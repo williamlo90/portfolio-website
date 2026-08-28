@@ -339,6 +339,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     )
     set_run_font(profile_links.add_run(" | "), size=10.0)
     add_hyperlink(profile_links, "github.com/williamlo90", "https://github.com/williamlo90")
+    set_run_font(profile_links.add_run(" | "), size=10.0)
+    add_hyperlink(
+        profile_links,
+        "william-lo-channiko-portfolio.pages.dev",
+        "https://william-lo-channiko-portfolio.pages.dev/",
+    )
 
     summary = document.add_paragraph(style="Resume Summary")
     set_run_font(

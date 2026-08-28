@@ -3,7 +3,7 @@
 APPLIED AI ENGINEER
 
 Jakarta, Indonesia | +62 813 4852 0623 | williamlochanniko4@gmail.com  
-linkedin.com/in/william-lo-channiko | github.com/williamlo90
+linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channiko-portfolio.pages.dev
 
 ## Professional Summary
 
