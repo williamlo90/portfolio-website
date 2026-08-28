@@ -319,7 +319,27 @@ img {
 }
 
 .hero-copy {
-  grid-column: 1 / 11;
+  grid-column: 1 / 9;
+}
+
+.hero-portrait {
+  grid-column: 10 / 13;
+  width: min(100%, 280px);
+  aspect-ratio: 4 / 5;
+  justify-self: end;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-panel);
+  background: var(--surface-2);
+  box-shadow: 0 20px 44px rgb(0 0 0 / 28%);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 26%;
+  transform: scale(1.16);
 }
 
 .eyebrow,
@@ -1149,7 +1169,7 @@ img {
   }
 
   .hero-copy {
-    grid-column: 1 / 11;
+    grid-column: 1 / 9;
   }
 
   .project-layout {
@@ -1212,7 +1232,23 @@ img {
   }
 
   .hero-grid {
-    display: block;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-portrait {
+    order: -1;
+    width: min(220px, 62vw);
+    margin: 0 auto 36px;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-copy .eyebrow {
+    order: -1;
   }
 
   .hero h1 {
