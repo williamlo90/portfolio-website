@@ -1,0 +1,63 @@
+---
+const stages = [
+  {
+    index: "01",
+    label: "Context",
+    detail: "Source material stays visible",
+  },
+  {
+    index: "02",
+    label: "AI proposal",
+    detail: "Bounded, reviewable contribution",
+  },
+  {
+    index: "03",
+    label: "Software checks",
+    detail: "Deterministic rules own constraints",
+  },
+  {
+    index: "04",
+    label: "Human decision",
+    detail: "Authority remains explicit",
+  },
+];
+---
+
+<div
+  class="chain"
+  aria-label="Shared decision system pattern"
+  data-motion-chain
+>
+  <div class="chain-heading">
+    <h2>AI should support the decision, not hide it.</h2>
+    <p>
+      Models contribute inside a workflow whose context, rules, and decision
+      authority stay visible.
+    </p>
+  </div>
+  <div class="chain-sequence">
+    <span class="chain-track" aria-hidden="true">
+      <span class="chain-progress" data-chain-progress></span>
+      <span class="chain-sweep" data-chain-sweep></span>
+    </span>
+    <ol class="chain-list">
+      {
+        stages.map((stage, position) => (
+          <li
+            class:list={["chain-item", { "is-active": position === 3 }]}
+            data-chain-stage
+            role="listitem"
+          >
+            <span class="chain-node" aria-hidden="true">
+              {stage.index}
+            </span>
+            <div>
+              <strong>{stage.label}</strong>
+              <span>{stage.detail}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</div>

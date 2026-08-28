@@ -1,0 +1,289 @@
+---
+import { getCollection } from "astro:content";
+import EvidenceChain from "../components/EvidenceChain.astro";
+import ProjectFeature from "../components/ProjectFeature.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const featuredEntries = (
+  await getCollection(
+    "projects",
+    ({ data }) => data.featured && data.publicationState === "published",
+  )
+).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
+
+const experienceEntries = (
+  await getCollection("experience", ({ data }) => data.featured)
+).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
+
+const personStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "William Lo Channiko",
+  jobTitle: "Applied AI and Full-Stack Engineer",
+  email: "williamlochanniko4@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "ID",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/william-lo-channiko/",
+    "https://github.com/williamlo90",
+  ],
+  knowsAbout: [
+    "Applied AI",
+    "Full-stack engineering",
+    "Document operations",
+    "Support decision systems",
+  ],
+};
+---
+
+<BaseLayout
+  title="William Lo Channiko | Applied AI + Full-Stack Engineer"
+  description="Portfolio of William Lo Channiko: full-stack AI systems for document review and governed support escalation, built with explicit software controls and human decision boundaries."
+  structuredData={personStructuredData}
+>
+  <SiteHeader home />
+
+  <main id="main-content" tabindex="-1">
+    <section
+      class="hero"
+      id="top"
+      aria-labelledby="hero-title"
+      data-motion-hero
+    >
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Applied AI + Full-Stack Engineer</p>
+          <h1 id="hero-title">William Lo Channiko</h1>
+          <p class="hero-statement">
+            I build AI systems for evidence-heavy work, with software-enforced
+            rules and explicit human decisions.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">View projects</a>
+            <a
+              class="button button-secondary"
+              href="/william-lo-channiko-resume.pdf"
+              download>Download resume</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="system-principle" aria-label="How I design AI systems">
+      <EvidenceChain />
+    </section>
+
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-intro">
+        <p class="section-index">Selected work</p>
+        <div>
+          <h2 id="projects-title">Full-stack AI systems, built end to end.</h2>
+          <p>
+            Each case study covers the product problem, architecture, control
+            boundary, verified engineering results, and what remains outside the
+            current scope.
+          </p>
+        </div>
+      </div>
+
+      {
+        featuredEntries.map(({ data }, position) => {
+          return (
+            <ProjectFeature
+              project={{
+                slug: data.slug,
+                title: data.title,
+                descriptor: data.descriptor,
+                summary: data.summary,
+                status: data.status.label,
+                statusTone: data.status.tone,
+              }}
+              metrics={data.metrics}
+              boundary={
+                data.highlights.find(({ label }) => label === "Boundary")
+                  ?.value ?? data.productionBoundary.detail
+              }
+              image={data.media.hero}
+              imageAlt={data.media.alt}
+              mediaCaption={data.media.caption}
+              reverse={position % 2 === 1}
+              repositoryUrl={
+                data.repository.public ? data.repository.url : undefined
+              }
+              liveUrl={data.liveDemo?.public ? data.liveDemo.url : undefined}
+              liveLabel={
+                data.liveDemo?.public ? data.liveDemo.label : undefined
+              }
+            />
+          );
+        })
+      }
+    </section>
+
+    <section
+      class="experience"
+      id="experience"
+      aria-labelledby="experience-title"
+    >
+      <div class="section-intro experience-intro">
+        <p class="section-index">Professional experience</p>
+        <div>
+          <h2 id="experience-title">
+            Full-stack engineering inside an operating business.
+          </h2>
+          <p>
+            Two internship terms covering native Android, offline workflows,
+            APIs, an internal web system, approval flows, imports, and business
+            reporting.
+          </p>
+        </div>
+      </div>
+
+      <div class="experience-list">
+        {
+          experienceEntries.map(({ data }) => (
+            <article class="experience-entry">
+              <aside
+                class="experience-meta"
+                aria-label={`Employment details for ${data.organization}`}
+              >
+                <div class="experience-meta-primary">
+                  <p class="experience-years">{data.yearsLabel}</p>
+                  <p class="experience-duration">{data.durationLabel}</p>
+                </div>
+                <div class="experience-meta-group">
+                  <p>{data.periodLabel}</p>
+                </div>
+                <div class="experience-meta-group">
+                  <p>{data.location}</p>
+                  <p>
+                    {data.workMode}, {data.employmentType}
+                  </p>
+                </div>
+              </aside>
+
+              <div class="experience-content">
+                <header class="experience-heading">
+                  <p class="experience-company">{data.organization}</p>
+                  <h3>{data.role}</h3>
+                </header>
+                <p class="experience-summary">{data.summary}</p>
+                <div class="experience-terms">
+                  {data.engagements.map((engagement) => (
+                    <section
+                      class="experience-term"
+                      aria-label={engagement.title}
+                    >
+                      <header>
+                        <p class="experience-term-label">{engagement.label}</p>
+                        <h4>{engagement.title}</h4>
+                      </header>
+                      <ul>
+                        {engagement.bullets.map((bullet) => (
+                          <li>{bullet}</li>
+                        ))}
+                      </ul>
+                      <ul
+                        class="experience-term-stack"
+                        aria-label={`Technologies used for ${engagement.title}`}
+                      >
+                        {engagement.technologies.map((technology) => (
+                          <li>{technology}</li>
+                        ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-copy">
+        <h2 id="about-title">Engineering AI as a system, not a feature.</h2>
+        <p>
+          I am an early-career engineer based in Indonesia with full-stack
+          experience across Android, web, APIs, and business data. My current
+          work focuses on AI products where the model is useful without becoming
+          the source of truth or the final authority.
+        </p>
+      </div>
+      <dl class="about-facts" aria-label="Professional profile">
+        <div>
+          <dt>Experience</dt>
+          <dd>1 year as a full-stack software engineer</dd>
+        </div>
+        <div>
+          <dt>Based in</dt>
+          <dd>Indonesia (UTC+7)</dd>
+        </div>
+        <div>
+          <dt>Education</dt>
+          <dd>Bachelor's Degree in Informatics, graduated with Distinction</dd>
+        </div>
+        <div>
+          <dt>Current focus</dt>
+          <dd>Document operations and support decision systems</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Let’s build software people can trust.</h2>
+      <p>
+        Open to Applied AI and full-stack engineering opportunities with teams
+        that value product clarity, measurable verification, and honest system
+        boundaries.
+      </p>
+      <div class="contact-actions">
+        <a
+          class="button button-primary"
+          href="mailto:williamlochanniko4@gmail.com"
+        >
+          Email William
+          <span class="action-arrow" aria-hidden="true">→</span>
+        </a>
+        <a
+          class="button button-secondary"
+          href="/william-lo-channiko-resume.pdf"
+          download
+        >
+          Download resume
+        </a>
+        <a
+          href="https://www.linkedin.com/in/william-lo-channiko/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          LinkedIn
+          <span class="action-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+        <a
+          href="https://github.com/williamlo90"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
+          <span class="action-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<script>
+  import "../scripts/home-motion";
+</script>

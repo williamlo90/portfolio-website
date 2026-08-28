@@ -1,0 +1,66 @@
+---
+import "@fontsource-variable/instrument-sans";
+import SiteAmbient from "../components/SiteAmbient.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  imagePath?: string;
+  imageAlt?: string;
+  structuredData?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  imagePath = "/og.png",
+  imageAlt = "William Lo Channiko | Applied AI and full-stack engineering portfolio",
+  structuredData,
+} = Astro.props;
+const canonical = Astro.site ? new URL(canonicalPath, Astro.site) : undefined;
+const socialImage = Astro.site ? new URL(imagePath, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#0B0E12" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content={description} />
+    <meta name="author" content="William Lo Channiko" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="William Lo Channiko" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content={imageAlt} />}
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {socialImage && <meta name="twitter:image:alt" content={imageAlt} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      structuredData && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteAmbient />
+    <slot />
+  </body>
+</html>

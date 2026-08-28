@@ -1,0 +1,276 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/project.css";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  nextProject: CollectionEntry<"projects">;
+}
+
+export async function getStaticPaths() {
+  const projects = (
+    await getCollection(
+      "projects",
+      ({ data }) => data.publicationState === "published",
+    )
+  ).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
+
+  return projects.map((project, index) => ({
+    params: { slug: project.data.slug },
+    props: {
+      project,
+      nextProject: projects[(index + 1) % projects.length],
+    },
+  }));
+}
+
+const { project, nextProject } = Astro.props;
+const { data } = project;
+const { Content, headings } = await render(project);
+const sections = headings.filter(({ depth }) => depth === 2);
+const projectStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: data.title,
+  description: data.summary,
+  creator: {
+    "@type": "Person",
+    name: "William Lo Channiko",
+  },
+  programmingLanguage: data.stack,
+  codeRepository: data.repository.public ? data.repository.url : undefined,
+};
+---
+
+<BaseLayout
+  title={`${data.title} | William Lo Channiko`}
+  description={data.summary}
+  canonicalPath={`/projects/${data.slug}/`}
+  imageAlt={`${data.title} case study by William Lo Channiko`}
+  structuredData={projectStructuredData}
+>
+  <SiteHeader />
+
+  <main
+    id="main-content"
+    class="case-study"
+    data-project={data.slug}
+    tabindex="-1"
+  >
+    <article id="top">
+      <header class="case-hero">
+        <a class="case-back" href="/#projects">
+          <span aria-hidden="true">←</span> All projects
+        </a>
+
+        <div class="case-heading">
+          <div class="case-title-block">
+            <p class="case-kicker">{data.descriptor}</p>
+            <h1>{data.title}</h1>
+          </div>
+          <div class="case-intro">
+            <p class="case-summary">{data.summary}</p>
+            <p class:list={["case-status", `case-status--${data.status.tone}`]}>
+              <span aria-hidden="true"></span>
+              {data.status.label}
+            </p>
+            <p class="case-status-detail">{data.status.detail}</p>
+            <div class="case-actions">
+              {
+                data.liveDemo?.public && (
+                  <a
+                    class="button button-primary"
+                    href={data.liveDemo.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {data.liveDemo.label} <span aria-hidden="true">↗</span>
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                )
+              }
+              {
+                data.repository.public && (
+                  <a
+                    class="button button-secondary"
+                    href={data.repository.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {data.repository.label} <span aria-hidden="true">↗</span>
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                )
+              }
+            </div>
+            {
+              data.liveDemo?.accessNote && (
+                <p class="case-access-note">{data.liveDemo.accessNote}</p>
+              )
+            }
+          </div>
+        </div>
+      </header>
+
+      <figure class="case-hero-media">
+        <a
+          href={data.media.hero.src}
+          target="_blank"
+          aria-label={`Open ${data.title} product screenshot at full size in a new tab`}
+        >
+          <Image
+            src={data.media.hero}
+            alt={data.media.alt}
+            widths={[720, 1080, 1440, 1920]}
+            sizes="(max-width: 1240px) 100vw, 1200px"
+            format="webp"
+            loading="eager"
+          />
+        </a>
+        <figcaption>{data.media.caption}</figcaption>
+      </figure>
+
+      <dl class="case-metrics" aria-label={`${data.title} verified metrics`}>
+        {
+          data.metrics.map((metric) => (
+            <div>
+              <dt>{metric.value}</dt>
+              <dd>{metric.label}</dd>
+              {metric.note && <p>{metric.note}</p>}
+            </div>
+          ))
+        }
+      </dl>
+
+      <section class="case-workflow" aria-labelledby="workflow-title">
+        <div>
+          <p class="section-index">System flow</p>
+          <h2 id="workflow-title">From intake to a governed outcome.</h2>
+        </div>
+        <ol>
+          {
+            data.workflow.map((stage, index) => (
+              <li role="listitem">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{stage}</strong>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <div class="case-body">
+        <aside class="case-sidebar" aria-label="Project snapshot">
+          <nav class="case-toc" aria-label="Case study sections">
+            <p class="case-sidebar-label">On this page</p>
+            <ol>
+              {
+                sections.map((section) => (
+                  <li>
+                    <a href={`#${section.slug}`}>{section.text}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+          <div>
+            <p class="case-sidebar-label">Role</p>
+            <p>{data.role}</p>
+          </div>
+          <div>
+            <p class="case-sidebar-label">Timeline</p>
+            <p>{data.timeline}</p>
+          </div>
+          <div>
+            <p class="case-sidebar-label">Intended users</p>
+            <ul>
+              {data.intendedUsers.map((user) => <li>{user}</li>)}
+            </ul>
+          </div>
+          <div>
+            <p class="case-sidebar-label">Stack</p>
+            <ul class="case-stack">
+              {data.stack.map((technology) => <li>{technology}</li>)}
+            </ul>
+          </div>
+          <div>
+            <p class="case-sidebar-label">Last verified</p>
+            <p>{data.verification.date}</p>
+            <p class="case-commit">
+              {
+                data.repository.public ? (
+                  <a
+                    href={`${data.repository.url}/commit/${data.verification.evidenceCommit}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Evidence {data.verification.evidenceCommit}
+                  </a>
+                ) : (
+                  <>Evidence {data.verification.evidenceCommit}</>
+                )
+              }
+            </p>
+          </div>
+        </aside>
+
+        <div class="case-prose">
+          <Content />
+        </div>
+      </div>
+
+      <section class="case-gallery" aria-labelledby="gallery-title">
+        <div class="case-gallery-heading">
+          <p class="section-index">Product views</p>
+          <h2 id="gallery-title">The interface around the decision.</h2>
+        </div>
+        <div class="case-gallery-grid">
+          {
+            data.media.gallery.map((item) => (
+              <figure>
+                <a
+                  href={item.image.src}
+                  target="_blank"
+                  aria-label={`Open ${item.caption} screenshot at full size in a new tab`}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    widths={[640, 960, 1280]}
+                    sizes="(max-width: 800px) 100vw, 50vw"
+                    format="webp"
+                    loading="lazy"
+                  />
+                </a>
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <aside class="case-boundary" aria-labelledby="boundary-title">
+        <p class="section-index">Current boundary</p>
+        <div>
+          <h2 id="boundary-title">{data.productionBoundary.label}</h2>
+          <p>{data.productionBoundary.detail}</p>
+          <p class="case-verification">{data.verification.source}</p>
+        </div>
+      </aside>
+
+      <nav class="next-project" aria-label="Next project">
+        <p>Next project</p>
+        <a href={`/projects/${nextProject.data.slug}/`}>
+          <span>{nextProject.data.title}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface ProjectData {
+  slug: string;
+  title: string;
+  descriptor: string;
+  summary: string;
+  status: string;
+  statusTone: "verified" | "active";
+}
+
+interface Props {
+  project: ProjectData;
+  metrics: Metric[];
+  boundary: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  mediaCaption: string;
+  reverse?: boolean;
+  repositoryUrl?: string;
+  liveUrl?: string;
+  liveLabel?: string;
+}
+
+const {
+  project,
+  metrics,
+  boundary,
+  image,
+  imageAlt,
+  mediaCaption,
+  reverse = false,
+  repositoryUrl,
+  liveUrl,
+  liveLabel,
+} = Astro.props;
+---
+
+<article
+  class:list={[
+    "project-feature",
+    `project-feature--${project.statusTone}`,
+    { "project-feature--reverse": reverse },
+  ]}
+  id={project.slug}
+>
+  <header class="project-heading">
+    <h3>{project.title}</h3>
+    <p class="project-descriptor">{project.descriptor}</p>
+  </header>
+
+  <div class="project-layout">
+    <figure class="project-media">
+      <a
+        class="project-image-link"
+        href={`/projects/${project.slug}/`}
+        aria-label={`View ${project.title} case study`}
+      >
+        <div class="project-image-well">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[640, 960, 1280, 1536]}
+            sizes="(max-width: 800px) 100vw, 58vw"
+            format="webp"
+            loading="lazy"
+          />
+        </div>
+      </a>
+      <figcaption>{mediaCaption}</figcaption>
+    </figure>
+
+    <div class="project-copy">
+      <p class="status-line">
+        <span class="status-dot" aria-hidden="true"></span>
+        {project.status}
+      </p>
+      <p class="project-summary">{project.summary}</p>
+
+      <dl class="project-metrics" aria-label={`${project.title} metrics`}>
+        {
+          metrics.slice(0, 3).map((metric) => (
+            <div>
+              <dt>{metric.value}</dt>
+              <dd>{metric.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="project-boundary">
+        <p>Current boundary</p>
+        <p>{boundary}</p>
+      </div>
+
+      <div class="project-actions">
+        <a
+          class="project-primary-action"
+          href={`/projects/${project.slug}/`}
+          aria-label={`View ${project.title} case study`}
+        >
+          View case study <span class="action-arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="project-secondary-actions">
+          {
+            liveUrl && (
+              <a href={liveUrl} target="_blank" rel="noreferrer">
+                {liveLabel ?? "Live preview"}{" "}
+                <span class="action-arrow" aria-hidden="true">
+                  ↗
+                </span>
+                <span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            )
+          }
+          {
+            repositoryUrl && (
+              <a href={repositoryUrl} target="_blank" rel="noreferrer">
+                Repository{" "}
+                <span class="action-arrow" aria-hidden="true">
+                  ↗
+                </span>
+                <span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

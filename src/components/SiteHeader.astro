@@ -1,0 +1,89 @@
+---
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+const prefix = home ? "" : "/";
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a
+      class="site-name"
+      href={home ? "#top" : "/"}
+      aria-label="William Lo Channiko, homepage"
+    >
+      William Lo Channiko
+    </a>
+    <nav class="desktop-navigation" aria-label="Primary navigation">
+      <a href={`${prefix}#projects`}>Projects</a>
+      <a href={`${prefix}#experience`}>Experience</a>
+      <a href={`${prefix}#about`}>About</a>
+      <a class="nav-contact" href={`${prefix}#contact`}>Contact</a>
+    </nav>
+    <nav class="mobile-navigation" aria-label="Mobile navigation">
+      <div class="mobile-menu" data-mobile-menu>
+        <button
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu-panel"
+          data-mobile-menu-toggle
+        >
+          <span>Menu</span>
+          <span aria-hidden="true" data-mobile-menu-symbol>+</span>
+        </button>
+        <div id="mobile-menu-panel" data-mobile-menu-panel hidden>
+          <a href={`${prefix}#projects`}>Projects</a>
+          <a href={`${prefix}#experience`}>Experience</a>
+          <a href={`${prefix}#about`}>About</a>
+          <a href={`${prefix}#contact`}>Contact</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-mobile-menu]")
+    .forEach((menu) => {
+      const toggle = menu.querySelector<HTMLButtonElement>(
+        "[data-mobile-menu-toggle]",
+      );
+      const panel = menu.querySelector<HTMLElement>("[data-mobile-menu-panel]");
+      const symbol = menu.querySelector<HTMLElement>(
+        "[data-mobile-menu-symbol]",
+      );
+
+      if (!toggle || !panel) return;
+
+      const setOpen = (open: boolean) => {
+        toggle.setAttribute("aria-expanded", String(open));
+        panel.hidden = !open;
+        if (symbol) symbol.textContent = open ? "−" : "+";
+      };
+
+      toggle.addEventListener("click", () => {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      panel.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          toggle.getAttribute("aria-expanded") === "true"
+        ) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!menu.contains(event.target as Node)) setOpen(false);
+      });
+    });
+</script>
