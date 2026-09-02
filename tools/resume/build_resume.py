@@ -385,7 +385,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built a policy-governed case-resolution workspace with Next.js, FastAPI, PostgreSQL/pgvector, LangGraph, Clerk, OpenAI, and controlled Gmail draft integration; kept evidence, approvals, and action authority server-controlled.",
+        "Built a policy-governed case-resolution workspace with FastAPI, PostgreSQL/pgvector, LangGraph, OpenAI, and controlled Gmail drafts; kept evidence, approvals, and action authority server-controlled. LangChain Core handled bounded formatting; CrewAI and AutoGen stayed isolated one-case comparisons.",
     )
     add_bullet(
         document,

@@ -12,14 +12,14 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 ## Technical Skills
 
 - Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, REST APIs, Docker, Git, GitHub Actions, CI/CD
-- Applied AI: OpenAI API, LangGraph, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
+- Applied AI: OpenAI API, LangGraph, LangChain Core, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
 - ML/NLP and testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright; Kotlin, PHP/CodeIgniter, SQLite
 
 ## Selected AI Projects
 
 ### Case Resolution Copilot | GitHub Repository | Jul 2026-Present
 
-- Built a policy-governed case-resolution workspace with Next.js, FastAPI, PostgreSQL/pgvector, LangGraph, Clerk, OpenAI, and controlled Gmail draft integration; kept evidence, approvals, and action authority server-controlled.
+- Built a policy-governed case-resolution workspace with FastAPI, PostgreSQL/pgvector, LangGraph, OpenAI, and controlled Gmail drafts; kept evidence, approvals, and action authority server-controlled. LangChain Core handled bounded formatting; CrewAI and AutoGen stayed isolated one-case comparisons.
 - Reduced median workflow time by 84% (582s to 95s) while completing 3/3 safe workflows versus 0/3 manually in a matched synthetic benchmark; validated PostgreSQL persistence, provider-failure handling, and frontend recovery for controlled-pilot readiness.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026

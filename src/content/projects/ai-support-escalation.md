@@ -46,6 +46,9 @@ stack:
   - Neon
   - Clerk
   - LangGraph
+  - LangChain Core
+  - CrewAI (comparison prototype)
+  - AutoGen (comparison prototype)
   - OpenAI
   - Gmail
   - Vercel
@@ -76,9 +79,9 @@ productionBoundary:
   detail: "The benchmark used matched synthetic cases and one developer operator. The Gmail journey was bounded to approved draft creation with no automatic send; no production-user or customer-impact claim is made."
 verification:
   date: "2026-08-25"
-  contentCommit: "76cba88"
-  evidenceCommit: "76cba88"
-  source: "Current portfolio content was reviewed against public GitHub main at 76cba88, including the developer workflow benchmark and Phase 8 operational-readiness evidence."
+  contentCommit: "317c25b"
+  evidenceCommit: "317c25b"
+  source: "Current portfolio content was reviewed against public GitHub main at 317c25b, including the developer workflow benchmark, Phase 8 operational-readiness evidence, and orchestrator framework validation."
 ---
 
 ## The problem
@@ -119,6 +122,11 @@ The implementation uses Next.js, React, TypeScript, Clerk, FastAPI,
 PostgreSQL/pgvector on Neon, LangGraph, OpenAI, and Vercel. PostgreSQL, rather
 than the model or graph runtime, is the durable source of truth for business
 state.
+
+The production workflow runs on LangGraph. LangChain Core supports bounded
+prompt and schema formatting, while CrewAI and AutoGen remain isolated
+comparison prototypes validated on one synthetic case; they are not runtime
+dependencies of the application.
 
 OpenAI is deliberately bounded to narrative work. It may improve the rationale,
 uncertainty explanation, response subject, and response body derived from a
@@ -166,6 +174,7 @@ measurement.
 
 - [Developer workflow benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
 - [Operational readiness evidence](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/phase8-operational-readiness/2026-08-25/README.md)
+- [Orchestrator framework validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/framework-validation.md)
 
 ## Failure handling
 

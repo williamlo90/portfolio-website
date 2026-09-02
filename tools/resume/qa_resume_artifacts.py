@@ -47,6 +47,7 @@ def check_docx(path: Path) -> dict[str, object]:
         "mailto:williamlochanniko4@gmail.com",
         "https://www.linkedin.com/in/william-lo-channiko/",
         "https://github.com/williamlo90",
+        "https://william-lo-channiko-portfolio.pages.dev/",
         "https://github.com/williamlo90/case-resolution-copilot",
         "https://github.com/williamlo90/ai-document-ops-system",
     )
@@ -77,7 +78,7 @@ def check_pdf(
         "84%",
         "582s to 95s",
         "3/3 safe workflows versus 0/3 manually",
-        "Gmail draft integration",
+        "Gmail drafts",
         "68%",
         "153s to 49s",
         "10/10 cases versus 9/10",
@@ -117,7 +118,7 @@ def check_pdf(
         action = annotation.get("/A")
         if action and action.get("/URI"):
             links.append(str(action["/URI"]))
-    assert len(links) == 5, f"Expected five PDF links, got {len(links)}: {links}"
+    assert len(links) == 6, f"Expected six PDF links, got {len(links)}: {links}"
     return {"pages": len(reader.pages), "characters": len(text), "links": links}
 
 
