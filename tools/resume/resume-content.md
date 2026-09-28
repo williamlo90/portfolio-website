@@ -11,7 +11,7 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 
 ## Technical Skills
 
-- Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, REST APIs, Docker, Git, GitHub Actions, CI/CD
+- Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, AWS, Azure, Docker, Git, CI/CD
 - Applied AI: OpenAI API, LangGraph, LangChain Core, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
 - ML/NLP and testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright; Kotlin, PHP/CodeIgniter, SQLite
 
@@ -19,13 +19,13 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 
 ### Case Resolution Copilot | GitHub Repository | Jul 2026-Present
 
-- Built a policy-governed case-resolution workspace with FastAPI, PostgreSQL/pgvector, LangGraph, OpenAI, and controlled Gmail drafts; kept evidence, approvals, and action authority server-controlled. LangChain Core handled bounded formatting; CrewAI and AutoGen stayed isolated one-case comparisons.
-- Reduced median workflow time by 84% (582s to 95s) while completing 3/3 safe workflows versus 0/3 manually in a matched synthetic benchmark; validated PostgreSQL persistence, provider-failure handling, and frontend recovery for controlled-pilot readiness.
+- Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations; reduced median workflow time by 84% (582s to 95s) across three matched synthetic cases.
+- Engineered FastAPI, PostgreSQL/pgvector, LangGraph, human approval, auditability, and controlled Gmail drafts; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including migration, queue processing, worker recovery, and teardown.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
-- Built an AI-powered invoice-to-ERP workflow with React, FastAPI, Mistral OCR, OpenAI structured outputs, and ERPNext; added deterministic validation, human review, audit history, and approval-gated idempotent draft delivery.
-- Cut median invoice-to-ERP draft time by 68% (153s to 49s) while achieving the expected result in 10/10 cases versus 9/10 through direct entry; retained 98.75% exact field match and 100% validation and blocker match on a sealed synthetic holdout.
+- Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export; cut median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.
+- Engineered React, FastAPI, Mistral OCR, OpenAI, and ERPNext integration; validated a temporary Azure deployment that processed a synthetic PDF through Container Apps, private Blob Storage, Service Bus, and PostgreSQL into the review workflow.
 
 ## Professional Experience
 
@@ -65,5 +65,5 @@ Honors: Academic Achievement Scholarship, 2024
 - Phone number is verified in William's prior CV and official internship acceptance form.
 - Invoice Review uses a one-operator synthetic benchmark and a real local ERPNext sandbox; it is not presented as a customer deployment or multi-user study.
 - Case Resolution Copilot uses matched synthetic cases and a developer-operated benchmark. Its readiness evidence includes a bounded hosted Gmail draft journey and disposable Neon PostgreSQL persistence, not production-user adoption.
-- Invoice Review was reviewed against public GitHub main at `edbae31`; its paired ERPNext benchmark was added at `c8f55da`. Case Resolution Copilot was reviewed at `76cba88`.
+- Invoice Review cloud validation was reviewed against public GitHub main at `b156e03`; its paired ERPNext benchmark was added at `c8f55da`. Case Resolution Copilot AWS validation was reviewed at `892dede`.
 - Employer code has no Git history; codebase-size metrics are framed separately from individual contribution.

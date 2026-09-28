@@ -314,7 +314,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     properties.revision = 1
     properties.keywords = (
         "Applied AI Engineer, AI Engineer, Python, FastAPI, TypeScript, React, "
-        "Next.js, OpenAI API, RAG, LangGraph, PostgreSQL, human-in-the-loop"
+        "Next.js, OpenAI API, RAG, LangGraph, PostgreSQL, AWS, Azure, human-in-the-loop"
     )
 
     name = document.add_paragraph(style="Resume Name")
@@ -361,7 +361,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_skill(
         document,
         "Core engineering",
-        "Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, REST APIs, Docker, Git, GitHub Actions, CI/CD",
+        "Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, AWS, Azure, Docker, Git, CI/CD",
     )
     add_skill(
         document,
@@ -385,12 +385,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built a policy-governed case-resolution workspace with FastAPI, PostgreSQL/pgvector, LangGraph, OpenAI, and controlled Gmail drafts; kept evidence, approvals, and action authority server-controlled. LangChain Core handled bounded formatting; CrewAI and AutoGen stayed isolated one-case comparisons.",
+        "Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations; reduced median workflow time by 84% (582s to 95s) across three matched synthetic cases.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Reduced median workflow time by 84% (582s to 95s) while completing 3/3 safe workflows versus 0/3 manually in a matched synthetic benchmark; validated PostgreSQL persistence, provider-failure handling, and frontend recovery for controlled-pilot readiness.",
+        "Engineered FastAPI, PostgreSQL/pgvector, LangGraph, human approval, auditability, and controlled Gmail drafts; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including migration, queue processing, worker recovery, and teardown.",
     )
 
     add_entry_title(
@@ -402,12 +402,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI-powered invoice-to-ERP workflow with React, FastAPI, Mistral OCR, OpenAI structured outputs, and ERPNext; added deterministic validation, human review, audit history, and approval-gated idempotent draft delivery.",
+        "Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export; cut median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Cut median invoice-to-ERP draft time by 68% (153s to 49s) while achieving the expected result in 10/10 cases versus 9/10 through direct entry; retained 98.75% exact field match and 100% validation and blocker match on a sealed synthetic holdout.",
+        "Engineered React, FastAPI, Mistral OCR, OpenAI, and ERPNext integration; validated a temporary Azure deployment that processed a synthetic PDF through Container Apps, private Blob Storage, Service Bus, and PostgreSQL into the review workflow.",
     )
 
     add_section(document, "Professional Experience")

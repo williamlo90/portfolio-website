@@ -55,7 +55,7 @@ highlights:
   - label: Benchmark
     value: "Six paired synthetic invoices were completed by one operator through the assisted workflow and through direct manual entry into ERPNext."
   - label: Engineering evidence
-    value: "Approval-gated ERPNext draft delivery includes mapping, idempotency, permission checks, reconciliation, and retry handling."
+    value: "Approval-gated ERPNext draft delivery includes idempotency and reconciliation; a temporary Azure run processed a synthetic PDF into the review workflow."
 workflow:
   - Upload invoice
   - OCR and field proposal
@@ -65,12 +65,12 @@ workflow:
   - Idempotent export
 productionBoundary:
   label: Local ERPNext sandbox benchmark
-  detail: "One operator used synthetic invoices in a local ERPNext sandbox. The evidence does not establish production-user adoption, customer impact, or multi-user time savings."
+  detail: "One operator used synthetic invoices in a local ERPNext sandbox. The Azure validation was temporary, used mock extraction providers, and was torn down. The evidence does not establish production-user adoption or multi-user time savings."
 verification:
-  date: "2026-08-23"
-  contentCommit: "edbae31"
-  evidenceCommit: "c8f55da"
-  source: "Current portfolio content was reviewed against public GitHub main at edbae31. The paired ERPNext timing benchmark and combined outcome record were added at c8f55da."
+  date: "2026-09-28"
+  contentCommit: "b156e03"
+  evidenceCommit: "b156e03"
+  source: "Reviewed against public GitHub main at b156e03. The paired ERPNext benchmark remains local evaluation evidence; Azure live validation used a temporary mock-provider deployment that was fully torn down."
 ---
 
 ## The problem
@@ -156,6 +156,13 @@ delivery does not silently create a duplicate draft.
 
 This is controlled integration evidence, not a production deployment claim.
 
+I also validated a temporary Azure deployment. Container Apps ran the API,
+worker, and migration job against Azure Database for PostgreSQL. A synthetic
+PDF passed malware scanning, private Blob Storage, Service Bus delivery, and
+mock-provider processing into the `needs_review` state. The resource group was
+deleted after the run. This validates the deployment and integration path, not
+production hosting or Azure-hosted real-provider extraction accuracy.
+
 ## How this was verified
 
 - [External evaluation summary](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/external-invoice-evaluation-v2.md)
@@ -165,6 +172,7 @@ This is controlled integration evidence, not a production deployment claim.
 - [Evaluation and failure log](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evaluation-experiment-log.md)
 - [Retained failed diagnostic](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/current-provider-diagnostic.failed-20260728T080824Z.json)
 - [Captioned demo video](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/assets/demo/invoice-review-demo.mp4)
+- [Azure live validation](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/azure-live-validation.md)
 
 The holdout uses licensed synthetic data. The release artifact records an older
 clean evidence commit than the current reviewed GitHub source; the frontmatter

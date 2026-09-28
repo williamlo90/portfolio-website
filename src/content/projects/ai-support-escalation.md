@@ -65,7 +65,7 @@ highlights:
   - label: Benchmark
     value: "Three matched synthetic cases were completed in a developer-operated manual-versus-Copilot benchmark."
   - label: Engineering evidence
-    value: "Real Gmail draft integration, PostgreSQL and pgvector persistence, provider-failure handling, frontend recovery paths, and authenticated readiness checks."
+    value: "Real Gmail draft integration, PostgreSQL persistence, recovery checks, and a temporary AWS deployment validated across the connected ingestion path."
 workflow:
   - Case intake
   - Evidence investigation
@@ -76,12 +76,12 @@ workflow:
   - Receipt and reconciliation
 productionBoundary:
   label: Controlled-pilot evidence
-  detail: "The benchmark used matched synthetic cases and one developer operator. The Gmail journey was bounded to approved draft creation with no automatic send; no production-user or customer-impact claim is made."
+  detail: "The benchmark used matched synthetic cases and one developer operator. The Gmail journey was bounded to approved draft creation without automatic send. The temporary AWS deployment was destroyed after validation; the always-on demo remains on Vercel and Neon. No production-user or customer-impact claim is made."
 verification:
-  date: "2026-08-25"
-  contentCommit: "317c25b"
-  evidenceCommit: "317c25b"
-  source: "Current portfolio content was reviewed against public GitHub main at 317c25b, including the developer workflow benchmark, Phase 8 operational-readiness evidence, and orchestrator framework validation."
+  date: "2026-09-28"
+  contentCommit: "892dede"
+  evidenceCommit: "892dede"
+  source: "Reviewed against public GitHub main at 892dede, including the developer workflow benchmark, operational-readiness evidence, orchestrator comparison, and bounded AWS live validation."
 ---
 
 ## The problem
@@ -170,11 +170,19 @@ Warm authenticated primary content was ready in 375 ms against a 2,500 ms gate.
 That browser timing is a readiness measurement, not an exact Core Web Vitals LCP
 measurement.
 
+I also validated a temporary AWS deployment of the API and background worker.
+The connected run covered ECS/Fargate service health, a successful database
+migration to RDS PostgreSQL with pgvector, S3-to-Lambda-to-SQS-to-Celery
+processing, worker replacement after interruption, and verified resource
+teardown. This was a bounded infrastructure test; the always-on demo remains on
+Vercel and Neon.
+
 ## How this was verified
 
 - [Developer workflow benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
 - [Operational readiness evidence](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/phase8-operational-readiness/2026-08-25/README.md)
 - [Orchestrator framework validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/framework-validation.md)
+- [AWS live validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/aws-live-validation/README.md)
 
 ## Failure handling
 
