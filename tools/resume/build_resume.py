@@ -385,12 +385,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations; reduced median workflow time by 84% (582s to 95s) across three matched synthetic cases.",
+        "Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations, reducing median workflow time by 84% (582s to 95s) across three matched synthetic cases.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Engineered FastAPI, PostgreSQL/pgvector, LangGraph, human approval, auditability, and controlled Gmail drafts; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including migration, queue processing, worker recovery, and teardown.",
+        "Designed the backend with FastAPI, PostgreSQL/pgvector, LangGraph, human approval, audit logs, and controlled Gmail drafting; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including database migration, queue processing, worker recovery, and teardown.",
     )
 
     add_entry_title(
@@ -402,12 +402,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export; cut median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.",
+        "Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export, reducing median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Engineered React, FastAPI, Mistral OCR, OpenAI, and ERPNext integration; validated a temporary Azure deployment that processed a synthetic PDF through Container Apps, private Blob Storage, Service Bus, and PostgreSQL into the review workflow.",
+        "Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated a temporary end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.",
     )
 
     add_section(document, "Professional Experience")

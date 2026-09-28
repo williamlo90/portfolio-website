@@ -19,13 +19,13 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 
 ### Case Resolution Copilot | GitHub Repository | Jul 2026-Present
 
-- Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations; reduced median workflow time by 84% (582s to 95s) across three matched synthetic cases.
-- Engineered FastAPI, PostgreSQL/pgvector, LangGraph, human approval, auditability, and controlled Gmail drafts; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including migration, queue processing, worker recovery, and teardown.
+- Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations, reducing median workflow time by 84% (582s to 95s) across three matched synthetic cases.
+- Designed the backend with FastAPI, PostgreSQL/pgvector, LangGraph, human approval, audit logs, and controlled Gmail drafting; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including database migration, queue processing, worker recovery, and teardown.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
-- Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export; cut median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.
-- Engineered React, FastAPI, Mistral OCR, OpenAI, and ERPNext integration; validated a temporary Azure deployment that processed a synthetic PDF through Container Apps, private Blob Storage, Service Bus, and PostgreSQL into the review workflow.
+- Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export, reducing median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.
+- Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated a temporary end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
 
 ## Professional Experience
 

@@ -78,7 +78,7 @@ def check_pdf(
         "84%",
         "582s to 95s",
         "three matched synthetic cases",
-        "Gmail drafts",
+        "Gmail drafting",
         "AWS deployment",
         "ECS/Fargate",
         "68%",
