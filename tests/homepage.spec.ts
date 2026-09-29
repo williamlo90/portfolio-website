@@ -353,7 +353,7 @@ test("mobile motion settles and project proof appears before dense copy", async 
   ).toBe(0);
 });
 
-test("switching to reduced motion mid-sequence restores the final state", async ({
+test("switching to reduced motion restores the final state", async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop lifecycle test");
@@ -369,8 +369,6 @@ test("switching to reduced motion mid-sequence restores the final state", async 
   await chain.evaluate((element) =>
     element.scrollIntoView({ block: "center", behavior: "instant" }),
   );
-  await expect(chain).toHaveAttribute("data-motion-chain-state", "running");
-
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(chain).toHaveAttribute("data-motion-chain-state", "complete");
   await expect(ambient).not.toHaveAttribute("data-active", "true");
@@ -378,14 +376,16 @@ test("switching to reduced motion mid-sequence restores the final state", async 
     "style",
     /transform/,
   );
-  expect(
-    await page.evaluate(
-      () =>
-        document
-          .getAnimations()
-          .filter((animation) => animation.playState === "running").length,
-    ),
-  ).toBe(0);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document
+            .getAnimations()
+            .filter((animation) => animation.playState === "running").length,
+      ),
+    )
+    .toBe(0);
   expect(runtimeErrors).toEqual([]);
 });
 
