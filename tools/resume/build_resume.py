@@ -352,7 +352,8 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
             "Applied AI engineer with 1 year of full-time software engineering internship experience "
             "across two terms. "
             "Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured "
-            "extraction, human-in-the-loop workflows, offline evaluation, and IndoBERT fine-tuning."
+            "extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment "
+            "across AWS and Azure."
         ),
         size=BODY_SIZE,
     )
@@ -361,7 +362,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_skill(
         document,
         "Core engineering",
-        "Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, AWS, Azure, Docker, Git, CI/CD",
+        "Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL",
     )
     add_skill(
         document,
@@ -370,8 +371,13 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     )
     add_skill(
         document,
-        "ML/NLP and testing",
-        "PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright; Kotlin, PHP/CodeIgniter, SQLite",
+        "Cloud & infrastructure",
+        "AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD",
+    )
+    add_skill(
+        document,
+        "ML & testing",
+        "PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright",
     )
 
     add_section(document, "Selected AI Projects")

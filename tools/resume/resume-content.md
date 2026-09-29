@@ -7,13 +7,14 @@ linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channi
 
 ## Professional Summary
 
-Applied AI engineer with 1 year of full-time software engineering internship experience across two terms. Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured extraction, human-in-the-loop workflows, offline evaluation, and IndoBERT fine-tuning.
+Applied AI engineer with 1 year of full-time software engineering internship experience across two terms. Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment across AWS and Azure.
 
 ## Technical Skills
 
-- Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL, AWS, Azure, Docker, Git, CI/CD
-- Applied AI: OpenAI API, LangGraph, LangChain Core, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
-- ML/NLP and testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright; Kotlin, PHP/CodeIgniter, SQLite
+- Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL
+- Applied AI: OpenAI API, LangGraph, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
+- Cloud & infrastructure: AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD
+- ML & testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright
 
 ## Selected AI Projects
 
