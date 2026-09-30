@@ -3,7 +3,7 @@ schemaVersion: 2
 slug: ai-support-escalation
 title: Case Resolution Copilot
 descriptor: Policy-governed decision workspace
-summary: "An authenticated workspace for assembling case evidence, applying versioned policy, preparing a reviewable resolution, recording human approval, and reconciling uncertain action outcomes."
+summary: "A policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions."
 publicationState: published
 featured: true
 featuredOrder: 2
@@ -46,6 +46,8 @@ stack:
   - Neon
   - Clerk
   - LangGraph
+  - Celery
+  - AWS
   - LangChain Core
   - CrewAI (comparison prototype)
   - AutoGen (comparison prototype)
@@ -53,19 +55,19 @@ stack:
   - Gmail
   - Vercel
 metrics:
-  - value: "~84%"
+  - value: "83.7%"
     label: Lower raw median case-resolution workflow time (582s to 95s)
   - value: "3/3"
     label: Complete safe workflows, versus 0/3 through the manual path
-  - value: "375 ms"
-    label: Warm authenticated primary-content readiness against a 2,500 ms gate
+  - value: "20/20"
+    label: Synthetic regression observations passed
 highlights:
   - label: Outcome
-    value: "Reduced median case-resolution workflow time by ~84% (582s to 95s) while completing the full safe workflow in 3/3 test cases."
+    value: "Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases."
   - label: Benchmark
     value: "Three matched synthetic cases were completed in a developer-operated manual-versus-Copilot benchmark."
   - label: Engineering evidence
-    value: "Real Gmail draft integration, PostgreSQL persistence, recovery checks, and a temporary AWS deployment validated across the connected ingestion path."
+    value: "20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios; live-validated a reproducible AWS architecture."
 workflow:
   - Case intake
   - Evidence investigation
@@ -78,10 +80,10 @@ productionBoundary:
   label: Controlled-pilot evidence
   detail: "The benchmark used matched synthetic cases and one developer operator. The Gmail journey was bounded to approved draft creation without automatic send. The temporary AWS deployment was destroyed after validation; the always-on demo remains on Vercel and Neon. No production-user or customer-impact claim is made."
 verification:
-  date: "2026-09-28"
-  contentCommit: "892dede"
-  evidenceCommit: "892dede"
-  source: "Reviewed against public GitHub main at 892dede, including the developer workflow benchmark, operational-readiness evidence, orchestrator comparison, and bounded AWS live validation."
+  date: "2026-09-30"
+  contentCommit: "47605cb"
+  evidenceCommit: "47605cb"
+  source: "Reviewed against public GitHub main at 47605cb, including Evaluation V1, the developer workflow benchmark, and AWS live validation."
 ---
 
 ## The problem
@@ -95,6 +97,8 @@ workspace for cases that need investigation, policy evidence, human authority,
 and a recoverable action trail.
 
 ## What I built
+
+Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
 
 The role-aware workspace supports Specialists, Supervisors, Administrators, and
 Auditors across case queues, review workspaces, controlled actions, policies,
@@ -140,18 +144,21 @@ silently retaining old authority.
 
 ## Verified outcomes
 
-**Reduced median case-resolution workflow time by ~84% (582s to 95s)** while
-completing the full safe workflow in **3/3 test cases**, compared with 0/3
-through the manual path.
+**Reduced raw median workflow time by 83.7% (582s to 95s)** in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through **20/20 regression observations**, a **3/3 OpenAI canary**, and **4/4 PostgreSQL workflow scenarios**.
+
+The workflow benchmark completed the full safe workflow in 3/3 Copilot cases,
+compared with 0/3 through the manual path.
 
 The developer-operated benchmark used three matched synthetic cases. Because
 the manual runs did not complete the same full safe-workflow boundary, the raw
 timing difference is descriptive and is not presented as a
 correctness-controlled speedup.
 
-Three targeted safety tests passed, and every Copilot outcome was re-read from
-the disposable Neon validation database rather than accepted from interface
-state alone.
+Evaluation V1 covered 10 synthetic cases with two regression repeats. The
+OpenAI canary covered three cases with two provider calls, including a correct
+provider skip when policy was missing. Four persisted PostgreSQL scenarios
+validated conflict blocking, immutable approval snapshots, exactly-once
+controlled execution, and unknown-outcome reconciliation.
 
 Public evaluation keeps 86 CFPB, Financial Ombudsman Service, and UCI records
 separate from three synthetic production-engine controls. These records test the
@@ -159,6 +166,8 @@ evaluation pipeline; they are not presented as complete customer cases or one
 aggregate product-accuracy score.
 
 ## Production and engineering evidence
+
+Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.
 
 The controlled-pilot readiness gate covered a real, bounded Gmail journey that
 created an approved persisted draft without automatically sending it, plus
@@ -179,6 +188,7 @@ Vercel and Neon.
 
 ## How this was verified
 
+- [Case Resolution Evaluation V1](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-evaluation-v1/README.md)
 - [Developer workflow benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
 - [Operational readiness evidence](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/phase8-operational-readiness/2026-08-25/README.md)
 - [Orchestrator framework validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/framework-validation.md)

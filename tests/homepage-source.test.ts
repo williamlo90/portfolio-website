@@ -86,9 +86,9 @@ describe("portfolio source constraints", () => {
     expect(documentProject).toContain("local ERPNext sandbox");
 
     expect(supportProject).toContain("publicationState: published");
-    expect(supportProject).toContain('value: "~84%"');
+    expect(supportProject).toContain('value: "83.7%"');
     expect(supportProject).toContain('value: "3/3"');
-    expect(supportProject).toContain('value: "375 ms"');
+    expect(supportProject).toContain('value: "20/20"');
     expect(supportProject).toContain("73 backend unit and contract checks");
     expect(supportProject).toContain("real, bounded Gmail journey");
     expect(supportProject).not.toContain('value: "57"');

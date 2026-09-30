@@ -391,12 +391,17 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations, reducing median workflow time by 84% (582s to 95s) across three matched synthetic cases.",
+        "Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Designed the backend with FastAPI, PostgreSQL/pgvector, LangGraph, human approval, audit logs, and controlled Gmail drafting; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including database migration, queue processing, worker recovery, and teardown.",
+        "Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.",
+    )
+    add_bullet(
+        document,
+        bullet_number_id,
+        "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.",
     )
 
     add_entry_title(

@@ -20,8 +20,9 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 
 ### Case Resolution Copilot | GitHub Repository | Jul 2026-Present
 
-- Built an AI-assisted case-resolution system that turns case evidence and policies into review-ready recommendations, reducing median workflow time by 84% (582s to 95s) across three matched synthetic cases.
-- Designed the backend with FastAPI, PostgreSQL/pgvector, LangGraph, human approval, audit logs, and controlled Gmail drafting; validated a temporary AWS deployment across ECS/Fargate, RDS, SQS, S3, and Lambda, including database migration, queue processing, worker recovery, and teardown.
+- Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
+- Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.
+- Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
@@ -66,5 +67,5 @@ Honors: Academic Achievement Scholarship, 2024
 - Phone number is verified in William's prior CV and official internship acceptance form.
 - Invoice Review uses a one-operator synthetic benchmark and a real local ERPNext sandbox; it is not presented as a customer deployment or multi-user study.
 - Case Resolution Copilot uses matched synthetic cases and a developer-operated benchmark. Its readiness evidence includes a bounded hosted Gmail draft journey and disposable Neon PostgreSQL persistence, not production-user adoption.
-- Invoice Review cloud validation was reviewed against public GitHub main at `b156e03`; its paired ERPNext benchmark was added at `c8f55da`. Case Resolution Copilot AWS validation was reviewed at `892dede`.
+- Invoice Review cloud validation was reviewed against public GitHub main at `b156e03`; its paired ERPNext benchmark was added at `c8f55da`. Case Resolution Copilot Evaluation V1 and AWS validation were reviewed at `47605cb`.
 - Employer code has no Git history; codebase-size metrics are framed separately from individual contribution.

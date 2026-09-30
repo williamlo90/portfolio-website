@@ -453,7 +453,7 @@ test("Support case study exposes governed evidence and its current boundary", as
     page.getByRole("heading", { level: 1, name: "Case Resolution Copilot" }),
   ).toBeVisible();
   const metrics = page.locator(".case-metrics dt");
-  await expect(metrics).toHaveText(["~84%", "3/3", "375 ms"]);
+  await expect(metrics).toHaveText(["83.7%", "3/3", "20/20"]);
   await expect(
     page.getByRole("link", { name: /View public repository/ }),
   ).toHaveAttribute(
