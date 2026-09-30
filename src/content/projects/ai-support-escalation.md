@@ -11,7 +11,7 @@ status:
   label: Controlled-pilot readiness gate passed
   detail: "The bounded Gmail draft journey, PostgreSQL persistence, recovery paths, and authenticated readiness checks passed the recorded gate."
   tone: verified
-timeline: July 2026-Present
+timeline: July 2026-September 2026
 role: Product and full-stack engineering
 repository:
   url: "https://github.com/williamlo90/case-resolution-copilot"
