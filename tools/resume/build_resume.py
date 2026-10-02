@@ -262,7 +262,7 @@ def configure_styles(document: Document, *, compact: bool = False):
 
     heading = styles["Heading 1"]
     set_style_font(heading, size=11.0, bold=True)
-    heading.paragraph_format.space_before = Pt(7.5 if compact else 9.0)
+    heading.paragraph_format.space_before = Pt(7.5 if compact else 8.0)
     heading.paragraph_format.space_after = Pt(3.5)
     heading.paragraph_format.line_spacing = 1.0
     heading.paragraph_format.keep_with_next = True
@@ -272,11 +272,11 @@ def configure_styles(document: Document, *, compact: bool = False):
         "Resume Role": (10.5, True, False, 0, 0.5, 1.0),
         "Resume Contact": (10.0, False, False, 0, 0, 1.0),
         "Resume Contact Last": (10.0, False, False, 0, 4.0 if compact else 5.0, 1.0),
-        "Resume Summary": (BODY_SIZE, False, False, 0, 7.5 if compact else 11.0, 1.08),
+        "Resume Summary": (BODY_SIZE, False, False, 0, 7.5 if compact else 8.0, 1.08),
         "Resume Skill": (BODY_SIZE, False, False, 0, 1.5 if compact else 2.25, 1.08),
         "Resume Entry": (BODY_SIZE, False, False, 5.5 if compact else 6.5, 0.8, 1.0),
         "Resume Meta": (BODY_SIZE, False, True, 0, 1.3 if compact else 2.0, 1.0),
-        "Resume Bullet": (BODY_SIZE, False, False, 0, 2.0 if compact else 3.0, 1.08),
+        "Resume Bullet": (BODY_SIZE, False, False, 0, 2.0 if compact else 2.5, 1.08),
         "Resume Detail": (BODY_SIZE, False, False, 0, 1.4 if compact else 2.25, 1.08),
         "Resume Certification": (8.5, False, False, 0, 0.45, 1.0),
     }
@@ -349,11 +349,10 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     summary = document.add_paragraph(style="Resume Summary")
     set_run_font(
         summary.add_run(
-            "Applied AI engineer with 1 year of full-time software engineering experience "
-            "across two terms. "
-            "Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured "
-            "extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment "
-            "across AWS and Azure."
+            "Applied AI engineer with 1 year of full-time software engineering experience. "
+            "Built end-to-end AI systems spanning RAG, structured extraction, "
+            "human-in-the-loop workflows, and AWS/Azure deployment, with a focus on reliability, "
+            "monitoring, and operational readiness."
         ),
         size=BODY_SIZE,
     )
@@ -401,7 +400,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.",
+        "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.",
     )
 
     add_entry_title(

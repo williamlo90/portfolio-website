@@ -167,7 +167,12 @@ aggregate product-accuracy score.
 
 ## Production and engineering evidence
 
-Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.
+Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.
+
+My end-to-end ownership covered architecture, implementation, evaluation,
+deployment validation, and recovery. Celery and SQS support asynchronous
+processing, while LangGraph coordinates LLM API integration and inference
+orchestration within application-enforced controls.
 
 The controlled-pilot readiness gate covered a real, bounded Gmail journey that
 created an approved persisted draft without automatically sending it, plus

@@ -73,7 +73,7 @@ def check_pdf(
     assert positions == sorted(positions), "PDF section extraction order is incorrect"
     for expected in (
         "1 year",
-        "cloud deployment across AWS and Azure",
+        "AWS/Azure deployment",
         "Cloud & infrastructure:",
         "Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL)",
         "Case Resolution Copilot",
@@ -84,8 +84,9 @@ def check_pdf(
         "20/20 regression observations",
         "3/3 OpenAI canary",
         "4/4 PostgreSQL workflow scenarios",
-        "Gmail drafting",
-        "AWS architecture",
+        "workflow reliability",
+        "CloudWatch monitoring",
+        "AWS deployment",
         "ECS/Fargate",
         "CloudFront",
         "68%",

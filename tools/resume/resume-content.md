@@ -7,7 +7,7 @@ linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channi
 
 ## Professional Summary
 
-Applied AI engineer with 1 year of full-time software engineering experience across two terms. Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment across AWS and Azure.
+Applied AI engineer with 1 year of full-time software engineering experience. Built end-to-end AI systems spanning RAG, structured extraction, human-in-the-loop workflows, and AWS/Azure deployment, with a focus on reliability, monitoring, and operational readiness.
 
 ## Technical Skills
 
@@ -22,7 +22,7 @@ Applied AI engineer with 1 year of full-time software engineering experience acr
 
 - Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
 - Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.
-- Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, Next.js, RBAC, audit trails, idempotent actions, and controlled Gmail drafting; live-validated a reproducible AWS architecture across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch.
+- Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
