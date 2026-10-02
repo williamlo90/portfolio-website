@@ -3,7 +3,7 @@ schemaVersion: 2
 slug: ai-document-operations
 title: Invoice Review
 descriptor: AI-powered invoice review & approval system
-summary: "A human-controlled accounts-payable workflow that keeps the source PDF, AI-proposed fields, deterministic validation, reviewer corrections, and approval-gated export in one inspectable system."
+summary: "An AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export."
 publicationState: published
 featured: true
 featuredOrder: 1
@@ -86,6 +86,8 @@ instead of presenting a broad but shallow “document AI” demo.
 
 ## What I built
 
+Built an AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export.
+
 The product provides six operational surfaces: Inbox, Invoices, Review,
 Exports, Quality, and Operations. The main workspace places the source PDF next
 to proposed fields, validation findings, correction history, and the reviewer
@@ -125,9 +127,7 @@ same blocker rules as the interface.
 
 ## Verified outcomes
 
-**Cut median invoice-to-ERP draft time by 68% (153s to 49s)** while achieving
-the expected result in **10/10 test cases**, compared with 9/10 through direct
-manual entry into ERPNext.
+**Reduced median invoice-to-ERP draft time by 68% (153s to 49s)** across six paired synthetic invoices; achieved the expected outcome in **10/10 test cases**, compared with **9/10 through manual ERPNext entry**.
 
 The timing benchmark covered six paired, draft-eligible synthetic invoices
 completed by one operator in a local ERPNext sandbox. Four blocker observations
@@ -148,6 +148,8 @@ the headline quality result.
 The recorded clean release reports at least 91.21% backend line coverage.
 
 ## Production and engineering evidence
+
+Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
 
 The workflow delivers approved Purchase Invoice drafts to a real local ERPNext
 sandbox. The integration covers field mapping, permission checks, idempotency,

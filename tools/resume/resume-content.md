@@ -26,8 +26,9 @@ Applied AI engineer with 1 year of full-time software engineering experience. Bu
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
-- Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export, reducing median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.
-- Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated a temporary end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
+- Built an AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export.
+- Reduced median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices; achieved the expected outcome in 10/10 test cases, compared with 9/10 through manual ERPNext entry.
+- Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
 
 ## Professional Experience
 

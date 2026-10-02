@@ -286,14 +286,14 @@ def configure_styles(document: Document, *, compact: bool = False):
         set_style_font(style, size=size, bold=bold, italic=italic)
         style.paragraph_format.space_before = Pt(before)
         style.paragraph_format.space_after = Pt(after)
-        style.paragraph_format.line_spacing = spacing
+        style.paragraph_format.line_spacing = 1.0 if name == "Resume Bullet" else spacing
 
 
 def build_resume(output_path: Path, *, include_certifications: bool = False):
     document = Document()
     section = document.sections[0]
-    section.top_margin = Inches(0.35 if include_certifications else 0.48)
-    section.bottom_margin = Inches(0.20 if include_certifications else 0.42)
+    section.top_margin = Inches(0.35 if include_certifications else 0.38)
+    section.bottom_margin = Inches(0.20 if include_certifications else 0.32)
     section.left_margin = Inches(0.55)
     section.right_margin = Inches(0.55)
     section.header_distance = Inches(0.20)
@@ -412,12 +412,17 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI document-to-ERP workflow that extracts, validates, and prepares invoices for human-approved export, reducing median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices.",
+        "Built an AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated a temporary end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.",
+        "Reduced median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices; achieved the expected outcome in 10/10 test cases, compared with 9/10 through manual ERPNext entry.",
+    )
+    add_bullet(
+        document,
+        bullet_number_id,
+        "Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.",
     )
 
     add_section(document, "Professional Experience")
