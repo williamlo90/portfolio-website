@@ -30,7 +30,7 @@ test("homepage presents two projects under one Projects navigation item", async 
     page.getByRole("heading", { name: "Case Resolution Copilot" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Full-Stack Software Engineer Intern" }),
+    page.getByRole("heading", { name: "Full-Stack Software Engineer" }),
   ).toBeVisible();
   await expect(page.getByText("2025-2026", { exact: true })).toBeVisible();
   await expect(page.getByText("1 year", { exact: true })).toBeVisible();

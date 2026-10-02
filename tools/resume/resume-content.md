@@ -7,7 +7,7 @@ linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channi
 
 ## Professional Summary
 
-Applied AI engineer with 1 year of full-time software engineering internship experience across two terms. Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment across AWS and Azure.
+Applied AI engineer with 1 year of full-time software engineering experience across two terms. Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment across AWS and Azure.
 
 ## Technical Skills
 
@@ -33,7 +33,7 @@ Applied AI engineer with 1 year of full-time software engineering internship exp
 
 ### PT Dover Chemical
 
-Software Engineer Intern (Mobile and Full-Stack) | Jakarta, Indonesia | Jan 2025-Jan 2026
+Software Engineer (Mobile and Full-Stack) | Jakarta, Indonesia | Jan 2025-Jan 2026
 
 - Built offline-first Draft Sales Order workflows for the CRM Dover Chemical Android app, enabling field-sales users to create and retain orders without connectivity; integrated 38 HTTP API operations, 15 Room entities/DAOs, and WorkManager synchronization for records, attachments, retries, and cleanup.
 - Built a Customer Management System for a 6,656-record customer master dataset across 15 data domains, including CRUD/search, validated Excel imports, reporting, audit logs, and role-gated approval, rejection, and reopen paths.

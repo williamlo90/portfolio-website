@@ -104,7 +104,7 @@ describe("portfolio source constraints", () => {
   });
 
   it("keeps the code-audited internship claims without invented impact", () => {
-    expect(experience).toContain("role: Full-Stack Software Engineer Intern");
+    expect(experience).toContain("role: Full-Stack Software Engineer");
     expect(experience).toContain("reported at 6,656 records");
     expect(experience).toContain("38 HTTP API operations");
     expect(experience).toContain("15 Room entities");

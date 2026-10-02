@@ -2,14 +2,14 @@
 schemaVersion: 1
 featured: true
 featuredOrder: 1
-role: Full-Stack Software Engineer Intern
+role: Full-Stack Software Engineer
 organization: PT Dover Chemical
-employmentType: Internship
+employmentType: Full-time
 location: Jakarta, Indonesia
 workMode: On-site
 yearsLabel: "2025-2026"
 durationLabel: 1 year
-periodLabel: Two full-time internship terms
+periodLabel: Two full-time terms
 summary: "Built internal sales-operations software for PT Dover Chemical across the CRM Dover Chemical Android app and a Customer Management System, covering offline synchronization, approval workflows, master-data management, imports, and analytics."
 engagements:
   - label: "Jan-Aug 2025"

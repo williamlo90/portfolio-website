@@ -349,7 +349,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     summary = document.add_paragraph(style="Resume Summary")
     set_run_font(
         summary.add_run(
-            "Applied AI engineer with 1 year of full-time software engineering internship experience "
+            "Applied AI engineer with 1 year of full-time software engineering experience "
             "across two terms. "
             "Built end-to-end Python/FastAPI and TypeScript/React systems spanning RAG, structured "
             "extraction, human-in-the-loop workflows, offline evaluation, and cloud deployment "
@@ -425,7 +425,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_entry_title(document, "PT Dover Chemical", first_in_section=True)
     add_meta_line(
         document,
-        "Software Engineer Intern (Mobile and Full-Stack) | Jakarta, Indonesia",
+        "Software Engineer (Mobile and Full-Stack) | Jakarta, Indonesia",
         "Jan 2025-Jan 2026",
     )
     add_bullet(
