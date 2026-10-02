@@ -430,12 +430,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built offline-first Draft Sales Order workflows for the CRM Dover Chemical Android app, enabling field-sales users to create and retain orders without connectivity; integrated 38 HTTP API operations, 15 Room entities/DAOs, and WorkManager synchronization for records, attachments, retries, and cleanup.",
+        "Partnered with IT supervisors and sales users to build an offline-first Draft Sales Order workflow for field operations, using local persistence, background synchronization, caching, retries, and attachment handling across 38 API operations and 15 Room entities/DAOs.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Built a Customer Management System for a 6,656-record customer master dataset across 15 data domains, including CRUD/search, validated Excel imports, reporting, audit logs, and role-gated approval, rejection, and reopen paths.",
+        "Built a Customer Management System around a 6,656-record customer master dataset, translating sales and administrative processes into validated imports, reporting, audit trails, and role-based approval, rejection, and reopen workflows across 15 data domains.",
     )
 
     add_section(document, "Education")

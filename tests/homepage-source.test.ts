@@ -103,12 +103,12 @@ describe("portfolio source constraints", () => {
     expect(supportProject).toContain("582s to 95s");
   });
 
-  it("keeps the code-audited internship claims without invented impact", () => {
+  it("keeps the approved experience scope without invented impact", () => {
     expect(experience).toContain("role: Full-Stack Software Engineer");
-    expect(experience).toContain("reported at 6,656 records");
-    expect(experience).toContain("38 HTTP API operations");
+    expect(experience).toContain("6,656-record customer master dataset");
+    expect(experience).toContain("38 API operations");
     expect(experience).toContain("15 Room entities");
-    expect(experience).toContain("90 public controller actions");
+    expect(experience).toContain("15 data domains");
     expect(experience).not.toMatch(/reduced? .+%/i);
   });
 });

@@ -15,8 +15,7 @@ engagements:
   - label: "Jan-Aug 2025"
     title: CRM Dover Chemical - Android App
     bullets:
-      - "Implemented Draft Sales Order workflows in Kotlin for the CRM Dover Chemical Android app, comprising 8 screen classes and 38 HTTP API operations for authentication, reference data, transactions, status workflows, and file attachments."
-      - "Implemented offline persistence with 15 Room entities, 15 DAOs, and 82 data-access functions, plus a WorkManager sync workflow covering server-ID assignment, item submission, attachment upload, retry handling, and local cleanup."
+      - "Partnered with IT supervisors and sales users to build an offline-first Draft Sales Order workflow for field operations, using local persistence, background synchronization, caching, retries, and attachment handling across 38 API operations and 15 Room entities/DAOs."
     technologies:
       - Kotlin
       - Room
@@ -25,9 +24,7 @@ engagements:
   - label: "Aug 2025-Jan 2026"
     title: Customer Management System - Web
     bullets:
-      - "Built a Customer Management System in PHP and CodeIgniter comprising 4 application modules, 20 controllers, 17 services, and 27 application views for a customer master dataset reported at 6,656 records."
-      - "Implemented 90 public controller actions supporting CRUD, server-side search, filtering, sorting, pagination, file attachments, and internal JSON/AJAX workflows across 15 customer-data domains."
-      - "Developed role-gated approval workflows for 10 entity types with transactional updates, audit logs, reopen and reject paths, validated Excel imports, and a sales-activity dashboard with two charts."
+      - "Built a Customer Management System around a 6,656-record customer master dataset, translating sales and administrative processes into validated imports, reporting, audit trails, and role-based approval, rejection, and reopen workflows across 15 data domains."
     technologies:
       - PHP
       - CodeIgniter
