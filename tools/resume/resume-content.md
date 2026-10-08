@@ -7,14 +7,15 @@ linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channi
 
 ## Professional Summary
 
-Applied AI engineer with 1 year of full-time software engineering experience. Built end-to-end AI systems spanning RAG, structured extraction, human-in-the-loop workflows, and AWS/Azure deployment, with a focus on reliability, monitoring, and operational readiness.
+Applied AI engineer with 1 year of full-time software engineering experience. Builds AI assistants, custom MCP servers, and reusable business skills for sales, service operations, and administration. Combines Python/API development, OpenAI and Ollama integration, access controls, testing, monitoring, and AWS/Azure deployment validation.
 
 ## Technical Skills
 
-- Core engineering: Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL
-- Applied AI: OpenAI API, LangGraph, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows
+- AI & MCP: Custom MCP servers, reusable business skills, OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR
+- Local AI: Ollama setup and local inference integration; Docker Compose environments; provider evaluation
+- Software & integrations: Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, Odoo, ERPNext, automation scripts
+- Security & reliability: RBAC, tenant isolation, human approval, audit trails, idempotency, recovery; Pytest, Vitest, Playwright, CloudWatch monitoring
 - Cloud & infrastructure: AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD
-- ML & testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright
 
 ## AI Projects
 

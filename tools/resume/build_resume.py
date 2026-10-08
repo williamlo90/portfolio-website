@@ -350,9 +350,9 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     set_run_font(
         summary.add_run(
             "Applied AI engineer with 1 year of full-time software engineering experience. "
-            "Built end-to-end AI systems spanning RAG, structured extraction, "
-            "human-in-the-loop workflows, and AWS/Azure deployment, with a focus on reliability, "
-            "monitoring, and operational readiness."
+            "Builds AI assistants, custom MCP servers, and reusable business skills for sales, "
+            "service operations, and administration. Combines Python/API development, OpenAI and "
+            "Ollama integration, access controls, testing, monitoring, and AWS/Azure deployment validation."
         ),
         size=BODY_SIZE,
     )
@@ -360,23 +360,28 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_section(document, "Technical Skills")
     add_skill(
         document,
-        "Core engineering",
-        "Python, TypeScript, SQL; FastAPI, Next.js, React; PostgreSQL",
+        "AI & MCP",
+        "Custom MCP servers, reusable business skills, OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR",
     )
     add_skill(
         document,
-        "Applied AI",
-        "OpenAI API, LangGraph, RAG, embeddings, pgvector, structured outputs, Mistral OCR, offline evaluation, human-in-the-loop workflows",
+        "Local AI",
+        "Ollama setup and local inference integration; Docker Compose environments; provider evaluation",
+    )
+    add_skill(
+        document,
+        "Software & integrations",
+        "Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, Odoo, ERPNext, automation scripts",
+    )
+    add_skill(
+        document,
+        "Security & reliability",
+        "RBAC, tenant isolation, human approval, audit trails, idempotency, recovery; Pytest, Vitest, Playwright, CloudWatch monitoring",
     )
     add_skill(
         document,
         "Cloud & infrastructure",
         "AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD",
-    )
-    add_skill(
-        document,
-        "ML & testing",
-        "PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright",
     )
 
     add_section(document, "AI Projects")
