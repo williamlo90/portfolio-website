@@ -396,13 +396,14 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(document, bullet_number_id, "Validated 62 automated tests, 11 MCP protocol scenarios, and eight browser checks; completed 135 synthetic workload tasks, including 33 verified writes, with zero observed errors or duplicate effects against a stateful PSA simulator.")
     add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, FastAPI, PostgreSQL, Docker, and optional OpenAI/Ollama assistance; implemented a responsive operator workspace, tenant isolation, audit trails, durable synchronization, and read-back verification with unknown-outcome recovery.")
 
-    add_entry_title(
+    odoo_title = add_entry_title(
         document,
         "Odoo Business Operations MCP Server",
         [("GitHub Repository", "https://github.com/williamlo90/odoo-business-operations-mcp-server")],
         date="Oct 2026",
         first_in_section=False,
     )
+    odoo_title.paragraph_format.space_before = Pt(12.5)
     add_bullet(document, bullet_number_id, "Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.")
     add_bullet(document, bullet_number_id, "Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.")
     add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.")
