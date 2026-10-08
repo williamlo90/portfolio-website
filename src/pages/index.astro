@@ -19,6 +19,11 @@ const experienceEntries = (
   await getCollection("experience", ({ data }) => data.featured)
 ).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
 
+const projectGroups = [
+  { id: "ai-applications", title: "AI Applications" },
+  { id: "mcp-business-automation", title: "MCP & Business Automation" },
+];
+
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -105,36 +110,47 @@ const personStructuredData = {
       </div>
 
       {
-        featuredEntries.map(({ data }, position) => {
-          return (
-            <ProjectFeature
-              project={{
-                slug: data.slug,
-                title: data.title,
-                descriptor: data.descriptor,
-                summary: data.summary,
-                status: data.status.label,
-                statusTone: data.status.tone,
-              }}
-              metrics={data.metrics}
-              boundary={
-                data.highlights.find(({ label }) => label === "Boundary")
-                  ?.value ?? data.productionBoundary.detail
-              }
-              image={data.media.hero}
-              imageAlt={data.media.alt}
-              mediaCaption={data.media.caption}
-              reverse={position % 2 === 1}
-              repositoryUrl={
-                data.repository.public ? data.repository.url : undefined
-              }
-              liveUrl={data.liveDemo?.public ? data.liveDemo.url : undefined}
-              liveLabel={
-                data.liveDemo?.public ? data.liveDemo.label : undefined
-              }
-            />
-          );
-        })
+        projectGroups.map((group) => (
+          <section class="project-group" aria-labelledby={`${group.id}-title`}>
+            <h3 class="project-group-title" id={`${group.id}-title`}>
+              {group.title}
+            </h3>
+            {featuredEntries
+              .filter(({ data }) => data.category === group.id)
+              .map(({ data }, position) => {
+                return (
+                  <ProjectFeature
+                    project={{
+                      slug: data.slug,
+                      title: data.title,
+                      descriptor: data.descriptor,
+                      summary: data.summary,
+                      status: data.status.label,
+                      statusTone: data.status.tone,
+                    }}
+                    metrics={data.metrics}
+                    boundary={
+                      data.highlights.find(({ label }) => label === "Boundary")
+                        ?.value ?? data.productionBoundary.detail
+                    }
+                    image={data.media.hero}
+                    imageAlt={data.media.alt}
+                    mediaCaption={data.media.caption}
+                    reverse={position % 2 === 1}
+                    repositoryUrl={
+                      data.repository.public ? data.repository.url : undefined
+                    }
+                    liveUrl={
+                      data.liveDemo?.public ? data.liveDemo.url : undefined
+                    }
+                    liveLabel={
+                      data.liveDemo?.public ? data.liveDemo.label : undefined
+                    }
+                  />
+                );
+              })}
+          </section>
+        ))
       }
     </section>
 

@@ -7,6 +7,7 @@ summary: "A service-operations MCP server and operator workspace for scoped tick
 publicationState: published
 featured: true
 featuredOrder: 3
+category: mcp-business-automation
 status:
   label: Local workflow and reliability validation complete
   detail: "Validated against a stateful two-tenant PSA simulator aligned with a publicly documented ConnectWise PSA API subset. Live ConnectWise tenant and cloud deployment validation remain pending."

@@ -24,6 +24,7 @@ const projects = defineCollection({
       publicationState: z.enum(["draft", "published"]),
       featured: z.boolean(),
       featuredOrder: z.number(),
+      category: z.enum(["ai-applications", "mcp-business-automation"]),
       status: z.object({
         label: z.string(),
         detail: z.string(),

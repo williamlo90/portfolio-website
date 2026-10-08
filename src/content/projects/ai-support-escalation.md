@@ -7,6 +7,7 @@ summary: "A policy-governed AI case-resolution system that converts fragmented e
 publicationState: published
 featured: true
 featuredOrder: 2
+category: ai-applications
 status:
   label: Controlled-pilot readiness gate passed
   detail: "The bounded Gmail draft journey, PostgreSQL persistence, recovery paths, and authenticated readiness checks passed the recorded gate."

@@ -17,7 +17,7 @@ Applied AI engineer with 1 year of full-time software engineering experience. Bu
 - Security & reliability: RBAC, tenant isolation, human approval, audit trails, idempotency, recovery; Pytest, Vitest, Playwright, CloudWatch monitoring
 - Cloud & infrastructure: AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD
 
-## AI Projects
+## MCP & Business Automation
 
 ### ConnectWise Service Operations MCP | GitHub Repository | Oct 2026
 
@@ -30,6 +30,8 @@ Applied AI engineer with 1 year of full-time software engineering experience. Bu
 - Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.
 - Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.
 - Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.
+
+## AI Projects
 
 ### Case Resolution Copilot | GitHub Repository | Jul-Sep 2026
 

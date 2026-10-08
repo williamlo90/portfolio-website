@@ -7,6 +7,7 @@ summary: "An AI invoice-to-ERP workflow that turns unstructured documents into v
 publicationState: published
 featured: true
 featuredOrder: 1
+category: ai-applications
 status:
   label: ERPNext workflow benchmark complete
   detail: "The approval-gated workflow was benchmarked against direct manual entry in a local ERPNext sandbox using synthetic invoices."

@@ -7,6 +7,7 @@ summary: "An AI-assisted Odoo operations platform with four reusable business sk
 publicationState: published
 featured: true
 featuredOrder: 4
+category: mcp-business-automation
 status:
   label: Local workflow and reliability validation complete
   detail: "Validated with synthetic local data against Odoo. Workload evidence comes from Phase 8 and browser acceptance from Phase 9A. Azure deployment remains pending."

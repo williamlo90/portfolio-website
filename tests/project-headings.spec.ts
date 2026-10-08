@@ -5,6 +5,16 @@ test("project headings align with their sections without overflow", async ({
 }, testInfo) => {
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator(".project-group-title")).toHaveText([
+    "AI Applications",
+    "MCP & Business Automation",
+  ]);
+  await expect(
+    page.locator(".project-group").nth(0).locator(".project-heading h4"),
+  ).toHaveText(["Invoice Review", "Case Resolution Copilot"]);
+  await expect(
+    page.locator(".project-group").nth(1).locator(".project-feature"),
+  ).toHaveCount(2);
   const projects = page.locator(".project-feature");
   await expect(projects).toHaveCount(4);
   for (const project of await projects.all()) {
@@ -17,7 +27,7 @@ test("project headings align with their sections without overflow", async ({
     ).toBe(true);
   }
   if (testInfo.project.name === "desktop") {
-    const title = page.locator("#odoo-business-operations-mcp-server h3");
+    const title = page.locator("#odoo-business-operations-mcp-server h4");
     expect(
       await title.evaluate((el) => {
         const style = getComputedStyle(el);
