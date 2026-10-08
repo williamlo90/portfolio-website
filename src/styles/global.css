@@ -621,12 +621,8 @@ img {
 }
 
 .project-heading {
-  max-width: 760px;
+  max-width: 100%;
   margin-bottom: 32px;
-  margin-left: 25%;
-}
-
-.project-feature--reverse .project-heading {
   margin-left: 0;
 }
 
@@ -638,10 +634,10 @@ img {
 }
 
 .project-descriptor {
-  max-width: 260px;
+  max-width: 65ch;
   margin-top: 10px;
   color: var(--text-secondary);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
 }
 
