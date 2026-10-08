@@ -15,7 +15,7 @@ engagements:
   - label: "Jan-Aug 2025"
     title: CRM Dover Chemical - Android App
     bullets:
-      - "Partnered with IT supervisors and sales users to build an offline-first Draft Sales Order workflow for field operations, using local persistence, background synchronization, caching, retries, and attachment handling across 38 API operations and 15 Room entities/DAOs."
+      - "Owned end-to-end development of an offline-first Draft Sales Order application, from requirements gathering with IT supervisors and sales users through implementation, integration, and testing; built local persistence, background synchronization, caching, retries, and attachment handling across 38 API operations and 15 Room entities/DAOs."
     technologies:
       - Kotlin
       - Room
@@ -24,7 +24,7 @@ engagements:
   - label: "Aug 2025-Jan 2026"
     title: Customer Management System - Web
     bullets:
-      - "Built a Customer Management System around a 6,656-record customer master dataset, translating sales and administrative processes into validated imports, reporting, audit trails, and role-based approval, rejection, and reopen workflows across 15 data domains."
+      - "Independently designed and built a Customer Management System end to end around a 6,656-record customer master dataset, translating sales and administrative requirements into validated imports, reporting, audit trails, and role-based approval, rejection, and reopen workflows across 15 data domains."
     technologies:
       - PHP
       - CodeIgniter
