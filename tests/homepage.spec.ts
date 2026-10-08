@@ -14,6 +14,11 @@ async function expectNoActionableAccessibilityFindings(
 
 for (const project of [
   {
+    slug: "ai-service-desk-ticket-operations-assistant",
+    title: "AI Service Desk & Ticket Operations Assistant",
+    metrics: ["16/16", "48", "183"],
+  },
+  {
     slug: "connectwise-service-operations-mcp",
     title: "ConnectWise Service Operations MCP",
     metrics: ["135/135", "33", "6"],
@@ -70,7 +75,7 @@ for (const project of [
   });
 }
 
-test("homepage presents four projects under one Projects navigation item", async ({
+test("homepage presents five projects under one Projects navigation item", async ({
   page,
 }) => {
   await page.goto("/");
@@ -99,7 +104,7 @@ test("homepage presents four projects under one Projects navigation item", async
       exact: true,
     }),
   ).toBeVisible();
-  await expect(page.locator(".project-feature")).toHaveCount(4);
+  await expect(page.locator(".project-feature")).toHaveCount(5);
   await expect(
     page.getByRole("heading", { name: "Full-Stack Software Engineer" }),
   ).toBeVisible();

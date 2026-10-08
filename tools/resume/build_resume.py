@@ -411,7 +411,18 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(document, bullet_number_id, "Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.")
     add_bullet(document, bullet_number_id, "Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.")
     add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.")
-    add_section(document, "AI Projects")
+    add_entry_title(
+        document,
+        "AI Service Desk & Ticket Operations Assistant",
+        [("GitHub Repository", "https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant")],
+        date="Oct 2026",
+    )
+    add_bullet(document, bullet_number_id, "Built an AI-assisted service desk platform that converts Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for access grants, service recovery, and related-ticket operations.")
+    add_bullet(document, bullet_number_id, "Validated AI triage on 16/16 held-out synthetic cases and exercised 48 synthetic HTTP workflows; verified platform behavior through 183 Python tests, 8 MCP tests, and 21 JavaScript checks, with automated regression and secret scanning in GitHub Actions.")
+    add_bullet(document, bullet_number_id, "Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak; implemented tenant isolation, payload-bound approvals, durable operation identities, and target verification to reconcile uncertain outcomes and prevent duplicate effects.")
+
+    ai_section = add_section(document, "AI Projects")
+    ai_section.paragraph_format.page_break_before = True
     add_entry_title(
         document,
         "Case Resolution Copilot",
@@ -435,14 +446,12 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
         "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.",
     )
 
-    continuation = add_section(document, "AI Projects")
-    continuation.paragraph_format.page_break_before = True
     add_entry_title(
         document,
         "Invoice Review",
         [("GitHub Repository", "https://github.com/williamlo90/ai-document-ops-system")],
         date="Jul-Aug 2026",
-        first_in_section=True,
+        first_in_section=False,
     )
     add_bullet(
         document,

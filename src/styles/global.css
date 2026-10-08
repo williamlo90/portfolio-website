@@ -639,6 +639,7 @@ img {
 }
 
 .project-heading h4 {
+  margin: 0;
   font-size: clamp(2rem, 3.3vw, 3.25rem);
   font-weight: 600;
   line-height: 1.06;

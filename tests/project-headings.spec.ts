@@ -14,9 +14,9 @@ test("project headings align with their sections without overflow", async ({
   ).toHaveText(["Invoice Review", "Case Resolution Copilot"]);
   await expect(
     page.locator(".project-group").nth(1).locator(".project-feature"),
-  ).toHaveCount(2);
+  ).toHaveCount(3);
   const projects = page.locator(".project-feature");
-  await expect(projects).toHaveCount(4);
+  await expect(projects).toHaveCount(5);
   for (const project of await projects.all()) {
     const heading = project.locator(".project-heading");
     const bounds = await project.boundingBox();
