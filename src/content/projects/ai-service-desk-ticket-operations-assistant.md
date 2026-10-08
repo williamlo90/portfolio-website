@@ -66,9 +66,9 @@ productionBoundary:
   detail: "The 16-case triage set is synthetic and internally designed. The 48 HTTP workflows use an isolated PostgreSQL lab and synthetic target, not live Jira/Keycloak throughput. Connected sandbox checks are separate. Production deployment and Azure validation remain outside the demonstrated scope."
 verification:
   date: "2026-10-09"
-  contentCommit: "77fbebbb18dcb3a5766a1968964d0c15db08b486"
+  contentCommit: "c19dbbd16ae4e5195a73e76848b399d1a70b12b0"
   evidenceCommit: "77fbebbb18dcb3a5766a1968964d0c15db08b486"
-  source: "Reviewed repository README, UI validation, case study, and phase-7 release-lab results."
+  source: "Reviewed repository README, UI validation, case study, and phase-7 release-lab results. Updated case-review and AI-practice screenshots from the English workbench at c19dbbd."
 ---
 
 ## What I built
