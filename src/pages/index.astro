@@ -20,8 +20,18 @@ const experienceEntries = (
 ).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
 
 const projectGroups = [
-  { id: "ai-applications", title: "AI Applications" },
-  { id: "mcp-business-automation", title: "MCP & Business Automation" },
+  {
+    id: "ai-applications",
+    title: "AI Applications",
+    description:
+      "AI-powered document and case-resolution workflows, from source evidence to human-approved outcomes.",
+  },
+  {
+    id: "mcp-business-automation",
+    title: "MCP & Business Automation",
+    description:
+      "Custom MCP servers and business integrations for service operations, sales workflows, and controlled action execution.",
+  },
 ];
 
 const personStructuredData = {
@@ -96,64 +106,63 @@ const personStructuredData = {
       <EvidenceChain />
     </section>
 
-    <section class="projects" id="projects" aria-labelledby="projects-title">
-      <div class="section-intro">
-        <p class="section-index">Selected work</p>
-        <div>
-          <h2 id="projects-title">Full-stack AI systems, built end to end.</h2>
-          <p>
-            Each case study covers the product problem, architecture, control
-            boundary, verified engineering results, and what remains outside the
-            current scope.
-          </p>
-        </div>
-      </div>
-
-      {
-        projectGroups.map((group) => (
-          <section class="project-group" aria-labelledby={`${group.id}-title`}>
-            <h3 class="project-group-title" id={`${group.id}-title`}>
-              {group.title}
-            </h3>
-            {featuredEntries
-              .filter(({ data }) => data.category === group.id)
-              .map(({ data }, position) => {
-                return (
-                  <ProjectFeature
-                    project={{
-                      slug: data.slug,
-                      title: data.title,
-                      descriptor: data.descriptor,
-                      summary: data.summary,
-                      status: data.status.label,
-                      statusTone: data.status.tone,
-                    }}
-                    metrics={data.metrics}
-                    boundary={
-                      data.highlights.find(({ label }) => label === "Boundary")
-                        ?.value ?? data.productionBoundary.detail
-                    }
-                    image={data.media.hero}
-                    imageAlt={data.media.alt}
-                    mediaCaption={data.media.caption}
-                    reverse={position % 2 === 1}
-                    repositoryUrl={
-                      data.repository.public ? data.repository.url : undefined
-                    }
-                    liveUrl={
-                      data.liveDemo?.public ? data.liveDemo.url : undefined
-                    }
-                    liveLabel={
-                      data.liveDemo?.public ? data.liveDemo.label : undefined
-                    }
-                  />
-                );
-              })}
-          </section>
-        ))
-      }
-    </section>
-
+    {
+      projectGroups.map((group, groupIndex) => (
+        <section
+          class="projects project-group"
+          id={groupIndex === 0 ? "projects" : group.id}
+          aria-labelledby={
+            groupIndex === 0 ? "projects-title" : `${group.id}-title`
+          }
+        >
+          <header class="section-intro">
+            <div>
+              <h2
+                class="project-group-title"
+                id={groupIndex === 0 ? "projects-title" : `${group.id}-title`}
+              >
+                {group.title}
+              </h2>
+              <p>{group.description}</p>
+            </div>
+          </header>
+          {featuredEntries
+            .filter(({ data }) => data.category === group.id)
+            .map(({ data }, position) => {
+              return (
+                <ProjectFeature
+                  project={{
+                    slug: data.slug,
+                    title: data.title,
+                    descriptor: data.descriptor,
+                    summary: data.summary,
+                    status: data.status.label,
+                    statusTone: data.status.tone,
+                  }}
+                  metrics={data.metrics}
+                  boundary={
+                    data.highlights.find(({ label }) => label === "Boundary")
+                      ?.value ?? data.productionBoundary.detail
+                  }
+                  image={data.media.hero}
+                  imageAlt={data.media.alt}
+                  mediaCaption={data.media.caption}
+                  reverse={position % 2 === 1}
+                  repositoryUrl={
+                    data.repository.public ? data.repository.url : undefined
+                  }
+                  liveUrl={
+                    data.liveDemo?.public ? data.liveDemo.url : undefined
+                  }
+                  liveLabel={
+                    data.liveDemo?.public ? data.liveDemo.label : undefined
+                  }
+                />
+              );
+            })}
+        </section>
+      ))
+    }
     <section
       class="experience"
       id="experience"
