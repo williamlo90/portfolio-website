@@ -6,7 +6,7 @@ descriptor: Business operations with independent approval
 summary: "An AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation."
 publicationState: published
 featured: true
-featuredOrder: 0.5
+featuredOrder: 4
 status:
   label: Local workflow and reliability validation complete
   detail: "Validated with synthetic local data against Odoo. Workload evidence comes from Phase 8 and browser acceptance from Phase 9A. Azure deployment remains pending."

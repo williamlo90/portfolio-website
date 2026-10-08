@@ -6,7 +6,7 @@ descriptor: Approved ticket updates with verified receipts
 summary: "A service-operations MCP server and operator workspace for scoped ticket context, internal notes, and evidence-backed time entries with separate-user approval."
 publicationState: published
 featured: true
-featuredOrder: 0
+featuredOrder: 3
 status:
   label: Local workflow and reliability validation complete
   detail: "Validated against a stateful two-tenant PSA simulator aligned with a publicly documented ConnectWise PSA API subset. Live ConnectWise tenant and cloud deployment validation remain pending."
