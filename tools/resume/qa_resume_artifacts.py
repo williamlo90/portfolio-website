@@ -50,6 +50,8 @@ def check_docx(path: Path) -> dict[str, object]:
         "https://william-lo-channiko-portfolio.pages.dev/",
         "https://github.com/williamlo90/case-resolution-copilot",
         "https://github.com/williamlo90/ai-document-ops-system",
+        "https://github.com/williamlo90/connectwise-service-operations-mcp",
+        "https://github.com/williamlo90/odoo-business-operations-mcp-server",
     )
     missing = [link for link in expected_links if link not in rels_xml]
     assert not missing, f"Missing DOCX hyperlinks: {missing}"
@@ -63,10 +65,10 @@ def check_pdf(
     forbid_certifications: bool = False,
 ) -> dict[str, object]:
     reader = PdfReader(path)
-    assert len(reader.pages) == 1, f"Expected one page, got {len(reader.pages)}"
+    assert len(reader.pages) == 2, f"Expected two pages, got {len(reader.pages)}"
     assert reader.get_fields() in (None, {}), "PDF contains form fields"
 
-    text = reader.pages[0].extract_text()
+    text = "\n".join(page.extract_text() for page in reader.pages)
     normalized_text = " ".join(text.replace("-\n", "-").split())
     assert "Expected" not in normalized_text, "Graduation qualifier still appears in PDF"
     positions = [text.index(heading) for heading in EXPECTED_HEADINGS]
@@ -78,6 +80,10 @@ def check_pdf(
         "Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL)",
         "Case Resolution Copilot",
         "Invoice Review",
+        "ConnectWise Service Operations MCP",
+        "Odoo Business Operations MCP Server",
+        "135 synthetic workload tasks",
+        "124 synthetic workload tasks",
         "83.7%",
         "582s to 95s",
         "three matched synthetic cases",
@@ -124,12 +130,12 @@ def check_pdf(
             assert marker not in normalized_text, f"Unexpected certification text: {marker}"
 
     links: list[str] = []
-    for annotation_ref in reader.pages[0].get("/Annots", []):
+    for annotation_ref in [ref for page in reader.pages for ref in page.get("/Annots", [])]:
         annotation = annotation_ref.get_object()
         action = annotation.get("/A")
         if action and action.get("/URI"):
             links.append(str(action["/URI"]))
-    assert len(links) == 6, f"Expected six PDF links, got {len(links)}: {links}"
+    assert len(links) == 8, f"Expected eight PDF links, got {len(links)}: {links}"
     return {"pages": len(reader.pages), "characters": len(text), "links": links}
 
 

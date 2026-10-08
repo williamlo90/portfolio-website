@@ -14,7 +14,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 # Visual authority: William's July 2025 CV PDF, distilled in artifact.md.
-# Intentional changes: one page, Applied AI focus, city-level address, 10 pt body.
+# Applied AI focus, city-level address, and two pages for four complete projects.
 FONT = "Arial"
 INK = RGBColor(0x00, 0x00, 0x00)
 LINK_BLUE = RGBColor(0x05, 0x61, 0xC9)
@@ -306,7 +306,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     properties.title = "William Lo Channiko - Applied AI Engineer Resume"
     properties.subject = "Applied AI Engineer resume"
     properties.author = "William Lo Channiko"
-    properties.comments = "One-page Applied AI Engineer resume."
+    properties.comments = "Applied AI Engineer resume."
     properties.language = "en-US"
     properties.last_modified_by = "William Lo Channiko"
     properties.created = datetime.now(timezone.utc)
@@ -380,6 +380,29 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     )
 
     add_section(document, "Selected AI Projects")
+    add_entry_title(
+        document,
+        "ConnectWise Service Operations MCP",
+        [("GitHub Repository", "https://github.com/williamlo90/connectwise-service-operations-mcp")],
+        date="Oct 2026",
+        first_in_section=True,
+    )
+    add_bullet(document, bullet_number_id, "Built a service-operations MCP server aligned with a publicly documented ConnectWise PSA API subset, exposing six tools for scoped ticket context, internal notes, and evidence-backed time entries with separate-user approval.")
+    add_bullet(document, bullet_number_id, "Validated 62 automated tests, 11 MCP protocol scenarios, and eight browser checks; completed 135 synthetic workload tasks, including 33 verified writes, with zero observed errors or duplicate effects against a stateful PSA simulator.")
+    add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, FastAPI, PostgreSQL, Docker, and optional OpenAI/Ollama assistance; implemented a responsive operator workspace, tenant isolation, audit trails, durable synchronization, and read-back verification with unknown-outcome recovery.")
+
+    add_entry_title(
+        document,
+        "Odoo Business Operations MCP Server",
+        [("GitHub Repository", "https://github.com/williamlo90/odoo-business-operations-mcp-server")],
+        date="Oct 2026",
+        first_in_section=False,
+    )
+    add_bullet(document, bullet_number_id, "Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.")
+    add_bullet(document, bullet_number_id, "Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.")
+    add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.")
+    document.add_page_break()
+    add_section(document, "Selected AI Projects continued")
     add_entry_title(
         document,
         "Case Resolution Copilot",

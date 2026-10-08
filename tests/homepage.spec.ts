@@ -12,7 +12,65 @@ async function expectNoActionableAccessibilityFindings(
   expect(actionableFindings).toEqual([]);
 }
 
-test("homepage presents two projects under one Projects navigation item", async ({
+for (const project of [
+  {
+    slug: "connectwise-service-operations-mcp",
+    title: "ConnectWise Service Operations MCP",
+    metrics: ["135/135", "33", "6"],
+  },
+  {
+    slug: "odoo-business-operations-mcp-server",
+    title: "Odoo Business Operations MCP Server",
+    metrics: ["124", "31/31", "13"],
+  },
+]) {
+  test(`MCP project ${project.slug} exposes evidence and public repository`, async ({
+    page,
+  }, testInfo) => {
+    await page.goto(`/projects/${project.slug}/`);
+    await expect(
+      page.getByRole("heading", { level: 1, name: project.title }),
+    ).toBeVisible();
+    await expect(page.locator(".case-metrics dt")).toHaveText(project.metrics);
+    await expect(
+      page.getByRole("link", { name: /View public repository/ }),
+    ).toHaveAttribute("href", `https://github.com/williamlo90/${project.slug}`);
+    await expect(page.locator(".case-boundary")).toContainText(/synthetic/i);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth,
+      ),
+    ).toBe(true);
+    await expectNoActionableAccessibilityFindings(page);
+    for (const picture of await page.locator(".case-gallery img").all()) {
+      await picture.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          picture.evaluate((image) => (image as HTMLImageElement).naturalWidth),
+        )
+        .toBeGreaterThan(0);
+    }
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await page.screenshot({
+      path: testInfo.outputPath("case-page.png"),
+      fullPage: true,
+    });
+    await page.goto("/");
+    await page.locator(`#${project.slug}`).scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        page
+          .locator(`#${project.slug} img`)
+          .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await page
+      .locator(`#${project.slug}`)
+      .screenshot({ path: testInfo.outputPath("project-card.png") });
+  });
+}
+
+test("homepage presents four projects under one Projects navigation item", async ({
   page,
 }) => {
   await page.goto("/");
@@ -29,6 +87,19 @@ test("homepage presents two projects under one Projects navigation item", async 
   await expect(
     page.getByRole("heading", { name: "Case Resolution Copilot" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "ConnectWise Service Operations MCP",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Odoo Business Operations MCP Server",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(page.locator(".project-feature")).toHaveCount(4);
   await expect(
     page.getByRole("heading", { name: "Full-Stack Software Engineer" }),
   ).toBeVisible();

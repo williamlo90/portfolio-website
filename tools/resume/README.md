@@ -1,6 +1,6 @@
 # Resume source
 
-This directory is the reproducible source for William's one-page Applied AI
+This directory is the reproducible source for William's two-page Applied AI
 Engineer resume. `artifact.md` records the retained CV visual system,
 `resume-content.md` records the approved copy and evidence boundaries, and
 `build_resume.py` creates the DOCX.
