@@ -22,6 +22,8 @@ BODY_SIZE = 10.5
 CONTENT_WIDTH_IN = 7.40
 BULLET_TEXT_INDENT_IN = 0.36
 BULLET_HANGING_IN = 0.16
+SECTION_GAP_PT = 12.5
+PROJECT_GAP_PT = 12.5
 
 
 def set_style_font(style, *, size: float, bold: bool = False, italic: bool = False):
@@ -225,7 +227,7 @@ def add_entry_title(
         paragraph.paragraph_format.space_before = Pt(1.5)
     elif links:
         # Use a consistent visual gap between adjacent project entries.
-        paragraph.paragraph_format.space_before = Pt(12.5)
+        paragraph.paragraph_format.space_before = Pt(PROJECT_GAP_PT)
     set_run_font(paragraph.add_run(title), size=BODY_SIZE, bold=True)
     for label, url in links or []:
         set_run_font(paragraph.add_run(" | "), size=BODY_SIZE)
@@ -265,7 +267,7 @@ def configure_styles(document: Document, *, compact: bool = False):
 
     heading = styles["Heading 1"]
     set_style_font(heading, size=11.0, bold=True)
-    heading.paragraph_format.space_before = Pt(7.5 if compact else 8.0)
+    heading.paragraph_format.space_before = Pt(SECTION_GAP_PT)
     heading.paragraph_format.space_after = Pt(3.5)
     heading.paragraph_format.line_spacing = 1.0
     heading.paragraph_format.keep_with_next = True
