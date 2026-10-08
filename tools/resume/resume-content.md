@@ -16,7 +16,7 @@ Applied AI engineer with 1 year of full-time software engineering experience. Bu
 - Cloud & infrastructure: AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD
 - ML & testing: PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright
 
-## Selected AI Projects
+## AI Projects
 
 ### ConnectWise Service Operations MCP | GitHub Repository | Oct 2026
 

@@ -379,7 +379,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
         "PyTorch, Hugging Face Transformers, scikit-learn, IndoBERT, Optuna; Pytest, Vitest, Playwright",
     )
 
-    add_section(document, "Selected AI Projects")
+    add_section(document, "AI Projects")
     add_entry_title(
         document,
         "ConnectWise Service Operations MCP",
@@ -401,8 +401,6 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(document, bullet_number_id, "Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.")
     add_bullet(document, bullet_number_id, "Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.")
     add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.")
-    document.add_page_break()
-    add_section(document, "Selected AI Projects continued")
     add_entry_title(
         document,
         "Case Resolution Copilot",
@@ -426,6 +424,8 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
         "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.",
     )
 
+    document.add_page_break()
+    add_section(document, "AI Projects")
     add_entry_title(
         document,
         "Invoice Review",

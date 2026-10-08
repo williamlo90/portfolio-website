@@ -11,7 +11,7 @@ from pypdf import PdfReader
 
 EXPECTED_HEADINGS = (
     "TECHNICAL SKILLS",
-    "SELECTED AI PROJECTS",
+    "AI PROJECTS",
     "PROFESSIONAL EXPERIENCE",
     "EDUCATION",
 )
