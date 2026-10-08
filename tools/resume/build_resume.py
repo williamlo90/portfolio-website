@@ -415,7 +415,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
         document,
         "Case Resolution Copilot",
         [("GitHub Repository", "https://github.com/williamlo90/case-resolution-copilot")],
-        date="Jul 2026-Sep 2026",
+        date="Jul-Sep 2026",
         first_in_section=False,
     )
     add_bullet(

@@ -31,7 +31,7 @@ Applied AI engineer with 1 year of full-time software engineering experience. Bu
 - Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.
 - Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.
 
-### Case Resolution Copilot | GitHub Repository | Jul 2026-Sep 2026
+### Case Resolution Copilot | GitHub Repository | Jul-Sep 2026
 
 - Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
 - Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.
