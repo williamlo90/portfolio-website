@@ -2,15 +2,15 @@
 schemaVersion: 2
 slug: ai-service-desk-ticket-operations-assistant
 title: AI Service Desk & Ticket Operations Assistant
-descriptor: From Jira tickets to human-approved, verified actions
-summary: "An AI-assisted service desk platform that turns Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for consequential actions."
+descriptor: Jira service requests, bounded MCP tools, verified results
+summary: "A custom MCP server connects AI clients to scoped Jira ticket tools. Python policy, PostgreSQL state, and independent human approval govern actions; target read-back verifies the result."
 publicationState: published
 featured: true
 featuredOrder: 5
 category: mcp-business-automation
 status:
   label: Local workflow and integration validation complete
-  detail: "Validated in a local lab with synthetic evaluations and connected Jira/Keycloak sandbox checks."
+  detail: "Validated in a local lab with synthetic evaluations and a connected Jira-to-Keycloak access-grant journey."
   tone: verified
 timeline: October 2026
 role: Product and full-stack engineering
@@ -19,13 +19,13 @@ repository:
   label: View public repository
   public: true
 media:
-  hero: ../../assets/projects/service-desk-review.jpg
-  alt: Service desk browser workspace reviewing a synthetic access proposal before human approval.
-  caption: Proposal review workspace with synthetic data
+  hero: ../../assets/projects/service-desk-jira-it1.jpg
+  alt: "Jira IT-1 synthetic service request for read-only reports access, with a linked IT-2 work item."
+  caption: "Actual Jira view of the synthetic IT-1 lab request"
   gallery:
-    - image: ../../assets/projects/service-desk-practice.jpg
-      alt: AI practice workspace showing source evidence and next-step guidance.
-      caption: Source-backed evidence and next-step guidance
+    - image: ../../assets/projects/service-desk-approval.png
+      alt: "Synthetic preview of the small supervisor approval page for a proposed access grant."
+      caption: "Synthetic preview of independent human approval, not a capture of the connected approval session"
 intendedUsers:
   - Service desk operator
   - Supervisor
@@ -38,64 +38,64 @@ stack:
   - OpenAI
   - Jira Service Management
   - Keycloak
-  - JavaScript
   - GitHub Actions
 metrics:
+  - value: "8"
+    label: Scoped ticket tools exposed through MCP
   - value: "16/16"
     label: Held-out synthetic AI triage cases passed
   - value: "48"
     label: Synthetic HTTP workflows exercised
-  - value: "183"
-    label: Python regression tests passed, plus 8 MCP tests and 21 JavaScript checks
 highlights:
   - label: Product
-    value: "Built an AI-assisted service desk platform that converts Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for access grants, service recovery, and related-ticket operations."
+    value: "Built a custom TypeScript MCP server with eight scoped ticket tools, backed by a Python service that reads Jira requests and prepares versioned action proposals. Human approval is separate from the MCP tool set."
   - label: Verified results
-    value: "Validated AI triage on 16/16 held-out synthetic cases and exercised 48 synthetic HTTP workflows; verified platform behavior through 183 Python tests, 8 MCP tests, and 21 JavaScript checks, with automated regression and secret scanning in GitHub Actions."
+    value: "A synthetic Jira IT-1 request led to a human-approved read-only Keycloak grant, target membership read-back, and a separate Jira result-property write. AI triage passed 16/16 held-out synthetic cases; 48 synthetic HTTP journeys exercised bounded recovery behavior."
   - label: Engineering
-    value: "Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak; implemented tenant isolation, payload-bound approvals, durable operation identities, and target verification to reconcile uncertain outcomes and prevent duplicate effects."
+    value: "Engineered the MCP-to-Python API path with PostgreSQL state, tenant isolation, version-bound approval, durable operation identities, and target read-back for uncertain outcomes."
 workflow:
-  - Read Jira ticket and source evidence
-  - Clarify missing information
-  - Persist a versioned action proposal
-  - Human approval of the exact payload
-  - Execute with a durable operation identity
-  - Verify the target and reconcile uncertain outcomes
+  - Read a scoped Jira ticket through MCP
+  - Prepare a versioned action proposal in Python
+  - Review and approve the exact payload separately
+  - Execute through an approval-aware worker
+  - Read back the Keycloak target state
+  - Record a bounded result as a Jira issue property
 productionBoundary:
   label: Local lab and synthetic evaluation
-  detail: "The 16-case triage set is synthetic and internally designed. The 48 HTTP workflows use an isolated PostgreSQL lab and synthetic target, not live Jira/Keycloak throughput. Connected sandbox checks are separate. Production deployment and Azure validation remain outside the demonstrated scope."
+  detail: "IT-1 is a synthetic Jira request in a connected local lab, not a customer ticket. The approval screenshot is a separate synthetic preview. The 16-case AI triage set and 48 HTTP workflows are synthetic evaluations; Jira workflow status was not changed. Production deployment and Azure validation remain outside the demonstrated scope."
 verification:
   date: "2026-10-09"
-  contentCommit: "c19dbbd16ae4e5195a73e76848b399d1a70b12b0"
-  evidenceCommit: "77fbebbb18dcb3a5766a1968964d0c15db08b486"
-  source: "Reviewed repository README, UI validation, case study, and phase-7 release-lab results. Updated case-review and AI-practice screenshots from the English workbench at c19dbbd."
+  contentCommit: "6f4712222cfa0628bca570915988e1b9e68f2625"
+  evidenceCommit: "6f4712222cfa0628bca570915988e1b9e68f2625"
+  source: "Reviewed the current README, MCP tool contract, Jira-to-Keycloak walkthrough, UI guide, and release evidence at 6f47122."
 ---
 
 ## What I built
 
-Built an AI-assisted service desk platform that converts Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for access grants, service recovery, and related-ticket operations.
+Built a custom TypeScript MCP server with eight scoped ticket tools, backed by a Python service that reads Jira requests and prepares versioned action proposals. The browser page is a small, separate surface for supervisor approval. Jira remains the source of the request.
 
 ## Verified outcomes
 
-Validated AI triage on 16/16 held-out synthetic cases and exercised 48 synthetic HTTP workflows; verified platform behavior through 183 Python tests, 8 MCP tests, and 21 JavaScript checks, with automated regression and secret scanning in GitHub Actions.
+A synthetic Jira IT-1 request for read-only report access led to an approved Keycloak group grant. Target read-back verified `requester-a` in `reports-reader` before the local case closed. A later, separate operation wrote a bounded result to a Jira issue property and read it back. The Jira workflow status and comments were not changed.
 
-The JavaScript total comprises 14 quote/next-step assertions and seven approval UI behavioral tests. The HTTP release exercise includes eight normal, 16 peak-concurrency, and 24 smoke-soak workflows against an isolated PostgreSQL lab and synthetic target. These are workflow checks, not production throughput or business time-savings measurements.
+OpenAI triage passed 16/16 internally designed synthetic held-out cases. A separate release exercise completed 48 synthetic HTTP journeys against an isolated PostgreSQL lab and synthetic target. These checks do not measure production throughput or business time savings.
 
 ## Architecture and reliability
 
-Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak; implemented tenant isolation, payload-bound approvals, durable operation identities, and target verification to reconcile uncertain outcomes and prevent duplicate effects.
+Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak. The MCP server exposes bounded ticket tools; the Python service enforces identity, tenant scope, policy, approval, and lifecycle transitions.
 
-The Python domain service owns policy, identity, proposal versions, and lifecycle transitions. PostgreSQL retains audit and operation state. The browser and MCP interface prepare proposals, while a separate approval-aware worker executes permitted actions.
+PostgreSQL retains audit and operation state. The MCP tool set cannot approve its own proposed action. A supervisor approves the exact payload through a small browser page; a separate worker executes after authorization.
 
 Approval is bound to the reviewed version and payload. If an execution receipt is lost, recovery checks the target before attempting another action. Local closure requires a verified outcome; it does not automatically change Jira workflow status.
 
 ## Validation scope
 
-OpenAI passed an internally designed synthetic held-out set. Connected evidence separately covers browser-approved access verification in Keycloak and bounded Jira read/write integration. The delivered system is a local lab; production deployment, extended endurance, and Azure validation are not claimed.
+The IT-1 Jira screenshot shows the synthetic request, not the approval or a resolved Jira status. The gallery image illustrates a proposal review with disposable fixture data; it was not captured during William's connected approval. The connected Jira-to-Keycloak path and later Jira result-property write have separate records. The delivered system is a local lab; production deployment and Azure validation remain outside this evidence.
 
 ## Repository and evidence
 
 - [GitHub repository](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant)
 - [Engineering case study](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/CASE-STUDY.md)
-- [UI validation and screenshots](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/WEB-UI.md)
+- [Jira to Keycloak integration walkthrough](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md)
+- [MCP tool contract](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/mcp-server/README.md)
 - [HTTP release exercise](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/phase-7/release-lab.json)

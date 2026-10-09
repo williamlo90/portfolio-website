@@ -16,7 +16,7 @@ for (const project of [
   {
     slug: "ai-service-desk-ticket-operations-assistant",
     title: "AI Service Desk & Ticket Operations Assistant",
-    metrics: ["16/16", "48", "183"],
+    metrics: ["8", "16/16", "48"],
   },
   {
     slug: "connectwise-service-operations-mcp",
