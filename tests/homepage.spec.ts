@@ -20,13 +20,13 @@ for (const project of [
   },
   {
     slug: "connectwise-service-operations-mcp",
-    title: "ConnectWise Service Operations MCP",
-    metrics: ["135/135", "33", "6"],
+    title: "ConnectWise Service Operations MCP Server",
+    metrics: ["6", "135/135", "33"],
   },
   {
     slug: "odoo-business-operations-mcp-server",
     title: "Odoo Business Operations MCP Server",
-    metrics: ["124", "31/31", "13"],
+    metrics: ["11", "124", "31/31"],
   },
 ]) {
   test(`MCP project ${project.slug} exposes evidence and public repository`, async ({
@@ -94,7 +94,7 @@ test("homepage presents five projects under one Projects navigation item", async
   ).toBeVisible();
   await expect(
     page.getByRole("heading", {
-      name: "ConnectWise Service Operations MCP",
+      name: "ConnectWise Service Operations MCP Server",
       exact: true,
     }),
   ).toBeVisible();
@@ -105,6 +105,15 @@ test("homepage presents five projects under one Projects navigation item", async
     }),
   ).toBeVisible();
   await expect(page.locator(".project-feature")).toHaveCount(5);
+  expect(
+    await page
+      .locator("#mcp-business-automation .project-feature")
+      .evaluateAll((cards) => cards.map((card) => card.id)),
+  ).toEqual([
+    "ai-service-desk-ticket-operations-assistant",
+    "odoo-business-operations-mcp-server",
+    "connectwise-service-operations-mcp",
+  ]);
   await expect(
     page.getByRole("heading", { name: "Full-Stack Software Engineer" }),
   ).toBeVisible();

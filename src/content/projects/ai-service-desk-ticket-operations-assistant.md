@@ -6,7 +6,7 @@ descriptor: Jira service requests, bounded MCP tools, verified results
 summary: "A custom MCP server connects AI clients to scoped Jira ticket tools. Python policy, PostgreSQL state, and independent human approval govern actions; target read-back verifies the result."
 publicationState: published
 featured: true
-featuredOrder: 5
+featuredOrder: 3
 category: mcp-business-automation
 status:
   label: Local workflow and integration validation complete
