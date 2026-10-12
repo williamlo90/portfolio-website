@@ -531,7 +531,7 @@ test("AI Document case study exposes its verified scope", async ({ page }) => {
 
 test("Support case study exposes governed evidence and its current boundary", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto("/projects/ai-support-escalation/");
 
   await expect(
@@ -556,8 +556,37 @@ test("Support case study exposes governed evidence and its current boundary", as
     /73 backend unit and contract checks/i,
   );
   await expect(page.locator(".case-boundary")).toContainText(
-    /bounded to approved draft creation/i,
+    /hosted screenshots show a read-only product tour/i,
+  );
+  await expect(page.locator(".case-gallery img")).toHaveCount(3);
+  await expect(page.locator(".case-gallery")).toContainText(
+    /unsent response draft/i,
   );
   await expect(page.locator(".case-metrics")).not.toContainText(/491|57/);
   await expectNoActionableAccessibilityFindings(page);
+  for (const picture of await page.locator(".case-gallery img").all()) {
+    await picture.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        picture.evaluate((image) => (image as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+  }
+  await page.screenshot({
+    path: testInfo.outputPath("case-page.png"),
+    fullPage: true,
+  });
+  await page.goto("/");
+  const projectCard = page.locator("#ai-support-escalation");
+  await projectCard.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      projectCard
+        .locator("img")
+        .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await projectCard.screenshot({
+    path: testInfo.outputPath("project-card.png"),
+  });
 });

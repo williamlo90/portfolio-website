@@ -19,19 +19,19 @@ repository:
   label: View public repository
   public: true
 media:
-  hero: ../../assets/projects/support-decision-brief.png
-  alt: "Support escalation Decision Brief showing verified facts, missing information, a suggested resolution, uncertainty, and required human review."
-  caption: "Decision Brief for a synthetic support case"
+  hero: ../../assets/projects/support-live-02-decision-brief.jpg
+  alt: "Hosted Case Resolution Copilot Decision Brief for synthetic case CS-DEMO-001, showing verified facts, a suggested resolution, uncertainty, and human-review guidance."
+  caption: "Decision Brief captured from the hosted demo with synthetic case data on October 12, 2026"
   gallery:
-    - image: ../../assets/projects/support-cases.png
-      alt: "Case Resolution Copilot queue showing priorities, status, owner, and service-level context."
-      caption: "Role-aware case queue with synthetic cases"
-    - image: ../../assets/projects/support-evidence.png
-      alt: "Support case evidence view showing normalized business evidence and its sources."
-      caption: "Evidence workspace for a synthetic case"
-    - image: ../../assets/projects/support-action-receipt.png
-      alt: "Completed controlled action showing the persisted connected-system receipt and external reference for a synthetic case."
-      caption: "Connected-system receipt from the deterministic hosted acceptance"
+    - image: ../../assets/projects/support-live-01-cases-queue.jpg
+      alt: "Hosted Case Resolution Copilot queue filtered to synthetic CS-DEMO cases, with priority, risk, ownership, and SLA context."
+      caption: "Hosted queue filtered to synthetic demo cases"
+    - image: ../../assets/projects/support-live-03-evidence.jpg
+      alt: "Hosted evidence tab showing checked business records, policy guidance, source freshness, and remaining information gaps for a synthetic billing case."
+      caption: "Evidence and policy guidance in the hosted demo"
+    - image: ../../assets/projects/support-live-04-conversation.jpg
+      alt: "Hosted conversation tab showing synthetic customer messages, an internal note, and a suggested response draft that has not been emailed."
+      caption: "Conversation and unsent response draft for a synthetic case"
 intendedUsers:
   - Support specialist
   - Supervisor
@@ -79,12 +79,12 @@ workflow:
   - Receipt and reconciliation
 productionBoundary:
   label: Controlled-pilot evidence
-  detail: "The benchmark used matched synthetic cases and one developer operator. The Gmail journey was bounded to approved draft creation without automatic send. The temporary AWS deployment was destroyed after validation; the always-on demo remains on Vercel and Neon. No production-user or customer-impact claim is made."
+  detail: "The benchmark used three matched synthetic cases and one developer operator. The October 12 hosted screenshots show a read-only product tour, not workflow acceptance. Controlled-action and Gmail-draft acceptance were recorded separately. AWS validation was temporary; the always-on demo remains on Vercel and Neon."
 verification:
-  date: "2026-09-30"
-  contentCommit: "47605cb"
-  evidenceCommit: "47605cb"
-  source: "Reviewed against public GitHub main at 47605cb, including Evaluation V1, the developer workflow benchmark, and AWS live validation."
+  date: "2026-10-12"
+  contentCommit: "dab033c5fb5a69257af76ce41f0553d7fddc665c"
+  evidenceCommit: "dab033c5fb5a69257af76ce41f0553d7fddc665c"
+  source: "Reviewed public GitHub main at dab033c, the October 12 live product tour captured from hosted source 80408ed, Evaluation V1, the developer workflow benchmark, and final September 25 AWS live validation."
 ---
 
 ## The problem
@@ -104,6 +104,11 @@ Built a policy-governed AI case-resolution system that converts fragmented evide
 The role-aware workspace supports Specialists, Supervisors, Administrators, and
 Auditors across case queues, review workspaces, controlled actions, policies,
 quality reporting, connections, and team administration.
+
+The gallery shows a read-only capture from the invite-only hosted demo on
+October 12, 2026. It follows synthetic case `CS-DEMO-001` through the queue,
+Decision Brief, evidence, and conversation. No case edit, approval, external
+action, or outgoing message was performed for those screenshots.
 
 The core journey is:
 
@@ -194,8 +199,10 @@ Vercel and Neon.
 
 ## How this was verified
 
+- [October 12 live product tour](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/live-product-tour/2026-10-12/README.md)
 - [Case Resolution Evaluation V1](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-evaluation-v1/README.md)
 - [Developer workflow benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
+- [Earlier hosted controlled-action acceptance](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/hosted-e2e-acceptance/2026-08-05/README.md)
 - [Operational readiness evidence](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/phase8-operational-readiness/2026-08-25/README.md)
 - [Orchestrator framework validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/framework-validation.md)
 - [AWS live validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/aws-live-validation/README.md)
@@ -213,10 +220,11 @@ or a human-confirmed resolution before the workflow can continue. This prevents
 
 ## Current boundary
 
-Historical hosted evidence records the predecessor frontend and backend running
-in Singapore with Clerk identity and a Neon database, including Specialist
-submission, Supervisor approval, one controlled action, duplicate blocking, and
-Auditor read-only inspection. It is not current-deployment proof.
+The October 12 product tour shows the hosted interface at source revision
+`80408ed`; it is visual evidence, not an end-to-end acceptance test or proof of
+all later revisions. The earlier hosted acceptance separately records
+Specialist submission, Supervisor approval, controlled execution, duplicate
+blocking, and Auditor inspection on the predecessor deployment.
 
 The evidence covers synthetic cases, one developer operator, a disposable Neon
 database, and one bounded hosted Gmail draft journey. It supports a

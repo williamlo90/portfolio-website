@@ -701,6 +701,11 @@ img {
   transition: transform 440ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+#ai-support-escalation .project-image-well img {
+  object-fit: cover;
+  object-position: center top;
+}
+
 .project-media figcaption {
   padding: 14px 18px;
   border-top: 1px solid var(--border-subtle);
@@ -1379,6 +1384,10 @@ img {
   .project-image-well {
     aspect-ratio: auto;
     min-height: 310px;
+  }
+
+  #ai-support-escalation .project-image-well img {
+    object-position: left top;
   }
 
   .experience {
