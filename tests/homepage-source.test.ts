@@ -24,14 +24,16 @@ describe("portfolio source constraints", () => {
     expect(header).toContain(">Experience</a>");
     expect(header).not.toMatch(/Invoice Review/);
     expect(header).not.toMatch(/Case Resolution Copilot/);
-    expect(homepage).toContain("featuredEntries.map");
+    expect(homepage).toContain("projectGroups.map");
+    expect(homepage).toContain("featuredEntries");
+    expect(homepage).toContain("data.category === group.id");
     expect(homepage).not.toMatch(/requires exactly two featured projects/i);
   });
 
   it("uses the canonical GitHub product brands", () => {
     expect(documentProject).toContain("title: Invoice Review");
     expect(documentProject).toContain(
-      "descriptor: AI-powered invoice review & approval system",
+      "descriptor: Human-approved invoice review and ERPNext drafts",
     );
     expect(supportProject).toContain("title: Case Resolution Copilot");
     expect(supportProject).toContain(
@@ -47,7 +49,9 @@ describe("portfolio source constraints", () => {
   it("names the Dover products in plain business language", () => {
     expect(experience).toContain("CRM Dover Chemical - Android App");
     expect(experience).toContain("Customer Management System - Web");
-    expect(experience).toContain("Built a Customer Management System");
+    expect(experience).toContain(
+      "built a Customer Management System end to end",
+    );
     expect(experience).not.toMatch(/Contributed to/);
     expect(experience).not.toMatch(/HMVC/);
   });
