@@ -28,6 +28,11 @@ for (const project of [
     title: "Odoo Business Operations MCP Server",
     metrics: ["11", "124", "31/31"],
   },
+  {
+    slug: "ai-sales-followup-crm-automation",
+    title: "AI Sales Follow-up & CRM Automation",
+    metrics: ["20/20", "1 + 1", "332"],
+  },
 ]) {
   test(`MCP project ${project.slug} exposes evidence and public repository`, async ({
     page,
@@ -75,7 +80,7 @@ for (const project of [
   });
 }
 
-test("homepage presents five projects under one Projects navigation item", async ({
+test("homepage presents six projects under one Projects navigation item", async ({
   page,
 }) => {
   await page.goto("/");
@@ -104,7 +109,13 @@ test("homepage presents five projects under one Projects navigation item", async
       exact: true,
     }),
   ).toBeVisible();
-  await expect(page.locator(".project-feature")).toHaveCount(5);
+  await expect(
+    page.getByRole("heading", {
+      name: "AI Sales Follow-up & CRM Automation",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(page.locator(".project-feature")).toHaveCount(6);
   expect(
     await page
       .locator("#mcp-business-automation .project-feature")
@@ -113,6 +124,7 @@ test("homepage presents five projects under one Projects navigation item", async
     "ai-service-desk-ticket-operations-assistant",
     "odoo-business-operations-mcp-server",
     "connectwise-service-operations-mcp",
+    "ai-sales-followup-crm-automation",
   ]);
   await expect(
     page.getByRole("heading", { name: "Full-Stack Software Engineer" }),
