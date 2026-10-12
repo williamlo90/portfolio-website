@@ -500,7 +500,9 @@ test("homepage remains complete when JavaScript is disabled", async ({
   await context.close();
 });
 
-test("AI Document case study exposes its verified scope", async ({ page }) => {
+test("AI Document case study exposes its verified scope", async ({
+  page,
+}, testInfo) => {
   await page.goto("/projects/ai-document-operations/");
 
   await expect(
@@ -526,7 +528,30 @@ test("AI Document case study exposes its verified scope", async ({ page }) => {
   await expect(
     page.getByText("ERPNext workflow benchmark complete", { exact: true }),
   ).toBeVisible();
+  await expect(page.locator(".case-boundary")).toContainText(
+    /elapsed time, not separately measured active work/i,
+  );
+  await expect(page.locator(".case-prose")).toContainText(
+    /planned Azure-live load, worker-recovery/i,
+  );
   await expectNoActionableAccessibilityFindings(page);
+  await page.screenshot({
+    path: testInfo.outputPath("case-page.png"),
+    fullPage: true,
+  });
+  await page.goto("/");
+  const projectCard = page.locator("#ai-document-operations");
+  await projectCard.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      projectCard
+        .locator("img")
+        .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await projectCard.screenshot({
+    path: testInfo.outputPath("project-card.png"),
+  });
 });
 
 test("Support case study exposes governed evidence and its current boundary", async ({
