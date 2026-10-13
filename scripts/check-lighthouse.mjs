@@ -7,7 +7,11 @@ import { launch } from "chrome-launcher";
 
 const previewPort = 4322;
 const previewOrigin = `http://127.0.0.1:${previewPort}`;
-const routes = ["/", "/projects/ai-document-operations/"];
+const routes = [
+  "/",
+  "/projects/ai-document-operations/",
+  "/projects/business-automation/",
+];
 const runsPerRoute = 3;
 const budgets = {
   lcp: 2_500,

@@ -67,10 +67,10 @@ productionBoundary:
   label: Synthetic local validation
   detail: "The recorded MCP responses and human-review page use a synthetic PSA simulator, not a live ConnectWise tenant. The workload is finite and local; cloud deployment was not validated."
 verification:
-  date: "2026-10-09"
-  contentCommit: "2c293af24481ca3e05901e328816374b6cd8b809"
-  evidenceCommit: "2c293af24481ca3e05901e328816374b6cd8b809"
-  source: "Reviewed current README, MCP walkthrough, portfolio copy, and linked regression/workload evidence at 2c293af."
+  date: "2026-10-13"
+  contentCommit: "3fc67ca8ad045640333d6d9080b302ba58b9ce20"
+  evidenceCommit: "3fc67ca8ad045640333d6d9080b302ba58b9ce20"
+  source: "Reviewed current README, case study, recorded MCP viewer, browser/MCP acceptance, CI and Phase 7 workload evidence at 3fc67ca."
 ---
 
 ## What I built
@@ -95,6 +95,8 @@ A lost write response is recorded as an unknown outcome. The operator reconciles
 
 The showcase images format actual reference-client MCP responses against an isolated two-tenant synthetic PSA simulator. They do not depict a ConnectWise screen or a live tenant. The 135-task run is a finite local workload, not customer productivity or cloud-capacity evidence. Live ConnectWise tenant and Azure validation remain outside this scope.
 
+The current repository also packages an offline HTML viewer for the recorded MCP responses and a reproducible Chromium browser/MCP acceptance path in CI. The viewer presents recorded evidence; it is not a live MCP host.
+
 ## Repository and evidence
 
 - [GitHub repository](https://github.com/williamlo90/connectwise-service-operations-mcp)
@@ -103,3 +105,5 @@ The showcase images format actual reference-client MCP responses against an isol
 - [Six-tool MCP contract](https://github.com/williamlo90/connectwise-service-operations-mcp/blob/main/docs/MCP-TOOL-MAP.md)
 - [Acceptance checklist](https://github.com/williamlo90/connectwise-service-operations-mcp/blob/main/docs/ACCEPTANCE-CHECKLIST.md)
 - [Reliability qualification](https://github.com/williamlo90/connectwise-service-operations-mcp/blob/main/docs/PHASE-7-DELIVERY.md)
+- [Offline recorded MCP evidence viewer](https://github.com/williamlo90/connectwise-service-operations-mcp/blob/main/docs/showcase/mcp-evidence.html)
+- [Current browser and MCP acceptance](https://github.com/williamlo90/connectwise-service-operations-mcp/blob/main/docs/WORKSPACE-UI.md)

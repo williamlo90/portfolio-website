@@ -2,15 +2,15 @@
 schemaVersion: 2
 slug: odoo-business-operations-mcp-server
 title: Odoo Business Operations MCP Server
-descriptor: MCP-led quotations with independent approval and Odoo read-back
-summary: "Eleven bounded MCP tools help an AI client research customers and prepare business actions. A separate person approves the exact proposal before MCP execution and Odoo result verification."
+descriptor: Browser and MCP workflows with independent approval and Odoo read-back
+summary: "Operators prepare quotations and CRM activities in a browser or through bounded MCP tools. A separate person approves the exact proposal, and the resulting Odoo record is read back before success is reported."
 publicationState: published
 featured: true
 featuredOrder: 4
 category: mcp-business-automation
 status:
-  label: Local workflow and reliability validation complete
-  detail: "Validated with synthetic local data and a connected MCP-to-approval-to-Odoo draft journey. No Azure deployment was validated."
+  label: Local browser and MCP workflows validated
+  detail: "The responsive workspace and MCP path were checked with synthetic local Odoo data. Azure runtime validation is pending."
   tone: verified
 timeline: October 2026
 role: Product and full-stack engineering
@@ -19,15 +19,18 @@ repository:
   label: View public repository
   public: true
 media:
-  hero: ../../assets/projects/odoo-quotation-s00150.png
-  alt: "Actual local Odoo draft quotation S00150 created after the synthetic MCP preparation and independent approval journey."
-  caption: "Odoo draft quotation S00150, created and read back in the connected synthetic MCP journey"
+  hero: ../../assets/projects/odoo-web-queue.png
+  alt: "Actual local Odoo operations workspace showing the synthetic company work queue."
+  caption: "Local browser workspace with synthetic company-scoped proposals"
   gallery:
-    - image: ../../assets/projects/odoo-approval-review.png
-      alt: "Actual local approval page showing the exact synthetic quotation proposal before MCP execution."
-      caption: "Independent review page; execution stays in the MCP client"
+    - image: ../../assets/projects/odoo-web-receipt.png
+      alt: "Actual local browser quotation review and verified Odoo draft receipt."
+      caption: "Quotation review, separate approval, and Odoo draft receipt in the local lab"
+    - image: ../../assets/projects/odoo-web-mobile.png
+      alt: "Mobile-width view of the Odoo operations browser workspace."
+      caption: "The same browser workflow at a mobile viewport"
 intendedUsers:
-  - Operations specialist
+  - Sales operations specialist
   - Independent approver
   - Administrator
 stack:
@@ -39,62 +42,62 @@ stack:
   - Odoo
   - Docker Compose
 metrics:
-  - value: "11"
-    label: "Bounded MCP tools"
-  - value: "124"
-    label: "Synthetic workload tasks completed"
+  - value: "10"
+    label: "Bounded MCP tools backed by one domain service"
+  - value: "13"
+    label: "Local browser acceptance checks passed"
   - value: "31/31"
-    label: "Quotation writes with exactly one order across replay checks"
+    label: "Synthetic quotation writes with one Odoo order across replay checks"
 highlights:
   - label: Product
-    value: "Built an MCP-first Odoo workflow with eleven scoped tools and four reusable business skills. An AI client can research customers, prepare quotations or CRM actions, and inspect outcomes; approval happens in a separate, limited browser page."
+    value: "Built a responsive browser workspace for quotation and CRM preparation, independent review, operator execution, and saved Odoo receipts. The CLI assistant and worker use four reusable skills through ten bounded MCP tools."
   - label: Verified results
-    value: "The current connected journey prepared a synthetic IDR 250,000 quotation through MCP, received independent approval, and created Odoo draft S00150 with matching read-back and a single effect after replay. The earlier Phase 8 workload completed 124 synthetic tasks, including 31/31 single-effect writes."
+    value: "Thirteen browser checks covered separate approval, company isolation, mobile layout, reload and lost-response recovery. A separate Phase 8 local workload completed 124 synthetic tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks."
   - label: Engineering
-    value: "Engineered the TypeScript MCP server and Python/FastAPI domain service with tenant-scoped reads, immutable proposals, payload-bound approval, stable idempotency keys, Odoo read-back, and persistent worker recovery."
+    value: "The browser and TypeScript MCP server share a Python/FastAPI domain service for tenant scope, immutable proposals, payload-bound approval, durable operation IDs, idempotency, Odoo read-back, and worker recovery."
 workflow:
-  - Resolve company-scoped customer and catalog through MCP
-  - Prepare an immutable quotation proposal
-  - Review and approve the exact payload separately
-  - Execute the approved action through MCP
-  - Verify the draft quotation in Odoo
-  - Reconcile replay or uncertain outcomes
+  - Resolve a company-scoped customer and catalog item
+  - Prepare a quotation or CRM activity in the browser or through MCP
+  - Review and approve the exact saved proposal as another person
+  - Execute as the original operator
+  - Inspect the verified Odoo receipt and reconcile uncertain outcomes
 productionBoundary:
   label: Synthetic local validation
-  detail: "The connected journey uses synthetic local Odoo records and no paid model request. Its draft quotation is not a confirmed sale. The workload figures are bounded local checks, not customer or cloud performance; Azure deployment remains unvalidated."
+  detail: "The browser checks and Phase 8 workload used synthetic local records. A draft quotation is not a confirmed sale. The result sets belong to different checkpoints; Azure hosting and customer operations were not validated."
 verification:
-  date: "2026-10-09"
-  contentCommit: "d346bf7a9dfc7c4d4f48df72a8ac90ad1709d29d"
-  evidenceCommit: "d346bf7a9dfc7c4d4f48df72a8ac90ad1709d29d"
-  source: "Reviewed default learning-phases branch README, MCP-first journey, case study, and linked Phase 8 evidence at d346bf7."
+  date: "2026-10-13"
+  contentCommit: "44b03db0f60c15dc389a43e6f9e18765f83ea455"
+  evidenceCommit: "44b03db0f60c15dc389a43e6f9e18765f83ea455"
+  source: "Reviewed current README, case study, Phase 9A browser acceptance, Phase 8 reliability evidence, and web UI guide at 44b03db."
 ---
 
-## What I built
+## Problem and solution
 
-Built an MCP-first Odoo operations workflow with eleven bounded tools and four reusable business skills. The client researches customer and catalog records, prepares a source-backed quotation or CRM action, and executes only after a separate person approves the exact proposal. The current browser is the approval surface, not a second sales application.
+Sales operations needs to find the right customer, prepare an accurate quotation or follow-up, and know whether Odoo accepted the result. A model can suggest an action, but source records can change and a lost response can hide a successful write.
+
+I built one governed domain service behind a responsive browser workspace, a TypeScript MCP server, and a persistent worker. Operators can prepare quotations and CRM activities in the browser; the CLI assistant uses four reusable skills through ten allowlisted MCP tools. Both paths apply the same authorization and execution rules.
 
 ## Verified outcomes
 
-The current connected journey resolved one synthetic customer and two products, prepared an IDR 250,000 quotation through MCP, received independent browser approval, and created Odoo draft S00150. Read-back matched its approved lines and total. Replaying the same operation returned the original result, with one application-ledger row and one Odoo order.
+The browser workspace passed 13 local Chromium acceptance checks covering quotation and CRM flows, separate accounts, reload, lost execution response, company isolation, mobile layout, and logout. Its screenshots show actual application screens using synthetic records.
 
-The earlier Phase 8 workload completed 124 synthetic tasks, including 31 verified draft writes. Each had one ledger entry and one Odoo order across replay checks. These are local engineering checks, not customer productivity measurements.
+The earlier Phase 8 workload completed 124 synthetic tasks, including 31 quotation writes. Across replay checks, each write had one application ledger entry and one Odoo order. These are bounded local engineering checks; the browser acceptance and workload counts are separate, overlapping suites.
 
 ## Architecture and reliability
 
-Engineered the TypeScript MCP server, Python/FastAPI domain service, Odoo integration, and persistent worker. Eleven allowlisted tools expose scoped business capabilities rather than arbitrary Odoo methods or SQL access.
+The browser calls the FastAPI domain service directly. A TypeScript MCP server connects the CLI assistant to the same service; neither client can approve its own proposal. PostgreSQL and Odoo hold authoritative transaction records, while local orchestration journals and the worker support deduplication and recovery.
 
-The MCP client and worker share tenant and authorization rules. A separate approver reviews the resolved customer, items, prices, source version, and payload hash. The Odoo addon checks freshness at write time. A durable operation ID, idempotency key, and downstream read-back establish what actually happened.
+A proposal records resolved customer, items, price, source version, and payload hash. A different actor approves that exact payload. The original operator executes with a stable operation identity. Odoo checks freshness within its write boundary; read-back and reconciliation establish the actual result before the UI reports it as verified.
 
-The persistent worker uses deduplication, leases, and bounded recovery. Replay checks verify that retries retain one Odoo order per operation. Lost-response recovery reconciles the existing business record.
+## Validation boundary
 
-## Validation scope
-
-The connected MCP/browser/Odoo example uses synthetic local sales records, no paid model request, and creates a draft quotation—not a confirmed sale. The separate 124-task workload is a bounded local engineering check. The current browser is limited to human approval; Azure remains a deployment plan, not a validated runtime.
+All demonstrated customers, orders, and CRM activities are synthetic local records. The browser supports preparation, approval, execution, and receipt inspection; natural-language assistant requests remain in the CLI. A verified draft is not a confirmed sale. Azure deployment is a prepared option, not a validated runtime.
 
 ## Repository and evidence
 
 - [GitHub repository](https://github.com/williamlo90/odoo-business-operations-mcp-server)
-- [Connected MCP-to-Odoo journey](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/docs/evidence/mcp-first-journey.md)
 - [Engineering case study](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/docs/portfolio/CASE_STUDY.md)
+- [Browser workspace guide](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/docs/WEB-UI.md)
+- [Browser acceptance](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/docs/PHASE-9A.md)
 - [MCP tool contract](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/MCP-INTEGRATIONS.md)
 - [Phase 8 reliability results](https://github.com/williamlo90/odoo-business-operations-mcp-server/blob/learning-phases/docs/PHASE-8.md)

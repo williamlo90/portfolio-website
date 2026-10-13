@@ -24,9 +24,9 @@ describe("portfolio source constraints", () => {
     expect(header).toContain(">Experience</a>");
     expect(header).not.toMatch(/Invoice Review/);
     expect(header).not.toMatch(/Case Resolution Copilot/);
-    expect(homepage).toContain("projectGroups.map");
-    expect(homepage).toContain("featuredEntries");
-    expect(homepage).toContain("data.category === group.id");
+    expect(homepage).toContain("aiProjects.map");
+    expect(homepage).toContain("automationProjects.map");
+    expect(homepage).toContain("/projects/business-automation/");
     expect(homepage).not.toMatch(/requires exactly two featured projects/i);
   });
 
@@ -108,7 +108,7 @@ describe("portfolio source constraints", () => {
   });
 
   it("keeps the approved experience scope without invented impact", () => {
-    expect(experience).toContain("role: Full-Stack Software Engineer");
+    expect(experience).toContain("role: Full-Stack Software Engineer Intern");
     expect(experience).toContain("6,656-record customer master dataset");
     expect(experience).toContain("38 API operations");
     expect(experience).toContain("15 Room entities");

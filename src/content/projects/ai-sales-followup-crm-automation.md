@@ -43,8 +43,8 @@ metrics:
     label: "Frozen synthetic cases linked and proposed correctly"
   - value: "1 + 1"
     label: "Odoo activity and controlled follow-up verified in a connected run"
-  - value: "332"
-    label: "Python tests passed in the local release audit"
+  - value: "360"
+    label: "Python tests passed in the current clean source-archive check"
 highlights:
   - label: Product
     value: "Built a sales follow-up workflow that links a customer message to a scoped deal, prepares a source-backed CRM change and email draft, and keeps review and separate approval ahead of execution."
@@ -62,10 +62,10 @@ productionBoundary:
   label: Local synthetic validation
   detail: "The screenshot is a synthetic review fixture. The connected run used sandbox records, lab roles, and a self-test recipient; normal sending is off by default. Results do not establish customer impact, production uptime, or cloud capacity."
 verification:
-  date: "2026-10-12"
-  contentCommit: "07ddf279d4785fe5b5947d2fb1038e0d43da20dc"
-  evidenceCommit: "07ddf279d4785fe5b5947d2fb1038e0d43da20dc"
-  source: "Reviewed the public README, engineering case study, Phase 8 delivery audit, and connected-run evidence at 07ddf27."
+  date: "2026-10-13"
+  contentCommit: "5680c23ab5edb7c7212fab1472f08c131daed32c"
+  evidenceCommit: "5680c23ab5edb7c7212fab1472f08c131daed32c"
+  source: "Reviewed current README, case study, connected-run evidence, current release JSON and browser report at 5680c23."
 ---
 
 ## What I built
@@ -78,7 +78,7 @@ The React workspace, TypeScript MCP server, and n8n schedules call the same Pyth
 
 In a connected synthetic run, one customer message traversed project-owned Outlook OAuth, n8n, OpenAI, PostgreSQL, and the Odoo sandbox. AI identified a missing internal owner; a lab operator supplied it from the source. Separate lab-role approvals led to one Odoo activity confirmed by read-back and one allowlisted self-test follow-up observed in Sent Items and the recipient's Junk folder.
 
-A frozen 20-case synthetic regression returned correct deal linkage and proposal count/recipient in 20/20 cases; 19/19 invoked extractions were correct. The local release audit passed 332 Python tests, plus UI and MCP builds. These checks support bounded workflow behavior, not a customer productivity or model-generalization claim.
+A frozen 20-case synthetic regression returned correct deal linkage and proposal count/recipient in 20/20 cases; 19/19 invoked extractions were correct. A newer clean source-archive check passed 360 Python tests, seven Chromium browser tests, UI and MCP builds, and two MCP reference-client tests. The newer check did not rerun Graph, Odoo, OpenAI, n8n import, or email dispatch; those connected results retain their earlier evidence. These checks support bounded workflow behavior, not a customer productivity or model-generalization claim.
 
 ## Architecture and reliability
 
@@ -99,3 +99,5 @@ The workflow stops when its local host sleeps or loses power or network. Small l
 - [Connected Outlook, Odoo, and email evidence](https://github.com/williamlo90/ai-sales-followup-crm-automation/blob/main/docs/evidence/phase-7-connected-email-ai-odoo.json)
 - [Phase 7 completion audit](https://github.com/williamlo90/ai-sales-followup-crm-automation/blob/main/docs/phase-7/COMPLETION-AUDIT.md)
 - [Phase 8 local delivery audit](https://github.com/williamlo90/ai-sales-followup-crm-automation/blob/main/docs/phase-8/DELIVERY-AUDIT.md)
+- [Current clean source-archive check](https://github.com/williamlo90/ai-sales-followup-crm-automation/blob/main/docs/evidence/current-release-20261013.json)
+- [Current browser regression](https://github.com/williamlo90/ai-sales-followup-crm-automation/blob/main/docs/evidence/browser-current-20261013.json)

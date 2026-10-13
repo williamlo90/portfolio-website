@@ -57,7 +57,7 @@ Repository: https://github.com/williamlo90/ai-service-desk-ticket-operations-ass
 
 ### PT Dover Chemical
 
-Software Engineer (Mobile and Full-Stack) | Jakarta, Indonesia | Jan 2025-Jan 2026
+Full-Stack Software Engineer Intern | Jakarta, Indonesia | Jan 2025-Jan 2026
 
 - Owned end-to-end development of an offline-first Draft Sales Order application, from requirements gathering with IT supervisors and sales users through implementation, integration, and testing; built local persistence, background synchronization, caching, retries, and attachment handling across 38 API operations and 15 Room entities/DAOs.
 - Independently designed and built a Customer Management System end to end around a 6,656-record customer master dataset, translating sales and administrative requirements into validated imports, reporting, audit trails, and role-based approval, rejection, and reopen workflows across 15 data domains.

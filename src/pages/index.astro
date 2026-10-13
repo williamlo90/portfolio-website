@@ -19,20 +19,12 @@ const experienceEntries = (
   await getCollection("experience", ({ data }) => data.featured)
 ).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
 
-const projectGroups = [
-  {
-    id: "ai-applications",
-    title: "AI Applications",
-    description:
-      "AI-powered document and case-resolution workflows, from source evidence to human-approved outcomes.",
-  },
-  {
-    id: "mcp-business-automation",
-    title: "MCP & Business Automation",
-    description:
-      "Custom MCP servers and business integrations for service operations, sales workflows, and controlled action execution.",
-  },
-];
+const aiProjects = featuredEntries.filter(
+  ({ data }) => data.category === "ai-applications",
+);
+const automationProjects = featuredEntries.filter(
+  ({ data }) => data.category === "mcp-business-automation",
+);
 
 const personStructuredData = {
   "@context": "https://schema.org",
@@ -59,7 +51,7 @@ const personStructuredData = {
 
 <BaseLayout
   title="William Lo Channiko | Applied AI + Full-Stack Engineer"
-  description="Portfolio of William Lo Channiko: full-stack AI systems and MCP integrations for invoice review, case resolution, service operations, Odoo, and sales follow-up automation."
+  description="Portfolio of William Lo Channiko: full-stack AI systems for invoice review, case resolution, offline document intelligence, service operations, Odoo, and sales follow-up automation."
   structuredData={personStructuredData}
 >
   <SiteHeader home />
@@ -106,63 +98,91 @@ const personStructuredData = {
       <EvidenceChain />
     </section>
 
-    {
-      projectGroups.map((group, groupIndex) => (
-        <section
-          class="projects project-group"
-          id={groupIndex === 0 ? "projects" : group.id}
-          aria-labelledby={
-            groupIndex === 0 ? "projects-title" : `${group.id}-title`
-          }
-        >
-          <header class="section-intro">
-            <div>
-              <h2
-                class="project-group-title"
-                id={groupIndex === 0 ? "projects-title" : `${group.id}-title`}
-              >
-                {group.title}
-              </h2>
-              <p>{group.description}</p>
-            </div>
-          </header>
-          {featuredEntries
-            .filter(({ data }) => data.category === group.id)
-            .map(({ data }, position) => {
-              return (
-                <ProjectFeature
-                  project={{
-                    slug: data.slug,
-                    title: data.title,
-                    descriptor: data.descriptor,
-                    summary: data.summary,
-                    status: data.status.label,
-                    statusTone: data.status.tone,
-                  }}
-                  metrics={data.metrics}
-                  boundary={
-                    data.highlights.find(({ label }) => label === "Boundary")
-                      ?.value ?? data.productionBoundary.detail
-                  }
-                  image={data.media.hero}
-                  imageAlt={data.media.alt}
-                  mediaCaption={data.media.caption}
-                  reverse={position % 2 === 1}
-                  repositoryUrl={
-                    data.repository.public ? data.repository.url : undefined
-                  }
-                  liveUrl={
-                    data.liveDemo?.public ? data.liveDemo.url : undefined
-                  }
-                  liveLabel={
-                    data.liveDemo?.public ? data.liveDemo.label : undefined
-                  }
+    <section
+      class="projects project-group"
+      id="projects"
+      aria-labelledby="projects-title"
+    >
+      <header class="section-intro">
+        <div>
+          <h2 class="project-group-title" id="projects-title">
+            AI Applications
+          </h2>
+          <p>
+            Document and case-resolution workflows, from source evidence and
+            local inference to human-approved outcomes.
+          </p>
+        </div>
+      </header>
+      {
+        aiProjects.map(({ data }, position) => (
+          <ProjectFeature
+            project={{
+              slug: data.slug,
+              title: data.title,
+              descriptor: data.descriptor,
+              summary: data.summary,
+              status: data.status.label,
+              statusTone: data.status.tone,
+            }}
+            metrics={data.metrics}
+            boundary={
+              data.highlights.find(({ label }) => label === "Boundary")
+                ?.value ?? data.productionBoundary.detail
+            }
+            image={data.media.hero}
+            imageAlt={data.media.alt}
+            mediaCaption={data.media.caption}
+            reverse={position % 2 === 1}
+            repositoryUrl={
+              data.repository.public ? data.repository.url : undefined
+            }
+            liveUrl={data.liveDemo?.public ? data.liveDemo.url : undefined}
+            liveLabel={data.liveDemo?.public ? data.liveDemo.label : undefined}
+          />
+        ))
+      }
+    </section>
+
+    <section
+      class="projects automation-section"
+      id="mcp-business-automation"
+      aria-labelledby="mcp-business-automation-title"
+    >
+      <div class="automation-preview">
+        <div class="automation-image-grid" aria-hidden="true">
+          {
+            automationProjects.map(({ data }) => (
+              <div class="automation-image">
+                <Image
+                  src={data.media.hero}
+                  alt=""
+                  widths={[320, 480, 640]}
+                  sizes="(max-width: 800px) 45vw, 25vw"
+                  format="webp"
+                  loading="lazy"
                 />
-              );
-            })}
-        </section>
-      ))
-    }
+              </div>
+            ))
+          }
+        </div>
+        <div class="automation-preview-copy">
+          <h2 id="mcp-business-automation-title">
+            MCP &amp; Business Automation
+          </h2>
+          <p>
+            Scoped tools and business workflows built around review and verified
+            outcomes.
+          </p>
+          <ul class="automation-project-names">
+            {automationProjects.map(({ data }) => <li>{data.title}</li>)}
+          </ul>
+          <a class="automation-more" href="/projects/business-automation/">
+            View more <span class="action-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
     <section
       class="experience"
       id="experience"
@@ -175,9 +195,9 @@ const personStructuredData = {
             Full-stack engineering inside an operating business.
           </h2>
           <p>
-            Two full-time terms covering native Android, offline workflows,
-            APIs, an internal web system, approval flows, imports, and business
-            reporting.
+            Two full-time internship terms covering native Android, offline
+            workflows, APIs, an internal web system, approval flows, imports,
+            and business reporting.
           </p>
         </div>
       </div>
@@ -259,7 +279,7 @@ const personStructuredData = {
       <dl class="about-facts" aria-label="Professional profile">
         <div>
           <dt>Experience</dt>
-          <dd>1 year as a full-stack software engineer</dd>
+          <dd>1 year as a full-stack software engineer intern</dd>
         </div>
         <div>
           <dt>Based in</dt>

@@ -5,7 +5,7 @@ test("project headings align with their sections without overflow", async ({
 }, testInfo) => {
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator("main > section.project-group")).toHaveCount(2);
+  await expect(page.locator("main > section.project-group")).toHaveCount(1);
   for (const section of await page
     .locator("main > section.project-group")
     .all()) {
@@ -19,19 +19,22 @@ test("project headings align with their sections without overflow", async ({
   }
   await expect(page.locator(".project-group-title")).toHaveText([
     "AI Applications",
-    "MCP & Business Automation",
   ]);
+  await expect(page.locator("#mcp-business-automation h2")).toHaveText(
+    "MCP & Business Automation",
+  );
   await expect(
     page
       .locator("main > section.project-group")
       .nth(0)
       .locator(".project-heading h3"),
-  ).toHaveText(["Invoice Review", "Case Resolution Copilot"]);
-  await expect(
-    page.locator(".project-group").nth(1).locator(".project-feature"),
-  ).toHaveCount(4);
+  ).toHaveText([
+    "Invoice Review",
+    "Case Resolution Copilot",
+    "Private Offline Document Intelligence",
+  ]);
   const projects = page.locator(".project-feature");
-  await expect(projects).toHaveCount(6);
+  await expect(projects).toHaveCount(3);
   for (const project of await projects.all()) {
     const heading = project.locator(".project-heading");
     const bounds = await project.boundingBox();
@@ -41,20 +44,22 @@ test("project headings align with their sections without overflow", async ({
       await heading.evaluate((el) => el.scrollWidth <= el.clientWidth),
     ).toBe(true);
   }
-  if (testInfo.project.name === "desktop") {
-    const title = page.locator("#odoo-business-operations-mcp-server h3");
-    expect(
-      await title.evaluate((el) => {
-        const style = getComputedStyle(el);
-        return el.getBoundingClientRect().height / parseFloat(style.lineHeight);
-      }),
-    ).toBeLessThan(1.1);
+  for (const picture of await page
+    .locator(".automation-image-grid img")
+    .all()) {
+    await picture.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        picture.evaluate((image) => (image as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
   }
+  await page.locator(".automation-preview").screenshot({
+    path: testInfo.outputPath("automation-preview.png"),
+  });
   for (const slug of [
     "ai-document-operations",
-    "connectwise-service-operations-mcp",
-    "odoo-business-operations-mcp-server",
-    "ai-sales-followup-crm-automation",
+    "private-offline-document-intelligence",
   ]) {
     const project = page.locator(`#${slug}`);
     await project.scrollIntoViewIfNeeded();

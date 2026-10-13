@@ -108,12 +108,14 @@ def check_pdf(
         "Azure deployment",
         "Service Bus",
         "Jan 2025-Jan 2026",
+        "Full-Stack Software Engineer Intern",
         "Bachelor's Degree in Informatics (S.Kom.)",
         "Graduated with Distinction",
         "GPA: 3.82/4.00",
     ):
         assert expected in normalized_text, f"Missing PDF text: {expected}"
     for retired_name in (
+        "Software Engineer (Mobile and Full-Stack)",
         "AI Support Escalation Copilot",
         "AI Document Operations System",
         "10+ months",

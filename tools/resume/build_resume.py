@@ -473,7 +473,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_entry_title(document, "PT Dover Chemical", first_in_section=True)
     add_meta_line(
         document,
-        "Software Engineer (Mobile and Full-Stack) | Jakarta, Indonesia",
+        "Full-Stack Software Engineer Intern | Jakarta, Indonesia",
         "Jan 2025-Jan 2026",
     )
     add_bullet(

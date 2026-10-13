@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import ProjectFeature from "../../components/ProjectFeature.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = (
+  await getCollection(
+    "projects",
+    ({ data }) =>
+      data.publicationState === "published" &&
+      data.category === "mcp-business-automation",
+  )
+).sort((left, right) => left.data.featuredOrder - right.data.featuredOrder);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "MCP & Business Automation",
+  description:
+    "Service operations and sales automation projects built by William Lo Channiko.",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: projects.map(({ data }, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: data.title,
+      url: `/projects/${data.slug}/`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title="MCP & Business Automation | William Lo Channiko"
+  description="Explore William Lo Channiko's MCP servers and business automation projects for service operations, Odoo, ConnectWise, and sales follow-up."
+  canonicalPath="/projects/business-automation/"
+  structuredData={structuredData}
+>
+  <SiteHeader />
+  <main id="main-content" class="automation-collection" tabindex="-1">
+    <header class="automation-collection-intro">
+      <a class="collection-back" href="/#mcp-business-automation">
+        <span aria-hidden="true">←</span> All projects
+      </a>
+      <h1>MCP &amp; Business Automation</h1>
+      <p>
+        Service operations and sales workflows built with scoped tools,
+        independent review, and verified results.
+      </p>
+    </header>
+    <section
+      class="projects automation-collection-projects"
+      aria-label="MCP and business automation projects"
+    >
+      <h2 class="visually-hidden">Projects</h2>
+      {
+        projects.map(({ data }, position) => (
+          <ProjectFeature
+            project={{
+              slug: data.slug,
+              title: data.title,
+              descriptor: data.descriptor,
+              summary: data.summary,
+              status: data.status.label,
+              statusTone: data.status.tone,
+            }}
+            metrics={data.metrics}
+            boundary={
+              data.highlights.find(({ label }) => label === "Boundary")
+                ?.value ?? data.productionBoundary.detail
+            }
+            image={data.media.hero}
+            imageAlt={data.media.alt}
+            mediaCaption={data.media.caption}
+            reverse={position % 2 === 1}
+            repositoryUrl={
+              data.repository.public ? data.repository.url : undefined
+            }
+            liveUrl={data.liveDemo?.public ? data.liveDemo.url : undefined}
+            liveLabel={data.liveDemo?.public ? data.liveDemo.label : undefined}
+          />
+        ))
+      }
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

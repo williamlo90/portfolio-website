@@ -26,6 +26,12 @@ media:
     - image: ../../assets/projects/service-desk-approval.png
       alt: "Synthetic preview of the small supervisor approval page for a proposed access grant."
       caption: "Synthetic preview of independent human approval, not a capture of the connected approval session"
+    - image: ../../assets/projects/service-desk-approval-verified.png
+      alt: "Synthetic in-memory approval page after target read-back verified the requested action."
+      caption: "Synthetic UI state after verified local closure"
+    - image: ../../assets/projects/service-desk-approval-uncertain.png
+      alt: "Synthetic in-memory approval page showing an uncertain outcome awaiting reconciliation."
+      caption: "Synthetic UI state blocks a repeat approval while the outcome is uncertain"
 intendedUsers:
   - Service desk operator
   - Supervisor
@@ -64,10 +70,10 @@ productionBoundary:
   label: Local lab and synthetic evaluation
   detail: "IT-1 is a synthetic Jira request in a connected local lab, not a customer ticket. The approval screenshot is a separate synthetic preview. The 16-case AI triage set and 48 HTTP workflows are synthetic evaluations; Jira workflow status was not changed. Production deployment and Azure validation remain outside the demonstrated scope."
 verification:
-  date: "2026-10-09"
-  contentCommit: "6f4712222cfa0628bca570915988e1b9e68f2625"
-  evidenceCommit: "6f4712222cfa0628bca570915988e1b9e68f2625"
-  source: "Reviewed the current README, MCP tool contract, Jira-to-Keycloak walkthrough, UI guide, and release evidence at 6f47122."
+  date: "2026-10-13"
+  contentCommit: "40d9ef4e38b5c2f0481f40bc68fb99976ae27b26"
+  evidenceCommit: "40d9ef4e38b5c2f0481f40bc68fb99976ae27b26"
+  source: "Reviewed current README, MCP tool contract, Jira-to-Keycloak walkthrough, UI states and release evidence at 40d9ef4; local source has unrelated uncommitted documentation."
 ---
 
 ## What I built
@@ -92,6 +98,8 @@ Approval is bound to the reviewed version and payload. If an execution receipt i
 
 The IT-1 Jira screenshot shows the synthetic request, not the approval or a resolved Jira status. The gallery image illustrates a proposal review with disposable fixture data; it was not captured during William's connected approval. The connected Jira-to-Keycloak path and later Jira result-property write have separate records. The delivered system is a local lab; production deployment and Azure validation remain outside this evidence.
 
+The additional gallery states are captures of separate synthetic in-memory cases. They show approval recorded, verified closure, and uncertain-outcome handling in the current small browser page; they are not additional connected Jira or Keycloak runs.
+
 ## Repository and evidence
 
 - [GitHub repository](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant)
@@ -99,3 +107,4 @@ The IT-1 Jira screenshot shows the synthetic request, not the approval or a reso
 - [Jira to Keycloak integration walkthrough](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md)
 - [MCP tool contract](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/mcp-server/README.md)
 - [HTTP release exercise](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/phase-7/release-lab.json)
+- [Human approval page and recorded UI states](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/blob/main/docs/WEB-UI.md)

@@ -7,12 +7,13 @@ client-side framework runtime.
 ## Information architecture
 
 - `/` — recruiter-focused homepage with Projects, Experience, About, and Contact
-- AI Applications: Invoice Review and Case Resolution Copilot
-- MCP & Business Automation: AI Service Desk & Ticket Operations Assistant,
-  Odoo Business Operations MCP Server, ConnectWise Service Operations MCP Server,
-  and AI Sales Follow-up & CRM Automation
+- AI Applications: Invoice Review, Case Resolution Copilot, and Private Offline Document Intelligence
+- MCP & Business Automation: a compact homepage preview links to
+  `/projects/business-automation/`, where AI Service Desk, Odoo Business
+  Operations, ConnectWise Service Operations, and AI Sales Follow-up each have
+  their own project overview.
 
-All six case studies remain children of the Projects section and are not global
+All seven case studies remain children of the Projects section and are not global
 navigation items. Their routes are generated from `src/content/projects/`.
 
 ## Content boundary
