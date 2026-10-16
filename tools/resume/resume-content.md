@@ -43,15 +43,15 @@ Repository: https://github.com/williamlo90/ai-service-desk-ticket-operations-ass
 
 ### Case Resolution Copilot | GitHub Repository | Jul-Sep 2026
 
-- Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
-- Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.
-- Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.
+- Built a case-resolution copilot with versioned SOP retrieval, human-approved actions, and verified downstream outcomes supporting case closure, reopening, and escalation.
+- Achieved 40/40 policy-correct and correctly completed outcomes on held-out synthetic cases: 19 verified actions and 21 acknowledged escalations; passed 18/18 SOP revision replay checks.
+- Recorded 83.7% lower raw median decision-workflow time (582s to 95s) in an earlier three-pair developer benchmark; validated container recovery and a separate temporary AWS deployment.
 
 ### Invoice Review | GitHub Repository | Jul-Aug 2026
 
-- Built an AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export.
-- Reduced median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices; achieved the expected outcome in 10/10 test cases, compared with 9/10 through manual ERPNext entry.
-- Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
+- Built an AI-assisted invoice review system with source-linked extraction, three-way purchase order/receipt matching, duplicate detection, and human-approved ERPNext posting.
+- Validated whole-invoice values and source provenance on 50/50 synthetic invoices, verified 20/20 eligible ERPNext sandbox postings, and recovered 20/20 restart replays without duplicate posting effects.
+- Reduced median time to a verified ERPNext draft by 68% (153s to 49s) in a separate six-invoice operator benchmark; validated packaged recovery and an earlier temporary Azure intake deployment.
 
 ## Professional Experience
 
@@ -89,7 +89,7 @@ Honors: Academic Achievement Scholarship, 2024
 - The January 2025 internship start is owner-confirmed and precedes the campus-document timeline; the public dated period is `Jan 2025-Jan 2026` across two full-time terms.
 - The combined internship title is a functional normalization of `Fullstack Mobile App Developer Intern` and `Full Stack Software Engineer`.
 - Phone number is verified in William's prior CV and official internship acceptance form.
-- Invoice Review uses a one-operator synthetic benchmark and a real local ERPNext sandbox; it is not presented as a customer deployment or multi-user study.
-- Case Resolution Copilot uses matched synthetic cases and a developer-operated benchmark. Its readiness evidence includes a bounded hosted Gmail draft journey and disposable Neon PostgreSQL persistence, not production-user adoption.
-- Invoice Review cloud validation was reviewed against public GitHub main at `b156e03`; its paired ERPNext benchmark was added at `c8f55da`. Case Resolution Copilot Evaluation V1 and AWS validation were reviewed at `47605cb`.
+- Invoice Review V2 evidence was reviewed at public GitHub main `e8d559b`: 50/50 synthetic whole invoices, 20/20 eligible local ERPNext sandbox postings, and 20/20 restart replays. Its separate earlier six-invoice timing result ends at a verified ERP draft, not a submitted posting.
+- Case Resolution Copilot V2 evidence was reviewed at public GitHub main `117a6b7`: 40/40 policy-correct and terminally complete synthetic cases and 18/18 exposed SOP revision decision replays. Its earlier three-pair developer benchmark measures decision-workflow time, not V2 verified completion.
+- Both AWS and Azure validations were temporary and preceded the V2 results. Do not imply that the hosted Case Resolution Copilot tour or an Azure deployment runs the V2 workflows.
 - Employer code has no Git history; codebase-size metrics are framed separately from individual contribution.

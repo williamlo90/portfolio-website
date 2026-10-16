@@ -33,7 +33,7 @@ describe("portfolio source constraints", () => {
   it("uses the canonical GitHub product brands", () => {
     expect(documentProject).toContain("title: Invoice Review");
     expect(documentProject).toContain(
-      "descriptor: Human-approved invoice review and ERPNext drafts",
+      "descriptor: Source-linked invoice review and verified ERP posting",
     );
     expect(supportProject).toContain("title: Case Resolution Copilot");
     expect(supportProject).toContain(
@@ -83,18 +83,20 @@ describe("portfolio source constraints", () => {
   it("publishes only repository-supported project metrics", () => {
     expect(documentProject).toContain("publicationState: published");
     expect(documentProject).toContain('value: "68%"');
-    expect(documentProject).toContain('value: "10/10"');
-    expect(documentProject).toContain('value: "98.75%"');
-    expect(documentProject).toContain("79/80");
+    expect(documentProject).toContain('value: "50/50"');
+    expect(documentProject).toContain('value: "20/20"');
+    expect(documentProject).toContain("20/20 restart replays");
     expect(documentProject).toContain("153s to 49s");
     expect(documentProject).toContain("local ERPNext sandbox");
 
     expect(supportProject).toContain("publicationState: published");
     expect(supportProject).toContain('value: "83.7%"');
-    expect(supportProject).toContain('value: "3/3"');
-    expect(supportProject).toContain('value: "20/20"');
-    expect(supportProject).toContain("73 backend unit and contract checks");
-    expect(supportProject).toContain("real, bounded Gmail journey");
+    expect(supportProject).toContain('value: "40/40"');
+    expect(supportProject).toContain('value: "18/18"');
+    expect(supportProject).toContain("19/19 required actions verified");
+    expect(supportProject).toContain(
+      "21/21 escalations routed and acknowledged",
+    );
     expect(supportProject).not.toContain('value: "57"');
     expect(supportProject).not.toContain('value: "491"');
     for (const retiredHash of [

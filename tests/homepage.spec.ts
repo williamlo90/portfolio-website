@@ -582,13 +582,15 @@ test("AI Document case study exposes its verified scope", async ({
     }),
   ).toBeVisible();
   await expect(
-    page.getByText("ERPNext workflow benchmark complete", { exact: true }),
+    page.getByText("V2 synthetic evaluation and local ERP posting verified", {
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(page.locator(".case-boundary")).toContainText(
-    /elapsed time, not separately measured active work/i,
+    /draft-timing benchmark is a separate six-invoice study/i,
   );
   await expect(page.locator(".case-prose")).toContainText(
-    /planned Azure-live load, worker-recovery/i,
+    /20\/20 eligible invoices/i,
   );
   await expectNoActionableAccessibilityFindings(page);
   await page.screenshot({
@@ -619,7 +621,7 @@ test("Support case study exposes governed evidence and its current boundary", as
     page.getByRole("heading", { level: 1, name: "Case Resolution Copilot" }),
   ).toBeVisible();
   const metrics = page.locator(".case-metrics dt");
-  await expect(metrics).toHaveText(["83.7%", "3/3", "20/20"]);
+  await expect(metrics).toHaveText(["40/40", "18/18", "83.7%"]);
   await expect(
     page.getByRole("link", { name: /View public repository/ }),
   ).toHaveAttribute(
@@ -631,13 +633,13 @@ test("Support case study exposes governed evidence and its current boundary", as
   ).toHaveCount(0);
   await expect(page.getByText(/invite-only access/i)).toHaveCount(0);
   await expect(page.locator(".case-prose")).toContainText(
-    /real, bounded Gmail journey/i,
+    /40\/40 policy-correct decisions/i,
   );
   await expect(page.locator(".case-prose")).toContainText(
-    /73 backend unit and contract checks/i,
+    /19\/19 verified target actions/i,
   );
   await expect(page.locator(".case-boundary")).toContainText(
-    /hosted screenshots show a read-only product tour/i,
+    /hosted screenshots show an earlier revision/i,
   );
   await expect(page.locator(".case-gallery img")).toHaveCount(3);
   await expect(page.locator(".case-gallery")).toContainText(
