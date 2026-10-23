@@ -2,15 +2,15 @@
 schemaVersion: 2
 slug: ai-document-operations
 title: Invoice Review
-descriptor: Source-linked invoice review and verified ERP posting
-summary: "An AI-assisted accounts-payable workflow that links extracted invoice values to their source, matches purchase orders and receipts, resolves exceptions, and requires human approval before verified ERPNext posting."
+descriptor: Human-approved invoice review and ERPNext drafts
+summary: "An AI invoice-to-ERP workflow that extracts PDF data, checks it against deterministic rules, and gives a reviewer the evidence and authority to approve a controlled ERPNext draft."
 publicationState: published
 featured: true
 featuredOrder: 1
 category: ai-applications
 status:
-  label: V2 synthetic evaluation and local ERP posting verified
-  detail: "The V2 technical cohort passed whole-invoice quality, authorized posting, and restart replay checks against a local ERPNext sandbox."
+  label: ERPNext workflow benchmark complete
+  detail: "The approval-gated workflow was benchmarked against direct entry using synthetic invoices and provisioned master data in a local ERPNext sandbox."
   tone: verified
 timeline: July-August 2026
 role: Product and full-stack engineering
@@ -21,104 +21,204 @@ repository:
 media:
   hero: ../../assets/projects/ai-document-review.png
   alt: "Invoice Review workspace showing a synthetic invoice beside extracted fields, validation findings, and an approval blocker."
-  caption: "Source-linked review workspace with synthetic fixture data"
+  caption: "Review workspace with synthetic fixture data"
   gallery:
     - image: ../../assets/projects/ai-document-approved.png
       alt: "Approved invoice decision panel showing the final human decision and retained review context."
-      caption: "Human approval decision using a synthetic fixture"
+      caption: "Approval decision using a synthetic fixture"
     - image: ../../assets/projects/ai-document-quality.png
       alt: "Invoice Review quality workspace showing evaluation scenarios and validation results."
-      caption: "Quality workspace with fixed synthetic evaluation data"
+      caption: "Quality workspace with a fixed synthetic evaluation"
 intendedUsers:
   - Finance reviewer
   - Accounts-payable operator
   - Operations administrator
 stack:
-  - React
+  - React 19
   - TypeScript
+  - Vite
   - FastAPI
-  - OCR.space
+  - SQLite
+  - PDF.js
+  - Mistral OCR
   - OpenAI structured extraction
   - ERPNext
-  - SQLite
-  - PostgreSQL
-  - Docker
   - Azure Container Apps
   - Azure Blob Storage
   - Azure Service Bus
+  - PostgreSQL
 metrics:
-  - value: "50/50"
-    label: "Whole-invoice values and required source provenance correct on frozen synthetic invoices"
-  - value: "20/20"
-    label: "Eligible ERPNext sandbox postings verified against invoice and ledger"
   - value: "68%"
-    label: "Lower median time to a verified ERPNext draft in a separate six-invoice benchmark"
+    label: Lower median elapsed invoice-to-ERP draft time (153s to 49s)
+  - value: "10/10"
+    label: Expected assisted-workflow results, versus 9/10 through direct entry
+  - value: "98.75%"
+    label: Exact field match on a sealed 10-invoice licensed synthetic holdout (79/80)
 highlights:
-  - label: V2 quality
-    value: "Whole-invoice values and required source provenance matched on 50/50 frozen synthetic invoices, including controlled PO, receipt, discrepancy, and duplicate scenarios."
-  - label: Verified ERP result
-    value: "All 20 eligible invoices posted in the local ERPNext sandbox with independent invoice and ledger read-back; 20/20 restart replays returned the same ERP target without duplicate posting effects."
-  - label: Separate timing evidence
-    value: "An earlier single-operator benchmark cut median elapsed time to a verified ERPNext draft by 68% (153s to 49s) across six paired synthetic invoices. It did not time the extended submitted-posting workflow."
+  - label: Outcome
+    value: "Cut median invoice-to-ERP draft time by 68% (153s to 49s) while achieving the expected result in 10/10 test cases."
+  - label: Benchmark
+    value: "Six paired synthetic invoices were completed by one operator through the assisted workflow and through direct manual entry into ERPNext."
+  - label: Engineering evidence
+    value: "Approval-gated ERPNext draft delivery includes idempotency and reconciliation. A temporary Azure run processed a synthetic PDF into review; a newer load, recovery, and observability harness has been rehearsed locally, not yet live-tested in Azure."
 workflow:
-  - Upload invoice and retain source evidence
-  - Extract proposed values with OCR and structured AI
-  - Match purchase order, receipt, and duplicate signals
-  - Review exceptions and attest source evidence
-  - Approve the ERP draft and separately approve submission
-  - Read back the submitted invoice and ledger
-  - Reconcile uncertain outcomes without duplicate posting
+  - Upload invoice
+  - OCR and field proposal
+  - Deterministic validation
+  - Human review and correction
+  - Approval or rejection
+  - Idempotent export
 productionBoundary:
-  label: Synthetic local ERP validation
-  detail: "V2 used controlled one-line USD synthetic invoices, human-role test identities, and a local ERPNext sandbox. The 68% draft-timing benchmark is a separate six-invoice study; V2 posting and recovery were not revalidated in Azure."
+  label: Local ERPNext sandbox benchmark
+  detail: "One operator used synthetic invoices in a provisioned local ERPNext sandbox. The 68% compares elapsed time, not separately measured active work. Azure integration validation used mock providers and was temporary; newer reliability scenarios remain local, not Azure-live."
 verification:
-  date: "2026-10-17"
-  contentCommit: "e8d559bc2451239e6370136a2b3f3c7d81eeb25d"
-  evidenceCommit: "e8d559bc2451239e6370136a2b3f3c7d81eeb25d"
-  source: "Reviewed public GitHub main at e8d559b, V2 Phase 6 quality/posting results, Phase 7 packaged release evidence, and the earlier paired ERPNext draft-timing report."
+  date: "2026-10-12"
+  contentCommit: "83ffd12b319469c76694a32513ff5941005335c5"
+  evidenceCommit: "83ffd12b319469c76694a32513ff5941005335c5"
+  source: "Reviewed public GitHub main at 83ffd12, including ERPNext prerequisites, revised evaluation and Azure claim boundaries, and the locally rehearsed production-validation harness. Original benchmark and Azure live-run artifacts remain separate earlier evidence."
 ---
 
 ## The problem
 
-Extracting fields from a PDF is only one part of accounts payable. A reviewer must know whether the supplier is mapped correctly, the quantity was received, the price matches the purchase order, and the invoice was already billed. Posting also needs explicit authority and a verifiable ERP result.
+Invoice review becomes fragile when the PDF, extracted values, validation reasons,
+and approval decision are split across tools. A reviewer needs to see what the
+system read, where a value came from, why a record is blocked, and what action is
+still allowed.
+
+I constrained the product to one complete invoice journey. That made it possible
+to design the failure states, reviewer authority, and export boundary in depth
+instead of presenting a broad but shallow “document AI” demo.
 
 ## What I built
 
-Built an AI-assisted invoice review workflow that keeps the source PDF, extracted values, purchasing evidence, exception decisions, and ERPNext outcome connected. The reviewer can inspect where a value came from, correct it, and resolve or reject a blocking discrepancy with a recorded reason.
+Built an AI invoice-to-ERP workflow that turns PDF data into a review-ready proposal, checks it with deterministic rules, and requires human approval before creating an ERPNext Purchase Invoice draft.
 
-V2 adds three-way purchase-order and receipt matching, duplicate detection, separate approval for ERP draft and submission, and independent invoice and ledger read-back. A missing or ambiguous value remains unknown; model confidence cannot approve a transaction.
+The product provides six operational surfaces: Inbox, Invoices, Review,
+Exports, Quality, and Operations. The main workspace places the source PDF next
+to proposed fields, validation findings, correction history, and the reviewer
+decision.
+
+- Uploaders can submit invoices and respond to correction requests.
+- Finance reviewers can compare the PDF with extracted values, correct fields,
+  reject a record, or approve it when blockers are cleared.
+- Administrators can inspect evaluation results, failed jobs, retries,
+  integrations, and audit events.
+
+Every correction retains the original proposal, before-and-after values, actor,
+reason, and timestamp. Export is available only after approval and uses an
+idempotency key to prevent duplicate delivery.
+
+## Architecture and decision boundary
+
+The React and TypeScript frontend uses TanStack Query and PDF.js. A FastAPI
+modular monolith owns authentication, workspace rules, state transitions,
+validation, audit events, and export eligibility. SQLite and private local file
+storage keep the demo reproducible; a background worker uses atomic job claims
+and lease fencing for asynchronous processing.
+
+The extraction layer is provider-based. Mock providers make the entire workflow
+available without paid credentials. A tested provider configuration sends the
+document through Mistral OCR and OpenAI structured extraction.
+
+The authority split is explicit:
+
+1. AI proposes invoice fields and source information.
+2. Application code checks required fields, totals, line items, duplicates,
+   roles, and allowed state transitions.
+3. A human reviewer approves, rejects, or requests correction.
+
+Model confidence alone can never approve an invoice, and the API enforces the
+same blocker rules as the interface.
 
 ## Verified outcomes
 
-On a frozen synthetic technical cohort, original extraction matched **50/50 whole invoices**, including required page and excerpt provenance. All **20/20 eligible invoices** were posted in a local ERPNext sandbox and verified against both the submitted invoice and ledger. The other **30/30 non-payable transactions** received authorized exception dispositions.
+**Reduced median invoice-to-ERP draft time by 68% (153s to 49s)** across six paired synthetic invoices; achieved the expected outcome in **10/10 test cases**, compared with **9/10 through manual ERPNext entry**.
 
-Restart replay returned the same ERP target in **20/20 cases**, with no duplicate posting effects in that cohort. Quantity, price, receipt, and duplicate checks were scored separately; the controlled cohort recorded no false holds or unsafe submissions.
+The timing benchmark covered six paired, draft-eligible synthetic invoices
+completed by one operator in a local ERPNext sandbox with provisioned company,
+supplier, item, account, tax, currency, and exchange-rate data. The measure is
+elapsed time from opening the source to a verified draft; active work and waiting
+time were not recorded separately. Four blocker observations
+from an earlier run remain in the combined 10-case outcome record but were not
+included in the paired timing median.
 
-The earlier one-operator timing benchmark measured a different endpoint: median elapsed time to a **verified ERPNext draft** fell by **68% (153s to 49s)** across six paired synthetic invoices. It did not measure time saved for V2's full submitted-posting workflow.
+The provider-backed extraction workflow also completed all ten invoices in a
+sealed, licensed-synthetic holdout. It matched 79 of 80 labeled fields (98.75%)
+and matched every expected validation code and approval blocker. The remaining
+miss was one unsupported due date, so this is not presented as perfect
+extraction or production accuracy.
 
-## Architecture and authority
+The public repository includes the holdout aggregate, but not the source PDFs,
+labels, OCR, or per-document predictions. The 98.75% result therefore cannot be
+independently rerun from the repository alone.
 
-React and TypeScript present the source-linked review workspace. FastAPI owns permissions, immutable purchasing evidence, match state, approvals, operation identity, audit history, and recovery. The validated real-provider V2 profile used OCR.space Engine 3 and OpenAI structured extraction; mock providers keep the local demo reproducible without paid credentials.
+A separate clean provider diagnostic processed 20 deterministic synthetic
+invoices and matched all 160 labeled fields. That set had already been used
+during development, so it remains supporting diagnostic evidence rather than
+the headline quality result.
 
-Application code checks PO and receipt quantities, prices, duplicate candidates, evidence freshness, and allowed state transitions. A human approves the reviewed match, then separately authorizes submission. ERPNext returns a submitted Purchase Invoice and ledger entries that are checked against an independent expected result.
+The recorded clean release reports at least 91.21% backend line coverage.
 
-If a submit response is lost, the operation remains unknown until a read-only ERP check establishes the actual target. In the packaged Docker journey, the application survived container recreation and reconciled the existing submitted invoice without a second create or submit. Turning off new writes still permits authorized reconciliation.
+## Production and engineering evidence
 
-## Deployment evidence
+Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.
 
-The current V2 posting, restart, and restore checks were validated locally against the ERPNext sandbox. The packaged release passed API/worker startup, migration and readiness, browser workflow, PostgreSQL integration, and SQLite/upload restore checks.
+The workflow delivers approved Purchase Invoice drafts to a real local ERPNext
+sandbox. The integration covers field mapping, permission checks, idempotency,
+delivery receipts, reconciliation, and deliberate retries so an uncertain
+delivery does not silently create a duplicate draft.
 
-An earlier temporary Azure deployment validated Container Apps, private Blob Storage, Service Bus, PostgreSQL, Managed Identity, and Key Vault by processing a synthetic PDF into review with mock providers. It did not validate V2 posting or cloud capacity; the resource group was removed after the run.
+This is controlled integration evidence, not a production deployment claim.
 
-## Evidence
+I also validated a temporary Azure deployment. Container Apps ran the API,
+worker, and migration job against Azure Database for PostgreSQL. A synthetic
+PDF passed ClamAV scanning, private Blob Storage, Service Bus delivery, and
+mock-provider processing into the `needs_review` state. Managed Identity and
+Key Vault supplied scoped access and secrets. The resource group was deleted
+after the run. This validates the deployment and integration path, not
+production hosting or Azure-hosted real-provider extraction accuracy.
 
-- [V2 quality and posting evaluation](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/invoice-review-v2/PHASE-6.md)
-- [Frozen whole-invoice quality aggregate](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/invoice-review-v2/quality-holdout/report.json)
-- [ERP posting and replay aggregate](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/invoice-review-v2/posting/report.json)
-- [Packaged Docker and recovery validation](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/invoice-review-v2/PHASE-7.md)
-- [Separate paired ERPNext draft-timing benchmark](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/erpnext-paired-draft-timing-results.md)
-- [Earlier Azure live validation](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/azure-live-validation.md)
+A newer production-validation harness covers local contract and rehearsal checks
+for concurrency, queue duplicate and poison-message handling, recovery,
+metrics, and trace correlation. The planned Azure-live load, worker-recovery,
+alert-delivery, and autoscaling scenarios have not passed. I do not claim
+production-grade reliability or measured cloud capacity from that local work.
+
+## How this was verified
+
+- [External evaluation summary](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/external-invoice-evaluation-v2.md)
+- [Paired ERPNext timing benchmark](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/erpnext-paired-draft-timing-results.md)
+- [Sealed holdout JSON](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/external-invoice-v2-holdout-final.json)
+- [Recorded release JSON](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/release-verification.json)
+- [Evaluation and failure log](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evaluation-experiment-log.md)
+- [Retained failed diagnostic](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/evidence/current-provider-diagnostic.failed-20260728T080824Z.json)
+- [Captioned demo video](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/assets/demo/invoice-review-demo.mp4)
+- [ERPNext draft walkthrough and prerequisites](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/demo-video.md#erpnext-draft-walkthrough)
+- [Azure live validation](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/azure-live-validation.md)
+- [Production-validation status and test matrix](https://github.com/williamlo90/ai-document-ops-system/blob/main/docs/production-documentation/production-grade-documentation-ai-document.md)
+
+The holdout uses licensed synthetic data. The release artifact records an older
+clean evidence commit than the current reviewed GitHub source; the frontmatter
+keeps those two identities separate.
+
+## Failure handling
+
+One diagnostic initially stopped on a localized amount such as `1.250,00`.
+The failed artifact was retained, deterministic number normalization was added,
+and a regression test covered the case before the clean diagnostic was rerun.
+
+The same approach appears in the runtime design: a failed external delivery
+does not rewrite an approved decision. The system retains the approved state and
+the delivery attempt so an operator can investigate or retry it deliberately.
 
 ## Current boundary
 
-The V2 quality cohort used developer/AI-assisted, one-line USD synthetic invoices with explicit zero tax and controlled PO/receipt scenarios. It is not an estimate of accuracy on arbitrary customer documents or a production deployment. The old six-invoice timing result ends at a verified draft, while the new 50-invoice results cover posting and recovery; they are separate studies with different endpoints.
+This is a one-operator benchmark for one invoice schema using synthetic invoices
+and a local ERPNext sandbox. Its mapping requires provisioned master data and
+cannot be assumed to work unchanged in another company's ERPNext. It establishes
+the measured elapsed-time result for that test boundary, not production-user
+adoption, customer impact, security certification, or multi-user time savings.
+
+Moving beyond that boundary requires finance-user usability testing, legally
+usable real invoices, managed identity and tenancy, durable object storage, a
+managed database and backup plan, and live malware scanning.

@@ -2,15 +2,15 @@
 schemaVersion: 2
 slug: ai-support-escalation
 title: Case Resolution Copilot
-descriptor: Policy-governed support decisions and verified outcomes
-summary: "A case-resolution copilot that retrieves applicable SOP versions, prepares evidence-backed Decision Briefs, and keeps consequential actions under human approval through target verification, closure, reopening, or acknowledged escalation."
+descriptor: Policy-governed decision workspace
+summary: "A policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions."
 publicationState: published
 featured: true
 featuredOrder: 2
 category: ai-applications
 status:
-  label: V2 synthetic evaluation and release checks passed
-  detail: "The V2 source passed a 40-case PostgreSQL-backed synthetic evaluation and isolated container/recovery checks. The hosted product tour shows an earlier deployment."
+  label: Controlled-pilot readiness gate passed
+  detail: "The bounded Gmail draft journey, PostgreSQL persistence, recovery paths, and authenticated readiness checks passed the recorded gate."
   tone: verified
 timeline: July 2026-September 2026
 role: Product and full-stack engineering
@@ -21,16 +21,16 @@ repository:
 media:
   hero: ../../assets/projects/support-live-02-decision-brief.jpg
   alt: "Hosted Case Resolution Copilot Decision Brief for synthetic case CS-DEMO-001, showing verified facts, a suggested resolution, uncertainty, and human-review guidance."
-  caption: "Decision Brief from the earlier hosted product tour with synthetic data"
+  caption: "Decision Brief captured from the hosted demo with synthetic case data on October 12, 2026"
   gallery:
     - image: ../../assets/projects/support-live-01-cases-queue.jpg
       alt: "Hosted Case Resolution Copilot queue filtered to synthetic CS-DEMO cases, with priority, risk, ownership, and SLA context."
       caption: "Hosted queue filtered to synthetic demo cases"
     - image: ../../assets/projects/support-live-03-evidence.jpg
       alt: "Hosted evidence tab showing checked business records, policy guidance, source freshness, and remaining information gaps for a synthetic billing case."
-      caption: "Evidence and policy guidance in the earlier hosted demo"
+      caption: "Evidence and policy guidance in the hosted demo"
     - image: ../../assets/projects/support-live-04-conversation.jpg
-      alt: "Hosted conversation tab showing synthetic customer messages, an internal note, and an unsent response draft."
+      alt: "Hosted conversation tab showing synthetic customer messages, an internal note, and a suggested response draft that has not been emailed."
       caption: "Conversation and unsent response draft for a synthetic case"
 intendedUsers:
   - Support specialist
@@ -38,86 +38,195 @@ intendedUsers:
   - Operations administrator
   - QA or auditor
 stack:
-  - Next.js
-  - React
+  - Next.js 16
+  - React 19
   - TypeScript
   - FastAPI
   - PostgreSQL
   - pgvector
+  - Neon
+  - Clerk
   - LangGraph
   - Celery
-  - OpenAI
   - AWS
+  - LangChain Core
+  - CrewAI (comparison prototype)
+  - AutoGen (comparison prototype)
+  - OpenAI
+  - Gmail
+  - Vercel
 metrics:
-  - value: "40/40"
-    label: "Policy-correct decisions and correct completed outcomes on held-out synthetic cases"
-  - value: "18/18"
-    label: "Decision replay checks across dated SOP revisions"
   - value: "83.7%"
-    label: "Lower raw median decision-workflow time in an earlier three-pair benchmark"
+    label: Lower raw median case-resolution workflow time (582s to 95s)
+  - value: "3/3"
+    label: Complete safe workflows, versus 0/3 through the manual path
+  - value: "20/20"
+    label: Synthetic regression observations passed
 highlights:
-  - label: V2 outcome
-    value: "Policy-correct decisions and correct terminal outcomes in 40/40 held-out synthetic cases: 19/19 required actions verified against synthetic targets and 21/21 escalations routed and acknowledged."
-  - label: SOP consistency
-    value: "An exposed replay set passed 18/18 decision checks across six cases, three SOP rule families, and dated policy versions."
-  - label: Separate timing evidence
-    value: "An earlier developer-operated benchmark recorded 83.7% lower raw median decision-workflow time (582s to 95s) across three matched synthetic pairs. It did not time the V2 verified-completion boundary."
+  - label: Outcome
+    value: "Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases."
+  - label: Benchmark
+    value: "Three matched synthetic cases were completed in a developer-operated manual-versus-Copilot benchmark."
+  - label: Engineering evidence
+    value: "20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios; live-validated a reproducible AWS architecture."
 workflow:
-  - Open case and gather source evidence
-  - Retrieve the applicable versioned SOP
-  - Prepare a bounded Decision Brief
-  - Obtain human approval for the exact proposed action
-  - Execute and verify the downstream target
-  - Close, reopen, or route an acknowledged escalation
+  - Case intake
+  - Evidence investigation
+  - Versioned policy retrieval
+  - Bounded Decision Brief
+  - Human review
+  - Controlled action
+  - Receipt and reconciliation
 productionBoundary:
-  label: Synthetic V2 source validation
-  detail: "V2 outcomes use PostgreSQL-backed APIs, deterministic decisions, and synthetic action targets. The hosted screenshots show an earlier revision; V2 has not been promoted to that host. The 83.7% timing comes from a separate older three-pair developer benchmark."
+  label: Controlled-pilot evidence
+  detail: "The benchmark used three matched synthetic cases and one developer operator. The October 12 hosted screenshots show a read-only product tour, not workflow acceptance. Controlled-action and Gmail-draft acceptance were recorded separately. AWS validation was temporary; the always-on demo remains on Vercel and Neon."
 verification:
-  date: "2026-10-17"
-  contentCommit: "117a6b70fef7183129116f6bb51d29e71591b111"
-  evidenceCommit: "117a6b70fef7183129116f6bb51d29e71591b111"
-  source: "Reviewed public GitHub main at 117a6b7, V2 claim ledger and sealed holdout results, dated SOP replay, Phase 6 release checks, and the earlier operator timing report."
+  date: "2026-10-12"
+  contentCommit: "dab033c5fb5a69257af76ce41f0553d7fddc665c"
+  evidenceCommit: "dab033c5fb5a69257af76ce41f0553d7fddc665c"
+  source: "Reviewed public GitHub main at dab033c, the October 12 live product tour captured from hosted source 80408ed, Evaluation V1, the developer workflow benchmark, and final September 25 AWS live validation."
 ---
 
 ## The problem
 
-Complex support cases combine customer messages, account records, and policies that may change over time. A plausible AI response is not enough: the team needs to know which SOP applies, what action was authorized, and whether that action actually happened.
+Complex support escalations are rarely blocked by a lack of prose. They are
+blocked by fragmented facts, unclear policy authority, risky side effects, and
+uncertain outcomes after an external system times out.
+
+This product is therefore not a general chatbot. It is a governed decision
+workspace for cases that need investigation, policy evidence, human authority,
+and a recoverable action trail.
 
 ## What I built
 
-Built a policy-governed case-resolution workflow that assembles source evidence and the applicable SOP version into a reviewable Decision Brief. Application rules determine eligible actions; a person approves the exact proposal before any consequential side effect.
+Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.
 
-V2 extends the workflow through verified target read-back, case closure and reopening, and routed escalation with acknowledgement. Changed policy or evidence makes an old approval stale rather than silently carrying its authority forward.
+The role-aware workspace supports Specialists, Supervisors, Administrators, and
+Auditors across case queues, review workspaces, controlled actions, policies,
+quality reporting, connections, and team administration.
 
-The images on this page show the earlier hosted product tour with synthetic cases. They illustrate the interface, not V2 deployment or evaluation.
+The gallery shows a read-only capture from the invite-only hosted demo on
+October 12, 2026. It follows synthetic case `CS-DEMO-001` through the queue,
+Decision Brief, evidence, and conversation. No case edit, approval, external
+action, or outgoing message was performed for those screenshots.
+
+The core journey is:
+
+1. Ingest or open a case and gather the relevant business evidence.
+2. Retrieve only policy versions that are applicable and currently valid.
+3. Build a Decision Brief that separates verified facts, missing information,
+   risk, uncertainty, and the proposed response.
+4. Bind human review to an immutable snapshot of the exact evidence, policy,
+   and recommendation that was reviewed.
+5. Register a controlled action with idempotency and receipt tracking.
+6. Reconcile an unknown outcome before another side effect is allowed.
+
+The frontend and FastAPI backend are organized as a modular monolith. Domain
+services, PostgreSQL persistence, and role-aware UI commands stay separated by
+business boundary without introducing a distributed runtime the product does
+not need.
+
+## Architecture and authority
+
+The implementation uses Next.js, React, TypeScript, Clerk, FastAPI,
+PostgreSQL/pgvector on Neon, LangGraph, OpenAI, and Vercel. PostgreSQL, rather
+than the model or graph runtime, is the durable source of truth for business
+state.
+
+The production workflow runs on LangGraph. LangChain Core supports bounded
+prompt and schema formatting, while CrewAI and AutoGen remain isolated
+comparison prototypes validated on one synthetic case; they are not runtime
+dependencies of the application.
+
+OpenAI is deliberately bounded to narrative work. It may improve the rationale,
+uncertainty explanation, response subject, and response body derived from a
+deterministic control record. It cannot change verified facts, risks, actions,
+financial impact, tenant scope, permissions, or the approval requirement.
+
+The backend owns role checks, organization scope, policy lifecycle, stale-review
+detection, idempotency, redaction, audit events, and recovery. If case evidence
+or policy changes after submission, the review becomes stale instead of
+silently retaining old authority.
 
 ## Verified outcomes
 
-The V2 sealed synthetic holdout recorded **40/40 policy-correct decisions and 40/40 correct terminal completions**. It included **19/19 verified target actions** and **21/21 required routed and acknowledged escalations**. The run used PostgreSQL-backed product APIs, deterministic decision rules, and synthetic billing and identity targets. Labels were authored and reviewed by the implementation agent; this is controlled scenario evidence, not general model accuracy or customer results.
+**Reduced raw median workflow time by 83.7% (582s to 95s)** in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through **20/20 regression observations**, a **3/3 OpenAI canary**, and **4/4 PostgreSQL workflow scenarios**.
 
-A separate exposed SOP replay passed **18/18 decision checks** across six cases, three rule families, and dated versions. It tests policy-change consistency, not another holdout or downstream payment completion.
+The workflow benchmark completed the full safe workflow in 3/3 Copilot cases,
+compared with 0/3 through the manual path.
 
-The earlier developer-operated benchmark recorded **83.7% lower raw median decision-workflow time (582s to 95s)** across three matched synthetic pairs. The manual path did not complete the same full safe workflow in all pairs, and this study did not measure time to V2 verified completion. It is kept separate from the 40-case V2 result.
+The developer-operated benchmark used three matched synthetic cases. Because
+the manual runs did not complete the same full safe-workflow boundary, the raw
+timing difference is descriptive and is not presented as a
+correctness-controlled speedup.
 
-## Architecture and reliability
+Evaluation V1 covered 10 synthetic cases with two regression repeats. The
+OpenAI canary covered three cases with two provider calls, including a correct
+provider skip when policy was missing. Four persisted PostgreSQL scenarios
+validated conflict blocking, immutable approval snapshots, exactly-once
+controlled execution, and unknown-outcome reconciliation.
 
-Next.js and React provide the role-aware workspace. FastAPI owns tenant scope, permissions, policy lifecycle, approval freshness, action registration, and audit history. PostgreSQL and pgvector retain durable case, retrieval, and operation state. LangGraph coordinates bounded AI narrative; deterministic application controls and authorized people remain responsible for decisions and side effects.
+Public evaluation keeps 86 CFPB, Financial Ombudsman Service, and UCI records
+separate from three synthetic production-engine controls. These records test the
+evaluation pipeline; they are not presented as complete customer cases or one
+aggregate product-accuracy score.
 
-An action is registered before execution with an operation identity. Target read-back checks the approved parameters and observed effect count before closure. An uncertain response stays unresolved until reconciliation; blind retry is blocked.
+## Production and engineering evidence
 
-The V2 release package passed isolated container startup and restart, ten PostgreSQL integration journeys, a seeded restore, known-good image replacement, and persisted unknown-outcome safety checks. These are reproducible demo/recovery checks, not production uptime measurements.
+Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.
 
-The earlier AWS architecture was live-validated temporarily across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, Secrets Manager, and CloudWatch. V2 was not newly deployed to AWS. The always-on hosted demo remains on Vercel and Neon at an earlier source revision.
+My end-to-end ownership covered architecture, implementation, evaluation,
+deployment validation, and recovery. Celery and SQS support asynchronous
+processing, while LangGraph coordinates LLM API integration and inference
+orchestration within application-enforced controls.
 
-## Evidence
+The controlled-pilot readiness gate covered a real, bounded Gmail journey that
+created an approved persisted draft without automatically sending it, plus
+PostgreSQL 18.6 and pgvector persistence on a disposable Neon database.
 
-- [V2 evaluation results](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-v2/RESULTS.md)
-- [V2 claim-to-evidence ledger](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-v2/CLAIM_LEDGER.md)
-- [Dated SOP replay results](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-v2/results/sop-replay.json)
-- [V2 container and recovery checks](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-v2/PHASE6_RELEASE.md)
-- [Earlier operator timing benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
-- [Earlier hosted product tour](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/live-product-tour/2026-10-12/README.md)
+Supporting checks included 73 backend unit and contract checks, 3 PostgreSQL
+integration checks, 4 provider-fault scenarios, and 35 frontend recovery checks.
+Warm authenticated primary content was ready in 375 ms against a 2,500 ms gate.
+That browser timing is a readiness measurement, not an exact Core Web Vitals LCP
+measurement.
+
+I also validated a temporary AWS deployment of the API and background worker.
+The connected run covered ECS/Fargate service health, a successful database
+migration to RDS PostgreSQL with pgvector, S3-to-Lambda-to-SQS-to-Celery
+processing, worker replacement after interruption, and verified resource
+teardown. This was a bounded infrastructure test; the always-on demo remains on
+Vercel and Neon.
+
+## How this was verified
+
+- [October 12 live product tour](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/live-product-tour/2026-10-12/README.md)
+- [Case Resolution Evaluation V1](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/case-resolution-evaluation-v1/README.md)
+- [Developer workflow benchmark](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/developer-workflow-benchmark/REPORT.md)
+- [Earlier hosted controlled-action acceptance](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/hosted-e2e-acceptance/2026-08-05/README.md)
+- [Operational readiness evidence](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/phase8-operational-readiness/2026-08-25/README.md)
+- [Orchestrator framework validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/framework-validation.md)
+- [AWS live validation](https://github.com/williamlo90/case-resolution-copilot/blob/main/docs/evidence/aws-live-validation/README.md)
+
+## Failure handling
+
+Consequential actions are registered before execution and protected by
+idempotency. A successful provider response produces a receipt that can be
+traced back to the reviewed snapshot.
+
+If a timeout means the side effect may have occurred, the system records an
+unknown outcome and blocks blind retry. Recovery uses a read-only status check
+or a human-confirmed resolution before the workflow can continue. This prevents
+"retry" from becoming a duplicate refund, credit, or account change.
 
 ## Current boundary
 
-The V2 results come from synthetic cases and deterministic target adapters. They do not establish customer adoption, real-provider completion rates, or production reliability. The October hosted screenshots predate V2 and cannot be used as proof that V2 is live. The timing benchmark is a separate earlier decision-workflow measure, not a speedup claim for equally successful V2 resolutions.
+The October 12 product tour shows the hosted interface at source revision
+`80408ed`; it is visual evidence, not an end-to-end acceptance test or proof of
+all later revisions. The earlier hosted acceptance separately records
+Specialist submission, Supervisor approval, controlled execution, duplicate
+blocking, and Auditor inspection on the predecessor deployment.
+
+The evidence covers synthetic cases, one developer operator, a disposable Neon
+database, and one bounded hosted Gmail draft journey. It supports a
+controlled-pilot readiness claim, not production-user adoption, customer impact,
+automatic email sending, production accuracy, or general enterprise readiness.

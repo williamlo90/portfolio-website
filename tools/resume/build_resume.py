@@ -433,17 +433,17 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built a case-resolution copilot with versioned SOP retrieval, human-approved actions, and verified downstream outcomes supporting case closure, reopening, and escalation.",
+        "Built a policy-governed AI case-resolution system that converts fragmented evidence and versioned policies into review-ready Decision Briefs, with deterministic risk controls and human approval for consequential actions.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Achieved 40/40 policy-correct and correctly completed outcomes on held-out synthetic cases: 19 verified actions and 21 acknowledged escalations; passed 18/18 SOP revision replay checks.",
+        "Reduced raw median workflow time by 83.7% (582s to 95s) in a developer-operated benchmark across three matched synthetic cases; validated critical behavior through 20/20 regression observations, a 3/3 OpenAI canary, and 4/4 PostgreSQL workflow scenarios.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Recorded 83.7% lower raw median decision-workflow time (582s to 95s) in an earlier three-pair developer benchmark; validated container recovery and a separate temporary AWS deployment.",
+        "Engineered the platform with FastAPI, PostgreSQL/pgvector, LangGraph, Celery, and Next.js; strengthened workflow reliability through idempotent actions, audit trails, and worker recovery. Live-validated a reproducible AWS deployment with CloudWatch monitoring across ECS/Fargate, RDS, SQS, S3, Lambda, CloudFront, IAM, and Secrets Manager.",
     )
 
     add_entry_title(
@@ -456,17 +456,17 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_bullet(
         document,
         bullet_number_id,
-        "Built an AI-assisted invoice review system with source-linked extraction, three-way purchase order/receipt matching, duplicate detection, and human-approved ERPNext posting.",
+        "Built an AI invoice-to-ERP workflow that turns unstructured documents into validated, review-ready invoice data, combining OCR extraction, deterministic validation, and human approval before ERPNext export.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Validated whole-invoice values and source provenance on 50/50 synthetic invoices, verified 20/20 eligible ERPNext sandbox postings, and recovered 20/20 restart replays without duplicate posting effects.",
+        "Reduced median invoice-to-ERP draft time by 68% (153s to 49s) across six paired synthetic invoices; achieved the expected outcome in 10/10 test cases, compared with 9/10 through manual ERPNext entry.",
     )
     add_bullet(
         document,
         bullet_number_id,
-        "Reduced median time to a verified ERPNext draft by 68% (153s to 49s) in a separate six-invoice operator benchmark; validated packaged recovery and an earlier temporary Azure intake deployment.",
+        "Integrated React, FastAPI, Mistral OCR, OpenAI, and ERPNext; validated an end-to-end Azure deployment using Container Apps, private Blob Storage, Service Bus, and PostgreSQL, processing a synthetic invoice from upload through the review queue.",
     )
 
     add_section(document, "Professional Experience")
