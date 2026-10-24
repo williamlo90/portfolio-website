@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { existsSync, mkdirSync, readFileSync, statSync } from "node:fs";
 import { extname, resolve, sep } from "node:path";
+import { URL } from "node:url";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
 
