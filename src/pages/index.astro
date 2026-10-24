@@ -22,9 +22,6 @@ const experienceEntries = (
 const aiProjects = featuredEntries.filter(
   ({ data }) => data.category === "ai-applications",
 );
-const automationProjects = featuredEntries.filter(
-  ({ data }) => data.category === "mcp-business-automation",
-);
 
 const personStructuredData = {
   "@context": "https://schema.org",
@@ -51,7 +48,7 @@ const personStructuredData = {
 
 <BaseLayout
   title="William Lo Channiko | Applied AI + Full-Stack Engineer"
-  description="Portfolio of William Lo Channiko: full-stack AI systems for invoice review, case resolution, offline document intelligence, service operations, Odoo, and sales follow-up automation."
+  description="Portfolio of William Lo Channiko: full-stack AI systems for invoice review, case resolution, and offline document intelligence."
   structuredData={personStructuredData}
 >
   <SiteHeader home />
@@ -144,45 +141,6 @@ const personStructuredData = {
       }
     </section>
 
-    <section
-      class="projects automation-section"
-      id="mcp-business-automation"
-      aria-labelledby="mcp-business-automation-title"
-    >
-      <div class="automation-preview">
-        <div class="automation-image-grid" aria-hidden="true">
-          {
-            automationProjects.map(({ data }) => (
-              <div class="automation-image">
-                <Image
-                  src={data.media.hero}
-                  alt=""
-                  widths={[320, 480, 640]}
-                  sizes="(max-width: 800px) 45vw, 25vw"
-                  format="webp"
-                  loading="lazy"
-                />
-              </div>
-            ))
-          }
-        </div>
-        <div class="automation-preview-copy">
-          <h2 id="mcp-business-automation-title">
-            MCP &amp; Business Automation
-          </h2>
-          <p>
-            Scoped tools and business workflows built around review and verified
-            outcomes.
-          </p>
-          <ul class="automation-project-names">
-            {automationProjects.map(({ data }) => <li>{data.title}</li>)}
-          </ul>
-          <a class="automation-more" href="/projects/business-automation/">
-            View more <span class="action-arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
     <section
       class="experience"
       id="experience"

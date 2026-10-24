@@ -14,26 +14,6 @@ async function expectNoActionableAccessibilityFindings(
 
 for (const project of [
   {
-    slug: "ai-service-desk-ticket-operations-assistant",
-    title: "AI Service Desk & Ticket Operations Assistant",
-    metrics: ["8", "16/16", "48"],
-  },
-  {
-    slug: "connectwise-service-operations-mcp",
-    title: "ConnectWise Service Operations MCP Server",
-    metrics: ["6", "135/135", "33"],
-  },
-  {
-    slug: "odoo-business-operations-mcp-server",
-    title: "Odoo Business Operations MCP Server",
-    metrics: ["10", "13", "31/31"],
-  },
-  {
-    slug: "ai-sales-followup-crm-automation",
-    title: "AI Sales Follow-up & CRM Automation",
-    metrics: ["20/20", "1 + 1", "360"],
-  },
-  {
     slug: "private-offline-document-intelligence",
     title: "Private Offline Document Intelligence",
     metrics: ["13/13", "5.056s", "0"],
@@ -70,11 +50,7 @@ for (const project of [
       path: testInfo.outputPath("case-page.png"),
       fullPage: true,
     });
-    await page.goto(
-      project.slug === "private-offline-document-intelligence"
-        ? "/"
-        : "/projects/business-automation/",
-    );
+    await page.goto("/");
     await page.locator(`#${project.slug}`).scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
@@ -89,7 +65,7 @@ for (const project of [
   });
 }
 
-test("homepage keeps AI applications prominent and summarizes automation", async ({
+test("homepage presents AI applications without the automation section", async ({
   page,
 }) => {
   await page.goto("/");
@@ -112,17 +88,8 @@ test("homepage keeps AI applications prominent and summarizes automation", async
       name: "Private Offline Document Intelligence",
     }),
   ).toBeVisible();
-  await expect(page.locator(".automation-project-names li")).toHaveText([
-    "AI Service Desk & Ticket Operations Assistant",
-    "Odoo Business Operations MCP Server",
-    "ConnectWise Service Operations MCP Server",
-    "AI Sales Follow-up & CRM Automation",
-  ]);
-  await expect(page.locator(".automation-image-grid img")).toHaveCount(4);
-  await expect(page.getByRole("link", { name: "View more" })).toHaveAttribute(
-    "href",
-    "/projects/business-automation/",
-  );
+  await expect(page.locator("#mcp-business-automation")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "View more" })).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: "Full-Stack Software Engineer Intern" }),
   ).toBeVisible();
@@ -165,53 +132,6 @@ test("homepage keeps AI applications prominent and summarizes automation", async
   expect(colors.heading).toBe("rgb(244, 247, 250)");
   expect(colors.horizontalOverflow).toBe(false);
   await expectNoActionableAccessibilityFindings(page);
-});
-
-test("View more opens the four automation projects and their case studies", async ({
-  page,
-}, testInfo) => {
-  await page.goto("/");
-  await page.getByRole("link", { name: "View more" }).click();
-  await expect(page).toHaveURL(/\/projects\/business-automation\/$/);
-  await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: "MCP & Business Automation",
-    }),
-  ).toBeVisible();
-  await expect(
-    page.locator(".automation-collection .project-feature"),
-  ).toHaveCount(4);
-  for (const slug of [
-    "ai-service-desk-ticket-operations-assistant",
-    "odoo-business-operations-mcp-server",
-    "connectwise-service-operations-mcp",
-    "ai-sales-followup-crm-automation",
-  ]) {
-    await expect(
-      page.locator(`#${slug} .project-primary-action`),
-    ).toHaveAttribute("href", `/projects/${slug}/`);
-  }
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth,
-    ),
-  ).toBe(true);
-  await expectNoActionableAccessibilityFindings(page);
-  for (const picture of await page
-    .locator(".automation-collection img")
-    .all()) {
-    await picture.scrollIntoViewIfNeeded();
-    await expect
-      .poll(() =>
-        picture.evaluate((image) => (image as HTMLImageElement).naturalWidth),
-      )
-      .toBeGreaterThan(0);
-  }
-  await page.screenshot({
-    path: testInfo.outputPath("automation-collection.png"),
-    fullPage: true,
-  });
 });
 
 test("mobile layout keeps Projects and Contact discoverable", async ({

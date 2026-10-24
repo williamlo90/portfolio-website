@@ -20,9 +20,7 @@ test("project headings align with their sections without overflow", async ({
   await expect(page.locator(".project-group-title")).toHaveText([
     "AI Applications",
   ]);
-  await expect(page.locator("#mcp-business-automation h2")).toHaveText(
-    "MCP & Business Automation",
-  );
+  await expect(page.locator("#mcp-business-automation")).toHaveCount(0);
   await expect(
     page
       .locator("main > section.project-group")
@@ -44,19 +42,6 @@ test("project headings align with their sections without overflow", async ({
       await heading.evaluate((el) => el.scrollWidth <= el.clientWidth),
     ).toBe(true);
   }
-  for (const picture of await page
-    .locator(".automation-image-grid img")
-    .all()) {
-    await picture.scrollIntoViewIfNeeded();
-    await expect
-      .poll(() =>
-        picture.evaluate((image) => (image as HTMLImageElement).naturalWidth),
-      )
-      .toBeGreaterThan(0);
-  }
-  await page.locator(".automation-preview").screenshot({
-    path: testInfo.outputPath("automation-preview.png"),
-  });
   for (const slug of [
     "ai-document-operations",
     "private-offline-document-intelligence",

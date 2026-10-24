@@ -1,7 +1,6 @@
-import { spawn } from "node:child_process";
-import { once } from "node:events";
-import { existsSync, mkdirSync } from "node:fs";
-import { resolve } from "node:path";
+import { createServer } from "node:http";
+import { existsSync, mkdirSync, readFileSync, statSync } from "node:fs";
+import { extname, resolve, sep } from "node:path";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
 
@@ -10,7 +9,7 @@ const previewOrigin = `http://127.0.0.1:${previewPort}`;
 const routes = [
   "/",
   "/projects/ai-document-operations/",
-  "/projects/business-automation/",
+  "/projects/ai-support-escalation/",
 ];
 const runsPerRoute = 3;
 const budgets = {
@@ -23,25 +22,37 @@ if (!existsSync(resolve("dist/index.html"))) {
   throw new Error("Run the production build before the Lighthouse check");
 }
 
-const preview = spawn(
-  process.execPath,
-  [
-    resolve("node_modules/astro/bin/astro.mjs"),
-    "preview",
-    "--host",
-    "127.0.0.1",
-    "--port",
-    String(previewPort),
-  ],
-  {
-    stdio: ["ignore", "pipe", "pipe"],
-    windowsHide: true,
-  },
-);
-
-let previewError = "";
-preview.stderr.on("data", (chunk) => {
-  previewError += chunk.toString();
+const distDirectory = resolve("dist");
+const contentTypes = {
+  ".html": "text/html; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".woff2": "font/woff2",
+};
+const preview = createServer((request, response) => {
+  const pathname = decodeURIComponent(
+    new URL(request.url, previewOrigin).pathname,
+  );
+  let path = resolve(distDirectory, `.${pathname}`);
+  if (path !== distDirectory && !path.startsWith(`${distDirectory}${sep}`)) {
+    response.writeHead(403).end();
+    return;
+  }
+  if (existsSync(path) && statSync(path).isDirectory()) {
+    path = resolve(path, "index.html");
+  }
+  if (!existsSync(path)) {
+    response.writeHead(404).end();
+    return;
+  }
+  response.setHeader(
+    "Content-Type",
+    contentTypes[extname(path)] ?? "application/octet-stream",
+  );
+  response.end(readFileSync(path));
 });
 
 let chrome;
@@ -49,7 +60,9 @@ const chromeProfile = resolve("work/lighthouse-profile");
 mkdirSync(chromeProfile, { recursive: true });
 
 try {
-  await waitForPreview(`${previewOrigin}/`);
+  await new Promise((resolvePromise) =>
+    preview.listen(previewPort, "127.0.0.1", resolvePromise),
+  );
   chrome = await launch({
     chromeFlags: [
       "--headless=new",
@@ -124,30 +137,7 @@ try {
       `Chrome cleanup warning: ${error instanceof Error ? error.message : String(error)}\n`,
     );
   }
-  if (preview.exitCode === null) {
-    preview.kill();
-    await Promise.race([
-      once(preview, "exit"),
-      new Promise((resolvePromise) => setTimeout(resolvePromise, 2_000)),
-    ]);
-  }
-}
-
-async function waitForPreview(url) {
-  const deadline = Date.now() + 30_000;
-  while (Date.now() < deadline) {
-    if (preview.exitCode !== null) {
-      throw new Error(`Astro preview stopped before startup: ${previewError}`);
-    }
-    try {
-      const response = await fetch(url);
-      if (response.ok) return;
-    } catch {
-      // The preview process is still starting.
-    }
-    await new Promise((resolvePromise) => setTimeout(resolvePromise, 200));
-  }
-  throw new Error(`Timed out waiting for Astro preview: ${previewError}`);
+  await new Promise((resolvePromise) => preview.close(resolvePromise));
 }
 
 function median(values) {

@@ -25,8 +25,8 @@ describe("portfolio source constraints", () => {
     expect(header).not.toMatch(/Invoice Review/);
     expect(header).not.toMatch(/Case Resolution Copilot/);
     expect(homepage).toContain("aiProjects.map");
-    expect(homepage).toContain("automationProjects.map");
-    expect(homepage).toContain("/projects/business-automation/");
+    expect(homepage).not.toContain("automationProjects.map");
+    expect(homepage).not.toContain("/projects/business-automation/");
     expect(homepage).not.toMatch(/requires exactly two featured projects/i);
   });
 

@@ -7,37 +7,14 @@ linkedin.com/in/william-lo-channiko | github.com/williamlo90 | william-lo-channi
 
 ## Professional Summary
 
-Applied AI engineer with 1 year of full-time software engineering experience. Builds AI assistants, custom MCP servers, and reusable business skills for sales, service operations, and administration. Combines Python/API development, OpenAI and Ollama integration, access controls, testing, monitoring, and AWS/Azure deployment validation.
+Applied AI engineer with 1 year of full-time software engineering experience. Builds source-grounded document and case-resolution workflows with human approval. Delivers full-stack systems, evaluations, and validated AWS/Azure deployments.
 
 ## Technical Skills
 
-- AI & MCP: Custom MCP servers, reusable business skills, OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR
-- Local AI: Ollama setup and local inference integration; Docker Compose environments; provider evaluation
-- Software & integrations: Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, Odoo, ERPNext, automation scripts
-- Security & reliability: RBAC, tenant isolation, human approval, audit trails, idempotency, recovery; Pytest, Vitest, Playwright, CloudWatch monitoring
+- Applied AI: OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR, offline evaluation
+- Software & integrations: Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, ERPNext, Docker
+- Security & reliability: RBAC, audit trails, idempotency, worker recovery; Pytest, Vitest, Playwright, CloudWatch monitoring
 - Cloud & infrastructure: AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD
-
-## MCP & Business Automation
-
-### ConnectWise Service Operations MCP | GitHub Repository | Oct 2026
-
-- Built a service-operations MCP server aligned with a publicly documented ConnectWise PSA API subset, exposing six tools for scoped ticket context, internal notes, and evidence-backed time entries with separate-user approval.
-- Validated 62 automated tests, 11 MCP protocol scenarios, and eight browser checks; completed 135 synthetic workload tasks, including 33 verified writes, with zero observed errors or duplicate effects against a stateful PSA simulator.
-- Engineered the platform with TypeScript, FastAPI, PostgreSQL, Docker, and optional OpenAI/Ollama assistance; implemented a responsive operator workspace, tenant isolation, audit trails, durable synchronization, and read-back verification with unknown-outcome recovery.
-
-### Odoo Business Operations MCP Server | GitHub Repository | Oct 2026
-
-- Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.
-- Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.
-- Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.
-
-### AI Service Desk & Ticket Operations Assistant | GitHub Repository | Oct 2026
-
-- Built an AI-assisted service desk platform that converts Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for access grants, service recovery, and related-ticket operations.
-- Validated AI triage on 16/16 held-out synthetic cases and exercised 48 synthetic HTTP workflows; verified platform behavior through 183 Python tests, 8 MCP tests, and 21 JavaScript checks, with automated regression and secret scanning in GitHub Actions.
-- Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak; implemented tenant isolation, payload-bound approvals, durable operation identities, and target verification to reconcile uncertain outcomes and prevent duplicate effects.
-
-Repository: https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant
 
 ## AI Projects
 
@@ -68,7 +45,7 @@ Multimedia Nusantara University, Tangerang, Indonesia | 2022-2026
 
 Bachelor's Degree in Informatics (S.Kom.) | Graduated with Distinction | GPA: 3.82/4.00
 
-Thesis: Fine-tuned two IndoBERT classifiers on 1,822 Indonesian social-media opinions; achieved test macro-F1 of 0.981 for sentiment and 0.870 for aspect classification, with inter-annotator Cohen's kappa of 0.954 and 0.900 on a 200-opinion reliability sample.
+Thesis: Fine-tuned two IndoBERT classifiers on 1,822 Indonesian opinions; test macro-F1 of 0.981 (sentiment) and 0.870 (aspect), with inter-annotator Cohen's kappa of 0.954 and 0.900 on 200 opinions.
 
 Honors: Academic Achievement Scholarship, 2024
 

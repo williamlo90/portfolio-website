@@ -14,16 +14,16 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 # Visual authority: William's July 2025 CV PDF, distilled in artifact.md.
-# Applied AI focus, city-level address, and two pages for four complete projects.
+# Applied AI focus, city-level address, and two complete AI projects.
 FONT = "Arial"
 INK = RGBColor(0x00, 0x00, 0x00)
 LINK_BLUE = RGBColor(0x05, 0x61, 0xC9)
-BODY_SIZE = 10.5
+BODY_SIZE = 10.0
 CONTENT_WIDTH_IN = 7.40
 BULLET_TEXT_INDENT_IN = 0.36
 BULLET_HANGING_IN = 0.16
-SECTION_GAP_PT = 12.5
-PROJECT_GAP_PT = 12.5
+SECTION_GAP_PT = 9.5
+PROJECT_GAP_PT = 9.0
 
 
 def set_style_font(style, *, size: float, bold: bool = False, italic: bool = False):
@@ -355,9 +355,8 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     set_run_font(
         summary.add_run(
             "Applied AI engineer with 1 year of full-time software engineering experience. "
-            "Builds AI assistants, custom MCP servers, and reusable business skills for sales, "
-            "service operations, and administration. Combines Python/API development, OpenAI and "
-            "Ollama integration, access controls, testing, monitoring, and AWS/Azure deployment validation."
+            "Builds source-grounded document and case-resolution workflows with human approval. "
+            "Delivers full-stack systems, evaluations, and validated AWS/Azure deployments."
         ),
         size=BODY_SIZE,
     )
@@ -365,23 +364,18 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     add_section(document, "Technical Skills")
     add_skill(
         document,
-        "AI & MCP",
-        "Custom MCP servers, reusable business skills, OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR",
-    )
-    add_skill(
-        document,
-        "Local AI",
-        "Ollama setup and local inference integration; Docker Compose environments; provider evaluation",
+        "Applied AI",
+        "OpenAI API, LangGraph, RAG, embeddings, structured outputs, Mistral OCR, offline evaluation",
     )
     add_skill(
         document,
         "Software & integrations",
-        "Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, Odoo, ERPNext, automation scripts",
+        "Python, TypeScript, SQL, FastAPI, React, Next.js; REST APIs, PostgreSQL/pgvector, ERPNext, Docker",
     )
     add_skill(
         document,
         "Security & reliability",
-        "RBAC, tenant isolation, human approval, audit trails, idempotency, recovery; Pytest, Vitest, Playwright, CloudWatch monitoring",
+        "RBAC, audit trails, idempotency, worker recovery; Pytest, Vitest, Playwright, CloudWatch monitoring",
     )
     add_skill(
         document,
@@ -389,40 +383,7 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
         "AWS (ECS/Fargate, RDS, SQS, S3, Lambda); Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL); Docker, CI/CD",
     )
 
-    add_section(document, "MCP & Business Automation")
-    add_entry_title(
-        document,
-        "ConnectWise Service Operations MCP",
-        [("GitHub Repository", "https://github.com/williamlo90/connectwise-service-operations-mcp")],
-        date="Oct 2026",
-        first_in_section=True,
-    )
-    add_bullet(document, bullet_number_id, "Built a service-operations MCP server aligned with a publicly documented ConnectWise PSA API subset, exposing six tools for scoped ticket context, internal notes, and evidence-backed time entries with separate-user approval.")
-    add_bullet(document, bullet_number_id, "Validated 62 automated tests, 11 MCP protocol scenarios, and eight browser checks; completed 135 synthetic workload tasks, including 33 verified writes, with zero observed errors or duplicate effects against a stateful PSA simulator.")
-    add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, FastAPI, PostgreSQL, Docker, and optional OpenAI/Ollama assistance; implemented a responsive operator workspace, tenant isolation, audit trails, durable synchronization, and read-back verification with unknown-outcome recovery.")
-
-    add_entry_title(
-        document,
-        "Odoo Business Operations MCP Server",
-        [("GitHub Repository", "https://github.com/williamlo90/odoo-business-operations-mcp-server")],
-        date="Oct 2026",
-        first_in_section=False,
-    )
-    add_bullet(document, bullet_number_id, "Built an AI-assisted Odoo operations platform with four reusable business skills and ten scoped MCP tools for customer research, quotation preparation, CRM follow-ups, and write reconciliation, enforcing tenant isolation and independent human approval.")
-    add_bullet(document, bullet_number_id, "Validated 124 synthetic workload tasks, including 31 quotation writes with exactly one Odoo order per operation across replay checks; passed 13 browser acceptance checks covering approval separation, cross-company access denial, and recovery after a lost execution response.")
-    add_bullet(document, bullet_number_id, "Engineered the platform with TypeScript, Python/FastAPI, PostgreSQL, Odoo, and Docker Compose; delivered a responsive web workspace with source-bound approvals, idempotent execution, verified business receipts, and persistent worker recovery.")
-    add_entry_title(
-        document,
-        "AI Service Desk & Ticket Operations Assistant",
-        [("GitHub Repository", "https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant")],
-        date="Oct 2026",
-    )
-    add_bullet(document, bullet_number_id, "Built an AI-assisted service desk platform that converts Jira tickets into evidence-backed recommendations and versioned action proposals, with human approval for access grants, service recovery, and related-ticket operations.")
-    add_bullet(document, bullet_number_id, "Validated AI triage on 16/16 held-out synthetic cases and exercised 48 synthetic HTTP workflows; verified platform behavior through 183 Python tests, 8 MCP tests, and 21 JavaScript checks, with automated regression and secret scanning in GitHub Actions.")
-    add_bullet(document, bullet_number_id, "Engineered the platform with Python, PostgreSQL, TypeScript/MCP, OpenAI, Jira Service Management, and Keycloak; implemented tenant isolation, payload-bound approvals, durable operation identities, and target verification to reconcile uncertain outcomes and prevent duplicate effects.")
-
-    ai_section = add_section(document, "AI Projects")
-    ai_section.paragraph_format.page_break_before = True
+    add_section(document, "AI Projects")
     add_entry_title(
         document,
         "Case Resolution Copilot",
@@ -518,9 +479,9 @@ def build_resume(output_path: Path, *, include_certifications: bool = False):
     thesis = document.add_paragraph(style="Resume Detail")
     set_run_font(
         thesis.add_run(
-            "Thesis: Fine-tuned two IndoBERT classifiers on 1,822 Indonesian social-media opinions; "
-            "achieved test macro-F1 of 0.981 for sentiment and 0.870 for aspect classification, with "
-            "inter-annotator Cohen's kappa of 0.954 and 0.900 on a 200-opinion reliability sample."
+            "Thesis: Fine-tuned two IndoBERT classifiers on 1,822 Indonesian opinions; "
+            "test macro-F1 of 0.981 (sentiment) and 0.870 (aspect), with inter-annotator "
+            "Cohen's kappa of 0.954 and 0.900 on 200 opinions."
         ),
         size=BODY_SIZE,
     )

@@ -8,12 +8,9 @@ client-side framework runtime.
 
 - `/` — recruiter-focused homepage with Projects, Experience, About, and Contact
 - AI Applications: Invoice Review, Case Resolution Copilot, and Private Offline Document Intelligence
-- MCP & Business Automation: a compact homepage preview links to
-  `/projects/business-automation/`, where AI Service Desk, Odoo Business
-  Operations, ConnectWise Service Operations, and AI Sales Follow-up each have
-  their own project overview.
+- Each AI application has a case study linked from the Projects section.
 
-All seven case studies remain children of the Projects section and are not global
+All three case studies remain children of the Projects section and are not global
 navigation items. Their routes are generated from `src/content/projects/`.
 
 ## Content boundary

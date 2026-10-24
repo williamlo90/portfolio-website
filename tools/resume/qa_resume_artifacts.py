@@ -11,7 +11,6 @@ from pypdf import PdfReader
 
 EXPECTED_HEADINGS = (
     "TECHNICAL SKILLS",
-    "MCP & BUSINESS AUTOMATION",
     "AI PROJECTS",
     "PROFESSIONAL EXPERIENCE",
     "EDUCATION",
@@ -51,9 +50,6 @@ def check_docx(path: Path) -> dict[str, object]:
         "https://william-lo-channiko-portfolio.pages.dev/",
         "https://github.com/williamlo90/case-resolution-copilot",
         "https://github.com/williamlo90/ai-document-ops-system",
-        "https://github.com/williamlo90/connectwise-service-operations-mcp",
-        "https://github.com/williamlo90/odoo-business-operations-mcp-server",
-        "https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant",
     )
     missing = [link for link in expected_links if link not in rels_xml]
     assert not missing, f"Missing DOCX hyperlinks: {missing}"
@@ -67,7 +63,7 @@ def check_pdf(
     forbid_certifications: bool = False,
 ) -> dict[str, object]:
     reader = PdfReader(path)
-    assert len(reader.pages) == 2, f"Expected two pages, got {len(reader.pages)}"
+    assert len(reader.pages) == 1, f"Expected one page, got {len(reader.pages)}"
     assert reader.get_fields() in (None, {}), "PDF contains form fields"
 
     text = "\n".join(page.extract_text() for page in reader.pages)
@@ -82,14 +78,6 @@ def check_pdf(
         "Azure (Container Apps, Blob Storage, Service Bus, PostgreSQL)",
         "Case Resolution Copilot",
         "Invoice Review",
-        "ConnectWise Service Operations MCP",
-        "Odoo Business Operations MCP Server",
-        "AI Service Desk & Ticket Operations Assistant",
-        "16/16 held-out synthetic cases",
-        "48 synthetic HTTP workflows",
-        "183 Python tests",
-        "135 synthetic workload tasks",
-        "124 synthetic workload tasks",
         "83.7%",
         "582s to 95s",
         "three matched synthetic cases",
@@ -115,6 +103,10 @@ def check_pdf(
     ):
         assert expected in normalized_text, f"Missing PDF text: {expected}"
     for retired_name in (
+        "MCP & BUSINESS AUTOMATION",
+        "ConnectWise Service Operations MCP",
+        "Odoo Business Operations MCP Server",
+        "AI Service Desk & Ticket Operations Assistant",
         "Software Engineer (Mobile and Full-Stack)",
         "AI Support Escalation Copilot",
         "AI Document Operations System",
@@ -143,7 +135,7 @@ def check_pdf(
         action = annotation.get("/A")
         if action and action.get("/URI"):
             links.append(str(action["/URI"]))
-    assert len(links) == 9, f"Expected nine PDF links, got {len(links)}: {links}"
+    assert len(links) == 6, f"Expected six PDF links, got {len(links)}: {links}"
     return {"pages": len(reader.pages), "characters": len(text), "links": links}
 
 
